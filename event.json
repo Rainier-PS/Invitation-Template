@@ -5,9 +5,9 @@
         "private": false
     },
     "event": {
-        "title": "Event Name",
-        "subtitle": "You are invited to [Event Name]",
-        "description": "Event Description"
+        "title": "[Event Title]",
+        "subtitle": "Join us for a [Event Type] celebration",
+        "description": "A description of your event goes here."
     },
     "datetime": {
         "date": "January 1, 2000",
@@ -69,5 +69,3 @@
         "text": ""
     }
 }
-
-

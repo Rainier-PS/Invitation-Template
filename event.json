@@ -11,7 +11,7 @@
     },
     "datetime": {
         "date": "January 1, 2000",
-        "startTime": "06:00 PM",
+        "startTime": "00:00 PM",
         "endTime": "",
         "timezone": "local",
         "allDay": false
@@ -23,16 +23,16 @@
     },
     "schedule": [
         {
-            "time": "6:00 PM",
-            "label": "Welcome"
+            "time": "00:00 PM",
+            "label": "Activity 1"
         },
         {
-            "time": "7:00 PM",
-            "label": "Dinner"
+            "time": "01:00 PM",
+            "label": "Activity 2"
         },
         {
-            "time": "8:30 PM",
-            "label": "Closing"
+            "time": "02:00 PM",
+            "label": "Activity 3"
         }
     ],
     "rsvp": {
@@ -53,10 +53,19 @@
     },
     "design": {
         "theme": "light",
-        "accentColor": "#2563eb"
+        "accentColor": "#2563eb",
+        "heroImages": [
+            "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1519225468359-2996515dad71?q=80&w=2069&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop"
+        ],
+        "sectionBackgrounds": [
+            "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1464366400600-7168b8af9bc6?q=80&w=2069&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=2069&auto=format&fit=crop"
+        ]
     },
     "footer": {
-        "text": "Hosted by the [Name] Family"
+        "text": "Hosted by the [Name]"
     }
 }
-

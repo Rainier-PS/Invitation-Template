@@ -220,6 +220,15 @@ a:hover {
     opacity: 0.8;
 }
 
+.low-profile-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.low-profile-link:hover {
+    opacity: 0.9;
+}
+
 #maps-link {
     text-decoration: underline;
     text-decoration-thickness: 1px;

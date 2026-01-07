@@ -1,8 +1,12 @@
 # Invitation Website Template
 
-A modern, premium, and responsive invitation website template designed for any event. This project is built with HTML, CSS, and Vanilla JavaScript, allowing for easy customization through a single JSON file.
+A free, modern, premium, and responsive invitation website template designed for any event. This project is built with HTML, CSS, and Vanilla JavaScript, allowing for easy customization through a single JSON file.
 
 ![Rainier Logo](https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg)
+
+## Demo
+
+Check out this site live at: [Live Site](https://rainier-ps.github.io/Invitation-Template/)!
 
 ## Features
 

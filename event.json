@@ -1,19 +1,61 @@
 {
-    "title": "Title",
-    "subtitle": "Subtitle",
-    "date": "January 1, 2000",
-    "time": "06:00 PM",
-    "description": "Description",
-    "venue": {
+    "meta": {
+        "version": "1.0",
+        "simpleMode": false,
+        "private": false
+    },
+    "event": {
+        "title": "Title",
+        "subtitle": "Subtitle",
+        "description": "Description"
+    },
+    "datetime": {
+        "date": "January 1, 2000",
+        "startTime": "06:00 PM",
+        "endTime": "",
+        "timezone": "local",
+        "allDay": false
+    },
+    "location": {
         "name": "Venue Name",
         "address": "Address",
         "mapsLink": "https://maps.google.com"
     },
     "schedule": [
-        "6:00 PM – Welcome",
-        "7:00 PM – Dinner",
-        "8:30 PM – Cake & Party"
+        {
+            "time": "6:00 PM",
+            "label": "Welcome"
+        },
+        {
+            "time": "7:00 PM",
+            "label": "Dinner"
+        },
+        {
+            "time": "8:30 PM",
+            "label": "Closing"
+        }
     ],
-    "footer": "Hosted by the [Name] Family",
-    "simpleMode": false
+    "rsvp": {
+        "enabled": true,
+        "provider": "tally",
+        "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1",
+        "deadline": "",
+        "maxGuestsPerInvite": 0
+    },
+    "calendar": {
+        "enabled": true,
+        "defaultDurationHours": 2,
+        "providers": {
+            "google": true,
+            "apple": false,
+            "outlook": false
+        }
+    },
+    "design": {
+        "theme": "light",
+        "accentColor": "#2563eb"
+    },
+    "footer": {
+        "text": "Hosted by the [Name] Family"
+    }
 }

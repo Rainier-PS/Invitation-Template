@@ -37,7 +37,7 @@ Add items to the `schedule` array to list activities:
 ## 2. Visual Customization
 
 ### Images
-Replace the URLs in the `design.heroImages` and `design.sectionBackgrounds` arrays with your own image URLs. For best results, use high-resolution landscape images.
+Replace the URLs in the `design.heroImages` and `design.sectionBackgrounds` arrays with your own image URLs. For best results, use landscape images that are compressed and converted to modern formats such as AVIF or WebP. These formats provide high visual quality at much smaller file sizes, resulting in faster load times and a more eco-friendly website. Avoid using uncompressed or excessively large images.
 
 ### Colors & Styling
 You can modify the general look and feel in `styles.css`.

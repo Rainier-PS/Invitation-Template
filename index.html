@@ -11,6 +11,12 @@
 
     <title>You're Invited</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Outfit:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css" />
     <script defer src="script.js"></script>
 
@@ -18,6 +24,13 @@
 </head>
 
 <body>
+    <button id="audio-control" class="audio-fab" aria-label="Play Music" hidden>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M8 5v14l11-7z" id="play-icon" />
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" id="pause-icon" style="display:none;" />
+        </svg>
+    </button>
+
     <main id="app" aria-live="polite">
 
         <section class="hero">
@@ -63,6 +76,14 @@
         </section>
 
         <footer>
+            <div class="footer-branding">
+                <img src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg"
+                    alt="Rainier Logo" class="footer-logo" onerror="this.style.display='none'">
+                <div class="footer-info">
+                    <p class="hosted-by">Hosted & Designed by</p>
+                    <p class="copyright">© 2026 Rainier Pearson Saputra | All rights reserved.</p>
+                </div>
+            </div>
             <p id="footer-text"></p>
         </footer>
 

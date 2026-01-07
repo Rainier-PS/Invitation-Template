@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="You're invited to a special event" />
+
+    <!-- Open Graph for sharing -->
+    <meta property="og:title" content="You're Invited" />
+    <meta property="og:description" content="Join us for a special event" />
+
+    <title>You're Invited</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <main id="app" aria-live="polite">
+
+        <!-- Hero -->
+        <section class="hero">
+            <h1 id="event-title">Loading…</h1>
+            <p class="subtitle" id="event-subtitle"></p>
+
+            <div class="hero-meta">
+                <time id="event-date"></time>
+                <span id="event-time"></span>
+            </div>
+
+            <a href="#rsvp" class="primary-btn">RSVP</a>
+        </section>
+
+        <!-- Details -->
+        <section class="section">
+            <h2>Event Details</h2>
+            <p id="event-description"></p>
+
+            <address class="location">
+                <p id="venue-name"></p>
+                <p id="venue-address"></p>
+                <a id="maps-link" target="_blank" rel="noopener">Open in Google Maps</a>
+            </address>
+        </section>
+
+        <!-- Schedule (optional) -->
+        <section class="section" id="schedule-section" hidden>
+            <h2>Schedule</h2>
+            <ul id="schedule-list"></ul>
+        </section>
+
+        <!-- RSVP -->
+        <section class="section" id="rsvp">
+            <h2>RSVP</h2>
+            <p>Please confirm your attendance</p>
+
+            <!-- Embedded form goes here -->
+            <div class="form-embed">
+                <!-- Replace with Tally / Google Form embed -->
+                <p class="placeholder">RSVP form goes here</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p id="footer-text"></p>
+        </footer>
+
+    </main>
+</body>
+
+</html>

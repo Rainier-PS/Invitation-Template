@@ -1,0 +1,19 @@
+{
+    "title": "Alex’s 18th Birthday",
+    "subtitle": "Come celebrate with us 🎉",
+    "date": "June 12, 2026",
+    "time": "6:00 PM",
+    "description": "Join us for an evening of fun, food, and celebration.",
+    "venue": {
+        "name": "City Community Hall",
+        "address": "123 Main Street, Springfield",
+        "mapsLink": "https://maps.google.com"
+    },
+    "schedule": [
+        "6:00 PM – Welcome",
+        "7:00 PM – Dinner",
+        "8:30 PM – Cake & Party"
+    ],
+    "footer": "Hosted by the Smith Family",
+    "simpleMode": false
+}

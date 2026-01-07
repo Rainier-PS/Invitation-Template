@@ -110,7 +110,7 @@ fetch(EVENT_JSON_URL)
                 if (typeof item === 'string') {
                     li.textContent = item;
                 } else {
-                    li.innerHTML = `<strong>${item.time}</strong> – ${item.label}`;
+                    li.innerHTML = `<strong>${item.time}</strong> ${item.label}`;
                 }
                 list.appendChild(li);
             });
@@ -122,6 +122,53 @@ fetch(EVENT_JSON_URL)
             document.documentElement.style.setProperty('--primary', data.design.accentColor);
         }
 
+        const sections = document.querySelectorAll('section, footer');
+
+        if (data.design?.heroImages?.length && sections[0]) {
+            const heroSection = sections[0];
+            const slideContainer = document.createElement('div');
+            slideContainer.className = 'hero-slideshow';
+
+            data.design.heroImages.forEach((url, i) => {
+                const slide = document.createElement('div');
+                slide.className = `hero-slide ${i === 0 ? 'active' : ''}`;
+                slide.style.backgroundImage = `url('${url}')`;
+                slideContainer.appendChild(slide);
+            });
+
+            heroSection.insertBefore(slideContainer, heroSection.firstChild);
+
+            // Auto-rotate
+            if (data.design.heroImages.length > 1) {
+                let currentSlide = 0;
+                const slides = slideContainer.querySelectorAll('.hero-slide');
+
+                setInterval(() => {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }, 5000); // 5 seconds per slide
+            }
+        } else if (data.design?.backgrounds?.length && sections[0]) {
+            sections[0].style.backgroundImage = `url('${data.design.backgrounds[0]}')`;
+        }
+
+        if (data.design?.sectionBackgrounds?.length) {
+            data.design.sectionBackgrounds.forEach((url, i) => {
+                const targetIndex = i + 1;
+                if (sections[targetIndex]) {
+                    sections[targetIndex].style.backgroundImage = `url('${url}')`;
+                }
+            });
+        } else if (data.design?.backgrounds?.length) {
+            data.design.backgrounds.forEach((url, index) => {
+                if (sections[index]) {
+                    if (index === 0 && data.design.heroImages?.length) return;
+                    sections[index].style.backgroundImage = `url('${url}')`;
+                }
+            });
+        }
+
         if (data.meta?.simpleMode) {
             document.body.classList.add("simple");
         }
@@ -131,3 +178,35 @@ fetch(EVENT_JSON_URL)
         document.getElementById("event-title").textContent = "Unable to load event details";
         document.getElementById("event-subtitle").textContent = "Please check back later.";
     });
+
+// Audio Player
+document.addEventListener('DOMContentLoaded', () => {
+    const AUDIO_URL = "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/alarm-clock-90867.mp3";
+    const audio = new Audio(AUDIO_URL);
+    audio.loop = true;
+    audio.volume = 0.3;
+
+    const btn = document.getElementById('audio-control');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    let isPlaying = false;
+
+    if (btn) {
+        btn.hidden = false;
+
+        btn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+                btn.classList.remove('playing');
+            } else {
+                audio.play().catch(e => console.log("Audio play blocked", e));
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                btn.classList.add('playing');
+            }
+            isPlaying = !isPlaying;
+        });
+    }
+});

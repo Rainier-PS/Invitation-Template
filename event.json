@@ -5,9 +5,9 @@
         "private": false
     },
     "event": {
-        "title": "Title",
-        "subtitle": "Subtitle",
-        "description": "Description"
+        "title": "Event Name",
+        "subtitle": "You are invited to [Event Name]",
+        "description": "Event Description"
     },
     "datetime": {
         "date": "January 1, 2000",
@@ -59,3 +59,4 @@
         "text": "Hosted by the [Name] Family"
     }
 }
+

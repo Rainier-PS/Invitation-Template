@@ -47,6 +47,21 @@ main {
     font-weight: 500;
 }
 
+#calendar-actions {
+    margin-top: 0.5rem;
+    font-size: 0.9em;
+}
+
+#google-calendar-link {
+    color: var(--primary);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#google-calendar-link:hover {
+    text-decoration: underline;
+}
+
 .primary-btn {
     display: inline-block;
     background: var(--primary);
@@ -96,4 +111,10 @@ footer {
 /* Simple mode (optional) */
 .simple {
     font-size: 1.15rem;
+}
+
+#app {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
 }

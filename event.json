@@ -55,17 +55,18 @@
         "theme": "light",
         "accentColor": "#2563eb",
         "heroImages": [
-            "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1519225468359-2996515dad71?q=80&w=2069&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop"
+            "img1",
+            "img2",
+            "img3"
         ],
         "sectionBackgrounds": [
-            "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1464366400600-7168b8af9bc6?q=80&w=2069&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=2069&auto=format&fit=crop"
+            "img1",
+            "img2",
+            "img3"
         ]
     },
     "footer": {
         "text": "Hosted by the [Name]"
     }
 }
+

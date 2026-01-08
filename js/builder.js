@@ -1,0 +1,189 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('event-form');
+    const preview = document.getElementById('json-preview');
+    const navButtons = document.querySelectorAll('#section-nav .nav-btn');
+    const sections = document.querySelectorAll('.form-section-stack');
+
+    // --- XSS Protection / Sanitization ---
+    // This helper ensures that any text entered by the user is treated as plain text
+    // when stored in the JSON object, preventing script injection.
+    const sanitize = (str) => {
+        if (typeof str !== 'string') return str;
+        return str.replace(/[<>]/g, (tag) => ({
+            '<': '&lt;',
+            '>': '&gt;'
+        }[tag] || tag));
+    };
+
+    const scrollRoot = document.getElementById('builder-scroll-root');
+
+    // --- Navigation Logic ---
+    navButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = btn.getAttribute('href');
+            const targetEl = document.querySelector(targetId);
+            if (targetEl && scrollRoot) {
+                const targetPos = targetEl.offsetTop - 80; // Offset for sticky nav
+                scrollRoot.scrollTo({
+                    top: targetPos,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // --- Active Link Observer ---
+    const observerOptions = {
+        root: scrollRoot,
+        rootMargin: '-10% 0px -80% 0px',
+        threshold: 0
+    };
+
+    const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('href') === `#${id}`);
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => navObserver.observe(section));
+
+    // --- Sync Accent Color Inputs ---
+    const colorPicker = document.getElementById('input-accentColor');
+    const colorText = document.getElementById('input-accentColor-text');
+
+    colorPicker.addEventListener('input', (e) => {
+        colorText.value = e.target.value;
+        updateJson();
+    });
+    colorText.addEventListener('input', (e) => {
+        colorPicker.value = e.target.value;
+        updateJson();
+    });
+
+    // --- JSON Generation Logic ---
+    const updateJson = () => {
+        const getValue = (id) => sanitize(document.getElementById(id).value);
+        const getCheck = (id) => document.getElementById(id).checked;
+
+        // Collect Schedule
+        const schedule = [];
+        document.querySelectorAll('.dynamic-list-item').forEach(item => {
+            const time = item.querySelector('.sched-time');
+            const label = item.querySelector('.sched-label');
+            if (time && label) {
+                schedule.push({
+                    time: sanitize(time.value),
+                    label: sanitize(label.value)
+                });
+            }
+        });
+
+        // Collect Hero Images
+        const heroImages = [];
+        document.querySelectorAll('.hero-img-url').forEach(input => {
+            heroImages.push(input.value); // URLs don't usually need tag-stripping but we should be careful with display
+        });
+
+        const json = {
+            "_meta_comment": "TEMPLATE CONFIGURATION",
+            "meta": {
+                "version": "1.1",
+                "private": false,
+                "simpleMode": false,
+                "showSimpleModeToggle": true
+            },
+            "event": {
+                "title": getValue('input-title'),
+                "subtitle": getValue('input-subtitle'),
+                "description": getValue('input-description')
+            },
+            "datetime": {
+                "date": getValue('input-date'),
+                "startTime": getValue('input-startTime'),
+                "endTime": getValue('input-endTime'),
+                "timezone": "local",
+                "allDay": false
+            },
+            "location": {
+                "name": getValue('input-venue-name'),
+                "address": getValue('input-venue-address'),
+                "mapsLink": getValue('input-mapsLink')
+            },
+            "schedule": schedule,
+            "rsvp": {
+                "enabled": getCheck('input-rsvp-enabled'),
+                "provider": getValue('input-rsvp-provider'),
+                "url": getValue('input-rsvp-url'),
+                "deadline": "",
+                "maxGuestsPerInvite": 0
+            },
+            "calendar": {
+                "enabled": true,
+                "defaultDurationHours": 2,
+                "providers": {
+                    "google": true,
+                    "apple": false,
+                    "outlook": false
+                }
+            },
+            "design": {
+                "theme": "light",
+                "accentColor": colorText.value,
+                "heroImages": heroImages,
+                "sectionBackgrounds": []
+            },
+            "footer": {
+                "text": getValue('input-footerText'),
+                "branding": {
+                    "link": "#",
+                    "logoUrl": getValue('input-logoUrl'),
+                    "logoAlt": "Logo"
+                },
+                "credits": {
+                    "designByLabel": "Created & Designed by",
+                    "copyrightYear": new Date().getFullYear().toString(),
+                    "authorName": getValue('input-authorName'),
+                    "templateLabel": "Template by",
+                    "templateAuthor": "Rainier Pearson Saputra",
+                    "templateLink": "https://rainier-ps.github.io/Personal-Website/",
+                    "repoLabel": "Open Repository",
+                    "repoLink": "https://github.com/Rainier-PS/Invitation-Template"
+                }
+            }
+        };
+
+        preview.textContent = JSON.stringify(json, null, 4);
+    };
+
+    // Auto-update on any input
+    form.addEventListener('input', updateJson);
+
+    // Add observers for dynamic items (since 'input' on form won't catch additions/removals well)
+    const listObserver = new MutationObserver(updateJson);
+    listObserver.observe(document.getElementById('schedule-list-builder'), { childList: true, subtree: true });
+    listObserver.observe(document.getElementById('hero-images-builder'), { childList: true, subtree: true });
+
+    // Initial preview
+    updateJson();
+});
+
+// Global copy function
+window.copyJson = function () {
+    const text = document.getElementById('json-preview').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.primary-btn[onclick="copyJson()"]');
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.style.background = '#10b981';
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '';
+        }, 2000);
+    });
+};

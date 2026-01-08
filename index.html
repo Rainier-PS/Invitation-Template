@@ -24,7 +24,18 @@
 </head>
 
 <body>
-    <button id="audio-control" class="audio-fab" aria-label="Play Music" hidden>
+    <button id="simple-mode-toggle" class="accessibility-fab" aria-label="Toggle Simple Mode"
+        data-tooltip="Switch between standard and easy-reading view" hidden>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" id="standard-view-icon" />
+            <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"
+                id="simple-view-icon" style="display:none;" />
+        </svg>
+    </button>
+
+    <button id="audio-control" class="audio-fab" aria-label="Play Music" data-tooltip="Turn background music on or off"
+        hidden>
         <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
             <path d="M8 5v14l11-7z" id="play-icon" />
             <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" id="pause-icon" style="display:none;" />
@@ -77,16 +88,22 @@
 
         <footer>
             <div class="footer-branding">
-                <a href="https://rainier-ps.github.io/Personal-Website/" class="low-profile-link" target="_blank"
-                    rel="noopener">
-                    <img src="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg"
-                        alt="Rainier Logo" class="footer-logo" onerror="this.style.display='none'">
+                <a id="footer-branding-link" href="#" class="low-profile-link" target="_blank" rel="noopener">
+                    <img id="footer-logo" src="" alt="" class="footer-logo">
                 </a>
                 <div class="footer-info">
-                    <p class="hosted-by">Created & Designed by</p>
-                    <p class="copyright">© 2026 [Name] | Template by <a
-                            href="https://rainier-ps.github.io/Personal-Website/" class="low-profile-link"
-                            target="_blank" rel="noopener">Rainier Pearson Saputra</a></p>
+                    <p class="hosted-by" id="footer-credits-label"></p>
+                    <p class="copyright">
+                        <span id="footer-copyright"></span>
+                        <span id="footer-template-container">
+                            | <span id="footer-template-label"></span>
+                            <a id="footer-template-link" href="#" class="low-profile-link" target="_blank"
+                                rel="noopener"></a>
+                        </span>
+                    </p>
+                    <p id="footer-repo-container" class="repo-info" hidden>
+                        <a id="footer-repo-link" href="#" class="low-profile-link" target="_blank" rel="noopener"></a>
+                    </p>
                 </div>
             </div>
             <p id="footer-text"></p>
@@ -96,4 +113,3 @@
 </body>
 
 </html>
-

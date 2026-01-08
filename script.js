@@ -1,4 +1,4 @@
-const EVENT_JSON_URL = "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/event.json";
+const EVENT_JSON_URL = "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/event.json";
 
 function formatGoogleCalendarDate(dateStr, timeStr) {
     try {
@@ -80,7 +80,45 @@ fetch(EVENT_JSON_URL)
             }
         }
 
-        setText("footer-text", data.footer.text);
+        // Footer Injection
+        setText("footer-text", data.footer?.text);
+
+        if (data.footer?.branding) {
+            const brandingLink = document.getElementById("footer-branding-link");
+            const footerLogo = document.getElementById("footer-logo");
+            if (brandingLink) brandingLink.href = data.footer.branding.link || "#";
+            if (footerLogo) {
+                if (data.footer.branding.logoUrl) {
+                    footerLogo.src = data.footer.branding.logoUrl;
+                    footerLogo.alt = data.footer.branding.logoAlt || "Logo";
+                    footerLogo.onerror = () => { footerLogo.style.display = 'none'; };
+                    footerLogo.style.display = 'block';
+                } else {
+                    footerLogo.style.display = 'none';
+                }
+            }
+        }
+
+        if (data.footer?.credits) {
+            const credits = data.footer.credits;
+            setText("footer-credits-label", credits.designByLabel);
+            setText("footer-copyright", `© ${credits.copyrightYear} ${credits.authorName}`);
+            setText("footer-template-label", credits.templateLabel);
+
+            const templateLink = document.getElementById("footer-template-link");
+            if (templateLink) {
+                templateLink.href = credits.templateLink || "#";
+                templateLink.textContent = credits.templateAuthor || "";
+            }
+
+            const repoContainer = document.getElementById("footer-repo-container");
+            const repoLink = document.getElementById("footer-repo-link");
+            if (repoContainer && repoLink && credits.repoLink) {
+                repoLink.href = credits.repoLink;
+                repoLink.textContent = credits.repoLabel || "Repository";
+                repoContainer.hidden = false;
+            }
+        }
 
         if (data.rsvp?.enabled && data.rsvp?.url) {
             const rsvpFrame = document.querySelector('iframe[data-tally-src], iframe[title="RSVP"]');
@@ -171,6 +209,50 @@ fetch(EVENT_JSON_URL)
 
         if (data.meta?.simpleMode) {
             document.body.classList.add("simple");
+        }
+
+        // Simple Mode Toggle & Visibility Logic
+        const simpleToggleBtn = document.getElementById('simple-mode-toggle');
+        const standardIcon = document.getElementById('standard-view-icon');
+        const simpleIcon = document.getElementById('simple-view-icon');
+
+        if (simpleToggleBtn) {
+            // Only show toggle if enabled in JSON (defaults to false)
+            const showToggle = data.meta?.showSimpleModeToggle === true;
+            simpleToggleBtn.style.display = showToggle ? 'flex' : 'none';
+
+            const updateIcons = (isSimple) => {
+                if (standardIcon) standardIcon.style.display = isSimple ? 'none' : 'block';
+                if (simpleIcon) simpleIcon.style.display = isSimple ? 'block' : 'none';
+                simpleToggleBtn.setAttribute('aria-label', isSimple ? 'Switch to Standard View' : 'Switch to Simple View');
+            };
+
+            // Initial icon state based on body class
+            updateIcons(document.body.classList.contains('simple'));
+
+            simpleToggleBtn.addEventListener('click', () => {
+                const isSimple = document.body.classList.toggle('simple');
+                updateIcons(isSimple);
+
+                // Scroll to top when switching for better orientation
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // IntersectionObserver to hide button when scrolling out of Hero
+            const heroSection = document.querySelector('.hero');
+            if (heroSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            simpleToggleBtn.classList.remove('scrolled-out');
+                        } else {
+                            simpleToggleBtn.classList.add('scrolled-out');
+                        }
+                    });
+                }, { threshold: 0.1 }); // 10% visibility to trigger
+
+                observer.observe(heroSection);
+            }
         }
     })
     .catch(err => {

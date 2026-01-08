@@ -1,9 +1,14 @@
 {
+    "_meta_comment": "TEMPLATE CONFIGURATION",
     "meta": {
-        "version": "1.0",
+        "version": "1.1",
+        "private": false,
+        "_comment_simpleMode": "Force 'Easy Reading' mode by default for all users",
         "simpleMode": false,
-        "private": false
+        "_comment_showSimpleModeToggle": "RECOMMENDED: Set to true if you want the accessibility toggle visible on the first page",
+        "showSimpleModeToggle": false
     },
+    "_event_comment": "EVENT CONTENT",
     "event": {
         "title": "[Event Title]",
         "subtitle": "Join us for a [Event Type] celebration",
@@ -29,15 +34,13 @@
         {
             "time": "01:00 PM",
             "label": "Activity 2"
-        },
-        {
-            "time": "02:00 PM",
-            "label": "Activity 3"
         }
     ],
+    "_rsvp_comment": "REGISTRATION (RSVP)",
     "rsvp": {
         "enabled": true,
         "provider": "tally",
+        "_comment_url": "Supports Tally forms, Google Forms, or any embeddable URL",
         "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1",
         "deadline": "",
         "maxGuestsPerInvite": 0
@@ -51,20 +54,24 @@
             "outlook": false
         }
     },
+    "_design_comment": "AESTHETICS & THEME",
     "design": {
         "theme": "light",
         "accentColor": "#2563eb",
+        "_comment_heroImages": "List of URLs for the hero slideshow on the first page",
         "heroImages": [
             "img1",
             "img2",
             "img3"
         ],
+        "_comment_sectionBackgrounds": "Sequential background images for each scrolling section",
         "sectionBackgrounds": [
             "img1",
             "img2",
             "img3"
         ]
     },
+    "_footer_comment": "FOOTER & CREDITS",
     "footer": {
         "text": "",
         "branding": {

@@ -66,6 +66,21 @@
         ]
     },
     "footer": {
-        "text": ""
+        "text": "",
+        "branding": {
+            "link": "https://rainier-ps.github.io/Personal-Website/",
+            "logoUrl": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg",
+            "logoAlt": "Rainier Logo"
+        },
+        "credits": {
+            "designByLabel": "Created & Designed by",
+            "copyrightYear": "2026",
+            "authorName": "[Name]",
+            "templateLabel": "Template by",
+            "templateAuthor": "Rainier Pearson Saputra",
+            "templateLink": "https://rainier-ps.github.io/Personal-Website/",
+            "repoLabel": "Open Repository",
+            "repoLink": "https://github.com/Rainier-PS/Invitation-Template"
+        }
     }
 }

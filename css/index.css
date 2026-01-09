@@ -465,3 +465,73 @@ textarea:focus {
         position: static !important;
     }
 }
+
+.badge-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid var(--glass-border);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    margin-bottom: 2rem;
+}
+
+.badge-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+}
+
+.badge-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-description {
+    max-width: 600px;
+    margin: 1.5rem auto;
+    color: var(--muted);
+}
+
+.button-container {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.icon-wrapper {
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.how-to-list {
+    padding-left: 1.5rem;
+}
+
+.how-to-list li {
+    margin-bottom: 1.2rem;
+}
+
+.footer-support {
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    opacity: 0.6;
+    font-size: 0.9rem;
+}
+
+.footer-support h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.footer-support p {
+    margin-bottom: 1rem;
+}

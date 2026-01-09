@@ -263,32 +263,47 @@ fetch(EVENT_JSON_URL)
 
 // Audio Player
 document.addEventListener('DOMContentLoaded', () => {
-    const AUDIO_URL = "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/alarm-clock-90867.mp3";
-    const audio = new Audio(AUDIO_URL);
-    audio.loop = true;
-    audio.volume = 0.3;
+    fetch(EVENT_JSON_URL)
+        .then(res => res.json())
+        .then(data => {
+            if (!data.music?.enabled || !data.music?.audioUrl) return;
 
-    const btn = document.getElementById('audio-control');
-    const playIcon = document.getElementById('play-icon');
-    const pauseIcon = document.getElementById('pause-icon');
-    let isPlaying = false;
+            const audio = new Audio(data.music.audioUrl);
+            audio.loop = data.music.loop ?? true;
+            audio.volume = data.music.volume ?? 0.3;
 
-    if (btn) {
-        btn.hidden = false;
+            const btn = document.getElementById('audio-control');
+            const playIcon = document.getElementById('play-icon');
+            const pauseIcon = document.getElementById('pause-icon');
+            let isPlaying = false;
 
-        btn.addEventListener('click', () => {
-            if (isPlaying) {
-                audio.pause();
-                playIcon.style.display = 'block';
-                pauseIcon.style.display = 'none';
-                btn.classList.remove('playing');
-            } else {
-                audio.play().catch(e => console.log("Audio play blocked", e));
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
-                btn.classList.add('playing');
+            if (btn) {
+                btn.hidden = false;
+
+                // Autoplay if enabled
+                if (data.music.autoplay) {
+                    audio.play().catch(e => console.log("Audio autoplay blocked", e));
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'block';
+                    btn.classList.add('playing');
+                    isPlaying = true;
+                }
+
+                btn.addEventListener('click', () => {
+                    if (isPlaying) {
+                        audio.pause();
+                        playIcon.style.display = 'block';
+                        pauseIcon.style.display = 'none';
+                        btn.classList.remove('playing');
+                    } else {
+                        audio.play().catch(e => console.log("Audio play blocked", e));
+                        playIcon.style.display = 'none';
+                        pauseIcon.style.display = 'block';
+                        btn.classList.add('playing');
+                    }
+                    isPlaying = !isPlaying;
+                });
             }
-            isPlaying = !isPlaying;
-        });
-    }
+        })
+        .catch(err => console.log("Failed to load audio:", err));
 });

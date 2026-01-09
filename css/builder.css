@@ -33,6 +33,9 @@ body {
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    overflow-wrap: break-word;
 }
 
 /* Background Gradients */
@@ -49,13 +52,21 @@ body::before {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .container-wide {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
+}
+
+@media (min-width: 768px) {
+
+    .container,
+    .container-wide {
+        padding: 2rem;
+    }
 }
 
 /* --- Typography --- */
@@ -90,7 +101,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
     border-bottom: 1px solid var(--glass-border);
@@ -98,6 +109,7 @@ nav {
     top: 0;
     z-index: 100;
     background: rgba(5, 5, 5, 0.5);
+    width: 100%;
 }
 
 .logo {
@@ -112,6 +124,22 @@ nav {
 .nav-links {
     display: flex;
     gap: 1.5rem;
+}
+
+@media (max-width: 600px) {
+    .nav-links {
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .nav-links {
+        gap: 0.5rem;
+    }
+
+    .nav-links a {
+        font-size: 0.75rem;
+    }
 }
 
 .nav-links a {
@@ -137,9 +165,19 @@ nav {
     -webkit-backdrop-filter: var(--glass-blur);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius);
-    padding: 2.5rem;
-    margin-bottom: 2rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .glass-panel {
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+    }
 }
 
 .primary-btn {
@@ -293,11 +331,19 @@ textarea:focus {
     transform: translateX(-50%) translateY(-5px);
 }
 
-footer {
+.site-footer {
     padding: 4rem 2rem;
     text-align: center;
     border-top: 1px solid var(--glass-border);
     margin-top: 4rem;
+    background: rgba(5, 5, 5, 0.8);
+}
+
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 3rem 1rem;
+        margin-top: 2rem;
+    }
 }
 
 .low-profile {
@@ -349,62 +395,236 @@ footer {
     opacity: 1;
 }
 
-/* Builder Specific Layout */
+/* --- Consolidated Sections from HTML --- */
+.form-section {
+    display: none;
+}
+
+.form-section.active {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dynamic-list-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: flex-end;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    flex-wrap: wrap;
+}
+
+.dynamic-list-item>div {
+    flex: 1 1 150px;
+}
+
+.remove-btn {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    padding: 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.remove-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+.preview-container {
+    position: sticky;
+    top: 100px;
+    max-height: calc(100vh - 120px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-panel {
+    position: sticky;
+    top: 0;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.json-badge {
+    font-size: 0.75rem;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--glass-border);
+}
+
+.preview-actions {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.preview-note {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    margin: 0;
+}
+
+pre {
+    background: #0f172a;
+    padding: 1rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    flex-grow: 1;
+    margin: 0;
+    border: 1px solid var(--glass-border);
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+    pre {
+        padding: 1.5rem;
+        font-size: 0.85rem;
+        height: 60vh;
+    }
+}
+
+@media (max-width: 767px) {
+    pre {
+        height: 40vh;
+    }
+}
+
+/* --- Builder Specific Layout Updates --- */
 .builder-layout {
     display: grid;
-    grid-template-columns: 1.8fr 1fr;
-    gap: 3rem;
-    height: calc(100vh - 160px);
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    height: auto;
     align-items: flex-start;
 }
 
+@media (min-width: 1025px) {
+    .builder-layout {
+        grid-template-columns: 1.8fr 1fr;
+        gap: 3rem;
+        height: calc(100vh - 160px);
+    }
+}
+
 .form-scroll-area {
-    height: 100%;
-    overflow-y: auto;
-    padding-right: 1.5rem;
-    scrollbar-width: thin;
-    scrollbar-color: var(--glass-border) transparent;
+    height: auto;
+    overflow: visible;
+    padding-right: 0;
 }
 
-.form-scroll-area::-webkit-scrollbar {
-    width: 6px;
-}
-
-.form-scroll-area::-webkit-scrollbar-thumb {
-    background: var(--glass-border);
-    border-radius: 10px;
+@media (min-width: 1025px) {
+    .form-scroll-area {
+        height: 100%;
+        overflow-y: auto;
+        padding-right: 1.5rem;
+    }
 }
 
 .preview-sticky-side {
-    position: sticky;
-    top: 0;
-    height: 100%;
+    position: static;
+    height: auto;
 }
 
-@media (max-width: 1024px) {
-    .builder-layout {
-        grid-template-columns: 1fr;
-        height: auto;
-    }
-
-    .form-scroll-area {
-        height: auto;
-        overflow-y: visible;
+@media (min-width: 1025px) {
+    .preview-sticky-side {
+        position: sticky;
+        top: 0;
+        height: 100%;
     }
 }
 
 @media (max-width: 768px) {
     nav {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+    }
+
+    .nav-links {
+        gap: 0.75rem;
+    }
+
+    .nav-links a {
+        font-size: 0.7rem;
     }
 
     h1 {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 8vw, 2.5rem);
     }
 
     .section-nav {
-        position: static !important;
+        position: sticky !important;
+        top: 60px !important;
+        margin-bottom: 1.5rem !important;
+        padding: 0.5rem !important;
+        background: rgba(5, 5, 5, 0.95);
+        border-radius: 0;
+        margin-left: -1rem;
+        margin-right: -1rem;
+        width: calc(100% + 2rem);
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .glass-panel {
+        padding: 1.25rem;
+        border-radius: 12px;
+    }
+
+    .container-wide {
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links {
+        display: none;
+        /* Hide nav links on very small screens or use a burger? For now let's keep it simple and just reduce space */
+    }
+
+    .nav-links.show {
+        display: flex;
     }
 }

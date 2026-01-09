@@ -18,6 +18,16 @@
     --glass-blur: blur(16px);
 }
 
+:root {
+    --vh: 100svh;
+}
+
+@supports (height: 100dvh) {
+    :root {
+        --vh: 100dvh;
+    }
+}
+
 *,
 *::before,
 *::after {
@@ -27,7 +37,7 @@
 html,
 body {
     margin: 0;
-    padding: 0;
+    padding: 0 0 4rem;
     background: var(--bg-base);
     color: var(--text);
     font-family: var(--font-body);
@@ -231,6 +241,15 @@ nav {
     border-color: rgba(255, 255, 255, 0.3);
 }
 
+@media (max-width: 480px) {
+
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
 a {
     color: var(--link);
     transition: color 0.3s, text-decoration 0.3s;
@@ -252,6 +271,7 @@ label {
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
     color: var(--muted);
+    word-break: break-all;
 }
 
 input,
@@ -332,18 +352,19 @@ textarea:focus {
 }
 
 .site-footer {
-    padding: 4rem 2rem;
+    padding: 3rem 1.5rem 4rem;
     text-align: center;
     border-top: 1px solid var(--glass-border);
-    margin-top: 4rem;
-    background: rgba(5, 5, 5, 0.8);
+    margin-top: 6rem;
+    background: rgba(5, 5, 5, 0.95);
+    width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
-@media (max-width: 768px) {
-    .site-footer {
-        padding: 3rem 1rem;
-        margin-top: 2rem;
-    }
+.site-footer,
+.site-footer * {
+    text-align: center;
 }
 
 .low-profile {
@@ -427,6 +448,7 @@ textarea:focus {
     border-radius: 12px;
     border: 1px solid var(--glass-border);
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .dynamic-list-item>div {
@@ -463,11 +485,21 @@ textarea:focus {
 
 .preview-panel {
     position: sticky;
-    top: 0;
+    top: 20px;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: auto;
+    max-height: calc(100vh - 40px);
+}
+
+@media (max-width: 1024px) {
+    .preview-panel {
+        position: static;
+        max-height: none;
+        height: auto;
+        padding: 1rem;
+    }
 }
 
 .preview-header {
@@ -507,7 +539,7 @@ pre {
     font-size: 0.8rem;
     overflow-x: auto;
     white-space: pre-wrap;
-    word-break: break-all;
+    word-break: break-word;
     flex-grow: 1;
     margin: 0;
     border: 1px solid var(--glass-border);
@@ -519,13 +551,14 @@ pre {
     pre {
         padding: 1.5rem;
         font-size: 0.85rem;
-        height: 60vh;
+        min-height: 400px;
     }
 }
 
 @media (max-width: 767px) {
     pre {
-        height: 40vh;
+        height: auto;
+        max-height: 50vh;
     }
 }
 
@@ -542,7 +575,8 @@ pre {
     .builder-layout {
         grid-template-columns: 1.8fr 1fr;
         gap: 3rem;
-        height: calc(100vh - 160px);
+        min-height: calc(var(--vh) - 160px);
+        height: auto;
     }
 }
 
@@ -593,15 +627,15 @@ pre {
     }
 
     .section-nav {
-        position: sticky !important;
-        top: 60px !important;
-        margin-bottom: 1.5rem !important;
-        padding: 0.5rem !important;
+        position: static !important;
+        top: auto !important;
+        margin-bottom: 2rem;
+        padding: 0.75rem;
         background: rgba(5, 5, 5, 0.95);
         border-radius: 0;
-        margin-left: -1rem;
-        margin-right: -1rem;
-        width: calc(100% + 2rem);
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
+        width: calc(100% + 1.5rem);
     }
 
     .grid {
@@ -616,6 +650,22 @@ pre {
     .container-wide {
         padding: 0.75rem;
     }
+
+    /* Ensure builder layout is single column on mobile */
+    .builder-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Prevent overflow on form elements */
+    .form-scroll-area,
+    .preview-sticky-side {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
 }
 
 @media (max-width: 480px) {
@@ -626,5 +676,17 @@ pre {
 
     .nav-links.show {
         display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .preview-container,
+    .preview-panel,
+    .preview-sticky-side {
+        position: static !important;
+        top: auto !important;
+        max-height: none !important;
+        height: auto !important;
     }
 }

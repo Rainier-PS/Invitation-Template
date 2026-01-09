@@ -237,7 +237,7 @@ a {
     text-decoration: none;
 }
 
-a:not(.logo):not(.nav-links a):not(.primary-btn):not(.secondary-btn):not(.nav-btn):hover {
+a:not(.logo) :not(.nav-links a) :not(.primary-btn) :not(.secondary-btn) :not(.nav-btn) :not(.low-profile a):hover {
     text-decoration: underline;
     text-decoration-style: wavy;
     text-decoration-color: var(--accent);
@@ -534,4 +534,36 @@ textarea:focus {
 
 .footer-support p {
     margin-bottom: 1rem;
+}
+
+#back-to-top {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+#back-to-top:hover {
+    transform: translateY(-3px);
+}
+
+#back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
 }

@@ -1,4 +1,4 @@
-const EVENT_JSON_URL = "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/event.json";
+const EVENT_JSON_URL = './event.json';
 
 function formatGoogleCalendarDate(dateStr, timeStr) {
     try {

@@ -390,9 +390,9 @@ footer>* {
 .audio-fab,
 .accessibility-fab {
     position: fixed;
-    bottom: 2rem;
-    width: clamp(40px, 8vw, 60px);   /* scales between 40px and 60px */
-    height: clamp(40px, 8vw, 60px);
+    bottom: clamp(1.5rem, 5vw, 2rem);       /* dynamic bottom spacing */
+    width: clamp(40px, 10vw, 60px);         /* scales between 40px (mobile) and 60px (desktop) */
+    height: clamp(40px, 10vw, 60px);
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(12px) brightness(0.8);
@@ -409,12 +409,13 @@ footer>* {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
+/* --- Positioning --- */
 .audio-fab {
-    right: 1.5rem; /* slightly closer on small screens */
+    right: clamp(1rem, 5vw, 2rem);
 }
 
 .accessibility-fab {
-    left: 1.5rem;
+    left: clamp(1rem, 5vw, 2rem);
 }
 
 .accessibility-fab.scrolled-out {
@@ -428,6 +429,15 @@ footer>* {
     background: rgba(255, 255, 255, 0.25);
     transform: scale(1.1) translateY(-4px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* --- SVG scaling --- */
+.audio-fab svg,
+.accessibility-fab svg {
+    width: 50%;        /* scales relative to button size */
+    height: 50%;
+    max-width: 30px;   /* prevents icons from getting too large on big screens */
+    max-height: 30px;
 }
 
 /* --- Tooltips --- */
@@ -446,9 +456,9 @@ footer>* {
     bottom: 110%;
     background: rgba(0, 0, 0, 0.9);
     color: #fff;
-    padding: 0.4rem 0.8rem; /* smaller padding on mobile */
+    padding: 0.4rem 0.8rem;
     border-radius: 8px;
-    font-size: clamp(0.7rem, 2vw, 0.85rem); /* dynamic font-size */
+    font-size: clamp(0.7rem, 2vw, 0.85rem);
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
@@ -473,18 +483,24 @@ footer>* {
     transform: translateY(-8px);
 }
 
-/* Optional: media query tweaks for very small screens */
+/* --- Media query for very small screens --- */
 @media (max-width: 400px) {
     .audio-fab,
     .accessibility-fab {
-        bottom: 1.5rem;
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
+        bottom: 1rem;
+    }
+
+    .audio-fab svg,
+    .accessibility-fab svg {
+        width: 50%;
+        height: 50%;
     }
 
     [data-tooltip]::after {
-        font-size: 0.7rem;
-        padding: 0.3rem 0.6rem;
+        font-size: 0.65rem;
+        padding: 0.25rem 0.5rem;
     }
 }
 
@@ -657,4 +673,5 @@ body.simple footer {
     text-align: center !important;
     align-items: center !important;
 }
+
 

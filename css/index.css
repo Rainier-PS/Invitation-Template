@@ -6,7 +6,6 @@
     --primary-glow: rgba(59, 130, 246, 0.5);
     --accent: #60a5fa;
     --link: #93c5fd;
-    /* Readable light blue */
 
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Outfit', sans-serif;
@@ -33,9 +32,10 @@ body {
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
+    overflow-wrap: break-word;
 }
 
-/* Background Gradients */
 body::before {
     content: '';
     position: fixed;
@@ -58,7 +58,14 @@ body::before {
     padding: 2rem;
 }
 
-/* --- Typography --- */
+@media (max-width: 768px) {
+
+    .container,
+    .container-wide {
+        padding: 1.5rem 1rem;
+    }
+}
+
 h1,
 h2,
 h3 {
@@ -85,7 +92,17 @@ h2 {
     margin-bottom: 2rem;
 }
 
-/* --- Navigation --- */
+.hero-header {
+    text-align: center;
+    margin: 4rem 0;
+}
+
+@media (max-width: 768px) {
+    .hero-header {
+        margin: 2rem 0;
+    }
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -114,6 +131,22 @@ nav {
     gap: 1.5rem;
 }
 
+@media (max-width: 600px) {
+    .nav-links {
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .nav-links {
+        gap: 0.5rem;
+    }
+
+    .nav-links a {
+        font-size: 0.75rem;
+    }
+}
+
 .nav-links a {
     text-decoration: none;
     color: var(--text);
@@ -130,7 +163,6 @@ nav {
     color: var(--link);
 }
 
-/* --- Components --- */
 .glass-panel {
     background: var(--glass-bg);
     backdrop-filter: var(--glass-blur);
@@ -140,6 +172,12 @@ nav {
     padding: 2.5rem;
     margin-bottom: 2rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .glass-panel {
+        padding: 1.5rem;
+    }
 }
 
 .primary-btn {
@@ -245,9 +283,16 @@ textarea:focus {
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin: 4rem 0;
+}
+
+@media (max-width: 768px) {
+    .features-grid {
+        margin: 2rem 0;
+        grid-template-columns: 1fr;
+    }
 }
 
 .feature-card {
@@ -293,11 +338,19 @@ textarea:focus {
     transform: translateX(-50%) translateY(-5px);
 }
 
-footer {
+.site-footer {
     padding: 4rem 2rem;
     text-align: center;
     border-top: 1px solid var(--glass-border);
     margin-top: 4rem;
+    background: rgba(5, 5, 5, 0.8);
+}
+
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 3rem 1rem;
+        margin-top: 2rem;
+    }
 }
 
 .low-profile {
@@ -395,13 +448,17 @@ footer {
 
 @media (max-width: 768px) {
     nav {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+    }
+
+    .logo {
+        font-size: 1.1rem;
     }
 
     h1 {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 8vw, 2.5rem);
     }
 
     .section-nav {

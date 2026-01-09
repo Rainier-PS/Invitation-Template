@@ -10,116 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/builder.css">
     <script defer src="js/builder.js"></script>
-    <style>
-        .section-nav {
-            display: flex;
-            gap: 0.75rem;
-            margin-bottom: 2rem;
-            overflow-x: auto;
-            padding-bottom: 1rem;
-            scrollbar-width: thin;
-        }
-
-        .section-nav button {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            color: var(--text);
-            padding: 0.6rem 1.2rem;
-            border-radius: 12px;
-            cursor: pointer;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-
-        .section-nav button.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        .form-section {
-            display: none;
-        }
-
-        .form-section.active {
-            display: block;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .dynamic-list-item {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            align-items: flex-end;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 1rem;
-            border-radius: 12px;
-            border: 1px solid var(--glass-border);
-        }
-
-        .remove-btn {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: #f87171;
-            padding: 0.6rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .remove-btn:hover {
-            background: rgba(239, 68, 68, 0.2);
-        }
-
-        .preview-container {
-            position: sticky;
-            top: 100px;
-            max-height: calc(100vh - 120px);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        pre {
-            background: #0f172a;
-            padding: 1.5rem;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            overflow-y: auto;
-            flex-grow: 1;
-            margin: 0;
-            border: 1px solid var(--glass-border);
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        @media (max-width: 1024px) {
-            .grid-builder {
-                grid-template-columns: 1fr !important;
-            }
-
-            .preview-container {
-                position: static;
-                max-height: none;
-                margin-top: 3rem;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -133,18 +23,16 @@
     </nav>
 
     <main class="container-wide">
-        <header style="margin: 2rem 0; text-align: center;">
+        <header class="page-header">
             <p class="subtitle">CONFIGURATION TOOL</p>
             <h1>Event Builder</h1>
-            <p style="color: var(--muted);">Fill out the form to generate your <code>event.json</code> configuration.
+            <p class="muted-text">Fill out the form to generate your <code>event.json</code> configuration.
             </p>
         </header>
 
         <div class="builder-layout">
-            <!-- Form Side -->
             <div class="form-scroll-area" id="builder-scroll-root">
-                <div class="section-nav" id="section-nav" role="tablist"
-                    style="position: sticky; top: 0; z-index: 50; background: rgba(5,5,5,0.9); backdrop-filter: blur(12px); padding: 1rem; margin-bottom: 2rem; border-radius: 12px; border: 1px solid var(--glass-border);">
+                <div class="section-nav section-nav-sticky" id="section-nav" role="tablist">
                     <a href="#section-event" class="nav-btn active" role="tab">Basic Info</a>
                     <a href="#section-datetime" class="nav-btn" role="tab">Date & Time</a>
                     <a href="#section-location" class="nav-btn" role="tab">Location</a>
@@ -154,7 +42,6 @@
                 </div>
 
                 <form id="event-form">
-                    <!-- Basic Info -->
                     <div class="form-section-stack" id="section-event">
                         <div class="glass-panel">
                             <h3>Basic Information</h3>
@@ -176,7 +63,6 @@
                         </div>
                     </div>
 
-                    <!-- Date & Time -->
                     <div class="form-section-stack" id="section-datetime">
                         <div class="glass-panel">
                             <h3>Date & Schedule</h3>
@@ -198,15 +84,12 @@
 
                             <h4>Schedule Activities</h4>
                             <div id="schedule-list-builder">
-                                <!-- Dynamic schedule items -->
                             </div>
-                            <button type="button" class="secondary-btn"
-                                style="width: 100%; border-style: dashed; margin-top: 1rem;"
-                                onclick="addScheduleItem()">+ Add Activity</button>
+                            <button type="button" class="secondary-btn add-item-btn" onclick="addScheduleItem()">+ Add
+                                Activity</button>
                         </div>
                     </div>
 
-                    <!-- Location -->
                     <div class="form-section-stack" id="section-location">
                         <div class="glass-panel">
                             <h3>Venue & Location</h3>
@@ -228,13 +111,12 @@
                         </div>
                     </div>
 
-                    <!-- RSVP -->
                     <div class="form-section-stack" id="section-rsvp">
                         <div class="glass-panel">
                             <h3>RSVP & Registration</h3>
                             <div class="form-group">
-                                <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer;">
-                                    <input type="checkbox" id="input-rsvp-enabled" checked style="width: auto;">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="input-rsvp-enabled" checked class="checkbox-inline">
                                     <span>Enable Registration Section</span>
                                 </label>
                             </div>
@@ -254,31 +136,26 @@
                         </div>
                     </div>
 
-                    <!-- Design -->
                     <div class="form-section-stack" id="section-design">
                         <div class="glass-panel">
                             <h3>Visual Styling</h3>
                             <div class="form-group">
                                 <label for="input-accentColor">Theme Accent Color</label>
-                                <div style="display: flex; gap: 1rem; align-items: center;">
-                                    <input type="color" id="input-accentColor" value="#3b82f6"
-                                        style="width: 64px; height: 48px; border: none; background: transparent; cursor: pointer;">
+                                <div class="color-picker-container">
+                                    <input type="color" id="input-accentColor" value="#3b82f6" class="color-input">
                                     <input type="text" id="input-accentColor-text" value="#3b82f6"
-                                        style="flex-grow: 1;">
+                                        class="text-input-flex">
                                 </div>
                             </div>
 
                             <h4>Hero Gallery URLs</h4>
                             <div id="hero-images-builder">
-                                <!-- Dynamic images -->
                             </div>
-                            <button type="button" class="secondary-btn"
-                                style="width: 100%; border-style: dashed; margin-top: 1rem;" onclick="addHeroImage()">+
+                            <button type="button" class="secondary-btn add-item-btn" onclick="addHeroImage()">+
                                 Add Image Link</button>
                         </div>
                     </div>
 
-                    <!-- Footer -->
                     <div class="form-section-stack" id="section-footer">
                         <div class="glass-panel">
                             <h3>Branding & Footer</h3>
@@ -302,21 +179,17 @@
 
             <!-- Preview Side -->
             <div class="preview-sticky-side">
-                <div class="glass-panel"
-                    style="position: sticky; top: 0; padding: 1.5rem; display: flex; flex-direction: column; height: 100%;">
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                        <h3 style="margin: 0;">Code Preview</h3>
-                        <div
-                            style="font-size: 0.75rem; color: var(--muted); background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--glass-border);">
-                            event.json</div>
+                <div class="glass-panel preview-panel">
+                    <div class="preview-header">
+                        <h3 class="preview-title">Code Preview</h3>
+                        <div class="json-badge">event.json</div>
                     </div>
-                    <pre id="json-preview"
-                        style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 1.5rem; margin: 0; font-size: 0.8rem; height: 60vh; overflow-y: auto; border: 1px solid var(--glass-border); line-height: 1.6; font-family: 'JetBrains Mono', 'Fira Code', monospace; scrollbar-width: thin; scrollbar-color: var(--glass-border) transparent;">{ ... }</pre>
-                    <div style="margin-top: 1.5rem; display: grid; grid-template-columns: 1fr; gap: 1rem;">
-                        <button onclick="copyJson()" class="primary-btn" style="width: 100%;">Copy event.json</button>
-                        <p style="font-size: 0.8rem; color: var(--muted); text-align: center; margin: 0;">Replace your
-                            local file with this code.</p>
+                    <pre id="json-preview">{ ... }</pre>
+                    <div class="preview-actions">
+                        <button onclick="copyJson()" class="primary-btn full-width-btn">Copy event.json</button>
+                        <button onclick="downloadJson()" class="secondary-btn full-width-btn">Download
+                            event.json</button>
+                        <p class="preview-note">Replace your local file with this code.</p>
                     </div>
                 </div>
             </div>
@@ -324,22 +197,21 @@
     </main>
 
 
-    <footer>
-        <p>&copy; 2026 Invitation Template Builder</p>
+    <footer class="site-footer">
+        <p class="footer-text">&copy; 2026 Invitation Template Builder</p>
     </footer>
 
     <script>
-        // Inline some basics for immediate functionality
         function addScheduleItem(time = "06:00 PM", label = "Welcome") {
             const container = document.getElementById('schedule-list-builder');
             const div = document.createElement('div');
             div.className = 'dynamic-list-item';
             div.innerHTML = `
-                <div style="flex: 1;">
+                <div class="flex-1">
                     <label>Time</label>
                     <input type="text" class="sched-time" value="${time}">
                 </div>
-                <div style="flex: 2;">
+                <div class="flex-2">
                     <label>Activity</label>
                     <input type="text" class="sched-label" value="${label}">
                 </div>
@@ -356,7 +228,7 @@
             const div = document.createElement('div');
             div.className = 'dynamic-list-item';
             div.innerHTML = `
-                <div style="flex: 1;">
+                <div class="flex-1">
                     <input type="url" class="hero-img-url" value="${url}" placeholder="https://...">
                 </div>
                 <button type="button" class="remove-btn" title="Remove Link" onclick="this.parentElement.remove()">
@@ -371,7 +243,6 @@
                 addScheduleItem("06:00 PM", "Welcome Drinks");
             }
             if (document.getElementById('hero-images-builder').children.length === 0) {
-                // Keep empty on start as per user request
             }
 
         });

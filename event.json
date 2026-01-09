@@ -1,92 +1,88 @@
 {
-    "_meta_comment": "TEMPLATE CONFIGURATION",
+    "_meta_comment": "TEMPLATE CONFIGURATION — FUN DEMO EDITION",
     "meta": {
         "version": "1.1",
         "private": false,
-        "_comment_simpleMode": "Force 'Easy Reading' mode by default for all users",
         "simpleMode": false,
-        "_comment_showSimpleModeToggle": "RECOMMENDED: Set to true if you want the accessibility toggle visible on the first page",
-        "showSimpleModeToggle": false
+        "showSimpleModeToggle": true
     },
-    "_event_comment": "EVENT CONTENT",
     "event": {
-        "title": "[Event Title]",
-        "subtitle": "Join us for a [Event Type] celebration",
-        "description": "A description of your event goes here."
+        "title": "404: Sleep Not Found",
+        "subtitle": "An Extremely Serious Coding Party (Not Really)",
+        "description": "A totally unofficial, highly chaotic coding hangout where bugs are features, coffee is a dependency, and Stack Overflow is the real MVP."
     },
     "datetime": {
-        "date": "January 1, 2000",
-        "startTime": "00:00 PM",
-        "endTime": "",
+        "date": "April 1, 2026",
+        "startTime": "09:00 PM",
+        "endTime": "03:00 AM",
         "timezone": "local",
         "allDay": false
     },
     "location": {
-        "name": "Venue Name",
-        "address": "Address",
-        "mapsLink": "https://maps.google.com"
+        "name": "The Internet™",
+        "address": "Somewhere between GitHub and Discord",
+        "mapsLink": "https://www.google.com/maps"
     },
     "schedule": [
         {
-            "time": "00:00 PM",
-            "label": "Activity 1"
+            "time": "09:00 PM",
+            "label": "Arrival & Pretending We Know What We're Doing"
         },
         {
-            "time": "01:00 PM",
-            "label": "Activity 2"
+            "time": "10:30 PM",
+            "label": "Live Coding (Things Will Break)"
+        },
+        {
+            "time": "12:00 AM",
+            "label": "Midnight Snack & Existential Debugging"
+        },
+        {
+            "time": "02:30 AM",
+            "label": "\"One Last Commit\" (Lies)"
         }
     ],
-    "_rsvp_comment": "REGISTRATION (RSVP)",
     "rsvp": {
         "enabled": true,
         "provider": "tally",
-        "_comment_url": "Supports Tally forms, Google Forms, or any embeddable URL",
         "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1",
-        "deadline": "",
-        "maxGuestsPerInvite": 0
+        "deadline": "March 31, 2026",
+        "maxGuestsPerInvite": 1
     },
     "calendar": {
         "enabled": true,
-        "defaultDurationHours": 2,
+        "defaultDurationHours": 6,
         "providers": {
             "google": true,
-            "apple": false,
-            "outlook": false
+            "apple": true,
+            "outlook": true
         }
     },
-    "_design_comment": "AESTHETICS & THEME",
     "design": {
         "theme": "light",
-        "accentColor": "#2563eb",
-        "_comment_heroImages": "List of URLs for the hero slideshow on the first page",
+        "accentColor": "#22c55e",
         "heroImages": [
-            "img1",
-            "img2",
-            "img3"
+            "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/images/bin-thieu-RjZQ3M3bGxQ-unsplash.jpg",
+            "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/images/junior-reis-xMDo8y776uE-unsplash.jpg",
+            "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/images/katelyn-macmillan-MtwNya-3mac-unsplash.jpg",
+            "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/images/ulyana-tim-AbnCRgL2DNs-unsplash.jpg"
         ],
-        "_comment_sectionBackgrounds": "Sequential background images for each scrolling section",
-        "sectionBackgrounds": [
-            "img1",
-            "img2",
-            "img3"
-        ]
+        "sectionBackgrounds": []
     },
-    "_footer_comment": "FOOTER & CREDITS",
     "footer": {
-        "text": "",
+        "text": "Warning: May contain bugs, memes, and spontaneous refactors.",
         "branding": {
-            "link": "https://rainier-ps.github.io/Personal-Website/",
+            "link": "#",
             "logoUrl": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg",
-            "logoAlt": "Rainier Logo"
+            "logoAlt": "Logo"
         },
         "credits": {
-            "designByLabel": "Created & Designed by",
+            "designByLabel": "Lovingly Assembled by",
             "copyrightYear": "2026",
-            "authorName": "[Name]",
+            "authorName": "Sleep-Deprived Developers",
             "templateLabel": "Template by",
             "templateAuthor": "Rainier Pearson Saputra",
             "templateLink": "https://rainier-ps.github.io/Personal-Website/",
-            "repoLabel": "Open Repository",
+            "repoLabel": "Yes, This Is Open Source",
             "repoLink": "https://github.com/Rainier-PS/Invitation-Template"
         }
     }

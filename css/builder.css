@@ -6,7 +6,6 @@
     --primary-glow: rgba(59, 130, 246, 0.5);
     --accent: #60a5fa;
     --link: #93c5fd;
-    /* Readable light blue */
 
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Outfit', sans-serif;
@@ -48,7 +47,6 @@ body {
     overflow-wrap: break-word;
 }
 
-/* Background Gradients */
 body::before {
     content: '';
     position: fixed;
@@ -416,7 +414,6 @@ textarea:focus {
     opacity: 1;
 }
 
-/* --- Consolidated Sections from HTML --- */
 .form-section {
     display: none;
 }
@@ -562,7 +559,6 @@ pre {
     }
 }
 
-/* --- Builder Specific Layout Updates --- */
 .builder-layout {
     display: grid;
     grid-template-columns: 1fr;
@@ -651,7 +647,6 @@ pre {
         padding: 0.75rem;
     }
 
-    /* Ensure builder layout is single column on mobile */
     .builder-layout {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -659,7 +654,6 @@ pre {
         max-width: 100%;
     }
 
-    /* Prevent overflow on form elements */
     .form-scroll-area,
     .preview-sticky-side {
         width: 100%;
@@ -671,7 +665,6 @@ pre {
 @media (max-width: 480px) {
     .nav-links {
         display: none;
-        /* Hide nav links on very small screens or use a burger? For now let's keep it simple and just reduce space */
     }
 
     .nav-links.show {
@@ -689,4 +682,82 @@ pre {
         max-height: none !important;
         height: auto !important;
     }
+}
+
+.page-header {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.muted-text {
+    color: var(--muted);
+}
+
+.section-nav-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(5, 5, 5, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+}
+
+.add-item-btn {
+    width: 100%;
+    border-style: dashed;
+    margin-top: 1rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+}
+
+.checkbox-inline {
+    width: auto;
+}
+
+.color-picker-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.color-input {
+    width: 64px;
+    height: 48px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.text-input-flex {
+    flex-grow: 1;
+}
+
+.preview-title {
+    margin: 0;
+}
+
+.full-width-btn {
+    width: 100%;
+}
+
+.footer-text {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-2 {
+    flex: 2;
 }

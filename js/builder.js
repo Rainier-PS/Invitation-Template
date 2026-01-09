@@ -4,9 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navButtons = document.querySelectorAll('#section-nav .nav-btn');
     const sections = document.querySelectorAll('.form-section-stack');
 
-    // --- XSS Protection / Sanitization ---
-    // This helper ensures that any text entered by the user is treated as plain text
-    // when stored in the JSON object, preventing script injection.
+    // XSS Protection / Sanitization
     const sanitize = (str) => {
         if (typeof str !== 'string') return str;
         return str.replace(/[<>]/g, (tag) => ({
@@ -17,14 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const scrollRoot = document.getElementById('builder-scroll-root');
 
-    // --- Navigation Logic ---
     navButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = btn.getAttribute('href');
             const targetEl = document.querySelector(targetId);
             if (targetEl && scrollRoot) {
-                const targetPos = targetEl.offsetTop - 80; // Offset for sticky nav
+                const targetPos = targetEl.offsetTop - 80;
                 scrollRoot.scrollTo({
                     top: targetPos,
                     behavior: 'smooth'
@@ -33,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Active Link Observer ---
     const observerOptions = {
         root: scrollRoot,
         rootMargin: '-10% 0px -80% 0px',
@@ -53,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sections.forEach(section => navObserver.observe(section));
 
-    // --- Sync Accent Color Inputs ---
     const colorPicker = document.getElementById('input-accentColor');
     const colorText = document.getElementById('input-accentColor-text');
 
@@ -66,12 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
         updateJson();
     });
 
-    // --- JSON Generation Logic ---
     const updateJson = () => {
         const getValue = (id) => sanitize(document.getElementById(id).value);
         const getCheck = (id) => document.getElementById(id).checked;
 
-        // Collect Schedule
         const schedule = [];
         document.querySelectorAll('.dynamic-list-item').forEach(item => {
             const time = item.querySelector('.sched-time');
@@ -84,10 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Collect Hero Images
         const heroImages = [];
         document.querySelectorAll('.hero-img-url').forEach(input => {
-            heroImages.push(input.value); // URLs don't usually need tag-stripping but we should be careful with display
+            heroImages.push(input.value);
         });
 
         const json = {
@@ -161,19 +153,15 @@ document.addEventListener('DOMContentLoaded', () => {
         preview.textContent = JSON.stringify(json, null, 4);
     };
 
-    // Auto-update on any input
     form.addEventListener('input', updateJson);
 
-    // Add observers for dynamic items (since 'input' on form won't catch additions/removals well)
     const listObserver = new MutationObserver(updateJson);
     listObserver.observe(document.getElementById('schedule-list-builder'), { childList: true, subtree: true });
     listObserver.observe(document.getElementById('hero-images-builder'), { childList: true, subtree: true });
 
-    // Initial preview
     updateJson();
 });
 
-// Global copy function
 window.copyJson = function () {
     const text = document.getElementById('json-preview').textContent;
     navigator.clipboard.writeText(text).then(() => {
@@ -187,3 +175,26 @@ window.copyJson = function () {
         }, 2000);
     });
 };
+
+window.downloadJson = function () {
+    const text = document.getElementById('json-preview').textContent;
+    const blob = new Blob([text], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'event.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    const btn = document.querySelector('.secondary-btn[onclick="downloadJson()"]');
+    const originalText = btn.textContent;
+    btn.textContent = 'Downloaded!';
+    btn.style.background = '#10b981';
+    setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+    }, 2000);
+};
+

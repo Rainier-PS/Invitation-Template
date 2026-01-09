@@ -254,7 +254,7 @@ a {
     text-decoration: none;
 }
 
-a:not(.logo):not(.nav-links a):not(.primary-btn):not(.secondary-btn):not(.nav-btn):hover {
+a:not(.logo) :not(.nav-links a) :not(.primary-btn) :not(.secondary-btn) :not(.nav-btn) :not(.low-profile a):hover {
     text-decoration: underline;
     text-decoration-style: wavy;
     text-decoration-color: var(--accent);
@@ -287,10 +287,23 @@ select {
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
     outline: none;
     background: rgba(255, 255, 255, 0.1);
     border-color: var(--primary);
+}
+
+select option {
+    background: #1e293b;
+    color: var(--text);
+    padding: 0.5rem;
+}
+
+select option:hover,
+select option:focus,
+select option:checked {
+    background: #334155;
 }
 
 .grid {
@@ -400,6 +413,8 @@ textarea:focus {
     opacity: 0.7;
     white-space: nowrap;
     flex-shrink: 0;
+    cursor: pointer;
+    pointer-events: auto;
 }
 
 .section-nav .nav-btn.active {
@@ -696,14 +711,16 @@ pre {
 .section-nav-sticky {
     position: sticky;
     top: 0;
-    z-index: 50;
-    background: rgba(5, 5, 5, 0.9);
+    z-index: 200;
+    background: rgba(5, 5, 5, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     padding: 1rem;
     margin-bottom: 2rem;
     border-radius: 12px;
     border: 1px solid var(--glass-border);
+    pointer-events: auto;
+    isolation: isolate;
 }
 
 .add-item-btn {

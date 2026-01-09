@@ -1,8 +1,7 @@
-// Marketing site logic
+// Main site logic
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Marketing site loaded');
+    console.log('Main site loaded');
 
-    // Smooth scroll for anchors if any
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -36,4 +35,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
         contactContainer.appendChild(link);
     }
+
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (!backToTopBtn) return;
+
+    const minScrollableHeight = 600;
+    if (document.body.scrollHeight - window.innerHeight < minScrollableHeight) {
+        backToTopBtn.style.display = 'none';
+        return;
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let lastScrollY = window.scrollY;
+    let lastTimestamp = performance.now();
+
+    window.addEventListener('scroll', () => {
+        const now = performance.now();
+        const deltaY = Math.abs(window.scrollY - lastScrollY);
+        const deltaTime = now - lastTimestamp;
+
+        const velocity = deltaTime > 0 ? deltaY / deltaTime : 0;
+
+        if (window.scrollY > 700) {
+            backToTopBtn.classList.add('visible');
+
+            if (!prefersReducedMotion) {
+                const opacity = Math.min(1, 0.3 + velocity * 4);
+                backToTopBtn.style.opacity = opacity.toFixed(2);
+            } else {
+                backToTopBtn.style.opacity = 1;
+            }
+        } else {
+            backToTopBtn.classList.remove('visible');
+            backToTopBtn.style.opacity = '';
+        }
+
+        lastScrollY = window.scrollY;
+        lastTimestamp = now;
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        });
+    });
 });

@@ -44,19 +44,17 @@
 
     <main class="container">
         <header class="hero-header">
-            <div
-                style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(59, 130, 246, 0.1); border: 1px solid var(--glass-border); padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 2rem;">
-                <span style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></span>
-                <span
-                    style="font-size: 0.8rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 1px;">Free
+            <div class="badge-container">
+                <span class="badge-dot"></span>
+                <span class="badge-text">Free
                     & Open Source • MIT License</span>
             </div>
             <h1>Stunning Digital Invitations</h1>
-            <p style="max-width: 600px; margin: 1.5rem auto; color: var(--muted);">
+            <p class="hero-description">
                 A sophisticated, glassmorphic invitation template designed for elegance and ease of use.
                 Perfect for weddings, parties, and corporate events.
             </p>
-            <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <div class="button-container">
                 <a href="builder.html" class="primary-btn">Start Configuring</a>
                 <a href="invite.html" class="secondary-btn">View Demo</a>
             </div>
@@ -64,7 +62,7 @@
 
         <section class="features-grid">
             <div class="feature-card">
-                <div class="icon-wrapper" style="margin-bottom: 1.5rem; color: var(--primary);">
+                <div class="icon-wrapper">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -138,16 +136,16 @@
 
         <section class="glass-panel">
             <h2>How to Use</h2>
-            <ol style="padding-left: 1.5rem;">
-                <li style="margin-bottom: 1.2rem;"><strong>Remix:</strong> Use our <a href="builder.html">Form
+            <ol class="how-to-list">
+                <li><strong>Remix:</strong> Use our <a href="builder.html">Form
                         Builder</a>
                     to generate your custom <code>event.json</code>.</li>
-                <li style="margin-bottom: 1.2rem;"><strong>Download:</strong> Fork or clone the repository from <a
+                <li><strong>Download:</strong> Fork or clone the repository from <a
                         href="https://github.com/Rainier-PS/Invitation-Template">GitHub</a>.</li>
-                <li style="margin-bottom: 1.2rem;"><strong>Replace:</strong> Overwrite the existing
+                <li><strong>Replace:</strong> Overwrite the existing
                     <code>event.json</code> with your generated code.
                 </li>
-                <li style="margin-bottom: 1.2rem;"><strong>Deploy:</strong> Host it for free on GitHub Pages, Vercel, or
+                <li><strong>Deploy:</strong> Host it for free on GitHub Pages, Vercel, or
                     Netlify.</li>
             </ol>
 
@@ -157,9 +155,9 @@
     </main>
 
     <footer class="site-footer">
-        <div style="max-width: 600px; margin: 0 auto 3rem; opacity: 0.6; font-size: 0.9rem;">
-            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text);">Support & Contributions</h3>
-            <p style="margin-bottom: 1rem;">Found a bug or have a suggestion? Help us improve by reporting issues or
+        <div class="footer-support">
+            <h3>Support & Contributions</h3>
+            <p>Found a bug or have a suggestion? Help us improve by reporting issues or
                 contributing on <a href="https://github.com/Rainier-PS/Invitation-Template" target="_blank"
                     rel="noopener">GitHub</a>.</p>
             <div id="contact-container">

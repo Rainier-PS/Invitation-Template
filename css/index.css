@@ -567,3 +567,60 @@ textarea:focus {
     opacity: 1;
     pointer-events: auto;
 }
+
+.carousel-section {
+    margin: 4rem 0;
+    text-align: center;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.carousel-slide h3 {
+    margin: 0.5rem 0;
+    color: var(--primary);
+}
+
+.carousel-slide p {
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
+    color: #f3f3f3;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.3);
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    z-index: 10;
+}
+
+.carousel-btn.prev { left: 1rem; }
+.carousel-btn.next { right: 1rem; }
+
+.carousel-btn:hover {
+    background: rgba(0,0,0,0.5);
+}

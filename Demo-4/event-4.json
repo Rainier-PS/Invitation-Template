@@ -1,0 +1,102 @@
+{
+    "_meta_comment": "TEMPLATE CONFIGURATION — BIRTHDAY PARTY EDITION",
+    "meta": {
+        "version": "1.3",
+        "private": false,
+        "simpleMode": false,
+        "showSimpleModeToggle": false
+    },
+    "event": {
+        "title": "Alex's 18th Birthday Bash",
+        "subtitle": "Cake, Games & Epic Fun!",
+        "description": "Come celebrate Alex leveling up! Expect music, games, snacks, and lots of laughs."
+    },
+    "datetime": {
+        "date": "July 10, 2026",
+        "startTime": "05:00 PM",
+        "endTime": "10:00 PM",
+        "timezone": "local",
+        "allDay": false
+    },
+    "location": {
+        "name": "Party Central",
+        "address": "456 Celebration Ave, Fun Town",
+        "mapsLink": "https://www.google.com/maps"
+    },
+    "schedule": [
+        {
+            "time": "05:00 PM",
+            "label": "Guests Arrive & Snacks"
+        },
+        {
+            "time": "06:00 PM",
+            "label": "Games & Activities"
+        },
+        {
+            "time": "07:30 PM",
+            "label": "Cake & Happy Birthday"
+        },
+        {
+            "time": "08:00 PM",
+            "label": "Dance & Chill"
+        }
+    ],
+    "rsvp": {
+        "enabled": true,
+        "provider": "tally",
+        "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1",
+        "deadline": "July 1, 2026",
+        "maxGuestsPerInvite": 3
+    },
+    "calendar": {
+        "enabled": true,
+        "defaultDurationHours": 5,
+        "providers": {
+            "google": true,
+            "apple": true,
+            "outlook": true
+        }
+    },
+    "design": {
+        "theme": "light",
+        "accentColor": "#f43f5e",
+        "heroImages": [
+            "https://images.unsplash.com/photo-1643175816971-a463dee6ae61?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fGJpcnRoZGF5fGVufDB8fDB8fHww",
+            "https://images.unsplash.com/photo-1551879403-6adb554966fd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDR8fGJpcnRoZGF5fGVufDB8fDB8fHww",
+            "https://images.unsplash.com/photo-1631857455684-a54a2f03665f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmlydGhkYXklMjBwYXJ0eXxlbnwwfHwwfHx8MA%3D%3D",
+            "https://images.unsplash.com/photo-1544155891-969f15a055d3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fGJpcnRoZGF5JTIwcGFydHl8ZW58MHx8MHx8fDA%3D",
+            "https://images.unsplash.com/photo-1621857524725-fdfeae3465dc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fGJpcnRoZGF5JTIwcGFydHl8ZW58MHx8MHx8fDA%3D"
+        ],
+        "sectionBackgrounds": [
+            "https://images.unsplash.com/photo-1643175816971-a463dee6ae61?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fGJpcnRoZGF5fGVufDB8fDB8fHww",
+            "https://images.unsplash.com/photo-1551879403-6adb554966fd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDR8fGJpcnRoZGF5fGVufDB8fDB8fHww",
+            "https://images.unsplash.com/photo-1631857455684-a54a2f03665f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmlydGhkYXklMjBwYXJ0eXxlbnwwfHwwfHx8MA%3D%3D",
+            "https://images.unsplash.com/photo-1544155891-969f15a055d3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fGJpcnRoZGF5JTIwcGFydHl8ZW58MHx8MHx8fDA%3D",
+            "https://images.unsplash.com/photo-1621857524725-fdfeae3465dc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fGJpcnRoZGF5JTIwcGFydHl8ZW58MHx8MHx8fDA%3D"
+        ]
+    },
+    "music": {
+        "enabled": true,
+        "loop": true,
+        "volume": 0.3,
+        "audioUrl": "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/audio/chill-abstract_intention.mp3"
+    },
+    "footer": {
+        "text": "Warning: Cake may disappear faster than expected!",
+        "branding": {
+            "link": "https://rainier-ps.github.io/Personal-Website/",
+            "logoUrl": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg",
+            "logoAlt": "Logo"
+        },
+        "credits": {
+            "designByLabel": "Created & Designed by",
+            "copyrightYear": "2026",
+            "authorName": "Max Heapford",
+            "templateLabel": "Template by",
+            "templateAuthor": "Rainier Pearson Saputra",
+            "templateLink": "https://rainier-ps.github.io/Personal-Website/",
+            "repoLabel": "Open Repository",
+            "repoLink": "https://github.com/Rainier-PS/Invitation-Template"
+        }
+    }
+}

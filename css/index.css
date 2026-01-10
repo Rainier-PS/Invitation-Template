@@ -568,59 +568,72 @@ textarea:focus {
     pointer-events: auto;
 }
 
-.carousel-section {
+.demo-section {
     margin: 4rem 0;
     text-align: center;
 }
 
-.carousel-container {
-    position: relative;
-    overflow: hidden;
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 2rem;
-}
-
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-slide {
-    min-width: 100%;
-    box-sizing: border-box;
-    padding: 1rem;
-}
-
-.carousel-slide h3 {
-    margin: 0.5rem 0;
+.demo-section h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
     color: var(--primary);
 }
 
-.carousel-slide p {
-    margin: 0.25rem 0;
-    font-size: 0.95rem;
-    color: #f3f3f3;
+.demo-track-wrapper {
+    overflow: hidden;
+    width: 100%;
+    padding: 1rem 0;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    position: relative;
 }
 
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0,0,0,0.3);
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
+.demo-track {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    will-change: transform;
+}
+
+.demo-slide {
+    flex: 0 0 auto;
+    width: 220px;
+    text-align: center;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* ensures button stays at bottom */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.demo-slide:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.demo-slide img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
     border-radius: 0.5rem;
-    z-index: 10;
+    margin-bottom: 0.5rem;
 }
 
-.carousel-btn.prev { left: 1rem; }
-.carousel-btn.next { right: 1rem; }
+.demo-slide h3 {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    color: #fff;
+    font-weight: 600;
+    flex-grow: 1;
+}
 
-.carousel-btn:hover {
-    background: rgba(0,0,0,0.5);
+.demo-btn {
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+    border-radius: 0.5rem;
 }

@@ -38,27 +38,30 @@
                     <a href="#section-location" class="nav-btn" role="tab">Location</a>
                     <a href="#section-rsvp" class="nav-btn" role="tab">RSVP</a>
                     <a href="#section-design" class="nav-btn" role="tab">Design</a>
+                    <a href="#section-music" class="nav-btn" role="tab">Music</a>
                     <a href="#section-footer" class="nav-btn" role="tab">Footer</a>
                 </div>
 
-                <form id="event-form">
+                <div class="form-scroll-content">
+                    <form id="event-form">
                     <div class="form-section-stack" id="section-event">
                         <div class="glass-panel">
                             <h3>Basic Information</h3>
+
                             <div class="form-group">
                                 <label for="input-title">Event Title</label>
-                                <input type="text" id="input-title" placeholder="Our Wedding" value="[Event Title]"
-                                    aria-required="true">
+                                <input type="text" id="input-title" placeholder="Our Wedding" aria-required="true">
                             </div>
+
                             <div class="form-group">
                                 <label for="input-subtitle">Subtitle</label>
-                                <input type="text" id="input-subtitle" placeholder="Join us for a celebration"
-                                    value="Join us for a [Event Type] celebration">
+                                <input type="text" id="input-subtitle" placeholder="Join us for a celebration">
                             </div>
+
                             <div class="form-group">
                                 <label for="input-description">Description</label>
                                 <textarea id="input-description" rows="4"
-                                    placeholder="Tell your guests about the event...">A description of your event goes here.</textarea>
+                                    placeholder="Tell your guests about the event..."></textarea>
                             </div>
                         </div>
                     </div>
@@ -151,8 +154,62 @@
                             <h4>Hero Gallery URLs</h4>
                             <div id="hero-images-builder">
                             </div>
-                            <button type="button" class="secondary-btn add-item-btn" onclick="addHeroImage()">+
-                                Add Image Link</button>
+                            <button type="button" class="secondary-btn add-item-btn" onclick="addHeroImage()">+ Add
+                                Image Link</button>
+
+                            <h4>Additional Design Options</h4>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="input-simpleMode" class="checkbox-inline">
+                                    <span>Enable Simple Mode</span>
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="input-showSimpleModeToggle" checked
+                                        class="checkbox-inline">
+                                    <span>Show Simple Mode Toggle</span>
+                                </label>
+                            </div>
+
+                            <h4>Section Backgrounds URLs</h4>
+                            <div id="section-backgrounds-builder"></div>
+                            <button type="button" class="secondary-btn add-item-btn" onclick="addSectionBackground()">+
+                                Add Section Background</button>
+                        </div>
+                    </div>
+
+                    <div class="form-section-stack" id="section-music">
+                        <div class="glass-panel">
+                            <h3>Background Music</h3>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="input-music-enabled" checked class="checkbox-inline">
+                                    <span>Enable Music</span>
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="input-music-loop" checked class="checkbox-inline">
+                                    <span>Loop</span>
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input-music-volume">Volume (0.0 - 1.0)</label>
+                                <input type="number" id="input-music-volume" min="0" max="1" step="0.05"
+                                    value="0.3">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input-music-audioUrl">Audio URL</label>
+                                <input type="url" id="input-music-audioUrl"
+                                    placeholder="https://example.com/audio.mp3">
+                            </div>
                         </div>
                     </div>
 
@@ -161,7 +218,7 @@
                             <h3>Branding & Footer</h3>
                             <div class="form-group">
                                 <label for="input-authorName">Author Name</label>
-                                <input type="text" id="input-authorName" value="[Name]">
+                                <input type="text" id="input-authorName" placeholder="Your Name">
                             </div>
                             <div class="form-group">
                                 <label for="input-logoUrl">Logo URL</label>
@@ -175,6 +232,7 @@
                         </div>
                     </div>
                 </form>
+                </div>
             </div>
 
             <!-- Preview Side -->
@@ -232,6 +290,21 @@
             div.innerHTML = `
                 <div class="flex-1">
                     <input type="url" class="hero-img-url" value="${url}" placeholder="https://...">
+                </div>
+                <button type="button" class="remove-btn" title="Remove Link" onclick="this.parentElement.remove()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                </button>
+            `;
+            container.appendChild(div);
+        }
+
+        function addSectionBackground(url = "") {
+            const container = document.getElementById('section-backgrounds-builder');
+            const div = document.createElement('div');
+            div.className = 'dynamic-list-item';
+            div.innerHTML = `
+                <div class="flex-1">
+                    <input type="url" class="section-bg-url" value="${url}" placeholder="https://example.com/bg.jpg">
                 </div>
                 <button type="button" class="remove-btn" title="Remove Link" onclick="this.parentElement.remove()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>

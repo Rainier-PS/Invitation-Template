@@ -14,15 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const scrollRoot = document.getElementById('builder-scroll-root');
+    const scrollContent = document.querySelector('.form-scroll-content') || scrollRoot;
 
     navButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = btn.getAttribute('href');
             const targetEl = document.querySelector(targetId);
-            if (targetEl && scrollRoot) {
+            if (targetEl && scrollContent) {
                 const targetPos = targetEl.offsetTop - 80;
-                scrollRoot.scrollTo({
+                scrollContent.scrollTo({
                     top: targetPos,
                     behavior: 'smooth'
                 });
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const observerOptions = {
-        root: scrollRoot,
+        root: scrollContent,
         rootMargin: '-10% 0px -80% 0px',
         threshold: 0
     };
@@ -65,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const getValue = (id) => sanitize(document.getElementById(id).value);
         const getCheck = (id) => document.getElementById(id).checked;
 
+        // Schedule
         const schedule = [];
         document.querySelectorAll('.dynamic-list-item').forEach(item => {
             const time = item.querySelector('.sched-time');
@@ -77,18 +79,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Hero Images
         const heroImages = [];
         document.querySelectorAll('.hero-img-url').forEach(input => {
             heroImages.push(input.value);
         });
 
+        // Section Backgrounds
+        const sectionBackgrounds = [];
+        document.querySelectorAll('.section-bg-url').forEach(input => {
+            sectionBackgrounds.push(input.value);
+        });
+
+        // Build JSON
         const json = {
             "_meta_comment": "TEMPLATE CONFIGURATION",
             "meta": {
                 "version": "1.1",
                 "private": false,
-                "simpleMode": false,
-                "showSimpleModeToggle": true
+                "simpleMode": getCheck('input-simpleMode'),
+                "showSimpleModeToggle": getCheck('input-showSimpleModeToggle')
             },
             "event": {
                 "title": getValue('input-title'),
@@ -128,7 +138,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 "theme": "light",
                 "accentColor": colorText.value,
                 "heroImages": heroImages,
-                "sectionBackgrounds": []
+                "sectionBackgrounds": sectionBackgrounds
+            },
+            "music": {
+                "enabled": getCheck('input-music-enabled'),
+                "loop": getCheck('input-music-loop'),
+                "volume": parseFloat(getValue('input-music-volume')) || 0.3,
+                "audioUrl": getValue('input-music-audioUrl') || ""
             },
             "footer": {
                 "text": getValue('input-footerText'),
@@ -158,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const listObserver = new MutationObserver(updateJson);
     listObserver.observe(document.getElementById('schedule-list-builder'), { childList: true, subtree: true });
     listObserver.observe(document.getElementById('hero-images-builder'), { childList: true, subtree: true });
+    listObserver.observe(document.getElementById('section-backgrounds-builder'), { childList: true, subtree: true });
 
     updateJson();
 });

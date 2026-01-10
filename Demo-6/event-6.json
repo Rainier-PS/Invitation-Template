@@ -1,0 +1,106 @@
+{
+    "_meta_comment": "TEMPLATE CONFIGURATION — ESPORTS EVENT EDITION",
+    "meta": {
+        "version": "1.5",
+        "private": false,
+        "simpleMode": false,
+        "showSimpleModeToggle": false
+    },
+    "event": {
+        "title": "Ultimate eSports Showdown 2026",
+        "subtitle": "Gaming, Tournaments & High Scores",
+        "description": "Join top gamers for a day of intense competition, epic matches, and spectator fun. Whether you play or cheer, the thrill is real!"
+    },
+    "datetime": {
+        "date": "November 14, 2026",
+        "startTime": "11:00 AM",
+        "endTime": "08:00 PM",
+        "timezone": "local",
+        "allDay": false
+    },
+    "location": {
+        "name": "Arena Gaming Hall",
+        "address": "321 Multiplayer Ave, Gamer City",
+        "mapsLink": "https://www.google.com/maps"
+    },
+    "schedule": [
+        {
+            "time": "11:00 AM",
+            "label": "Registration & Warm-up Matches"
+        },
+        {
+            "time": "12:00 PM",
+            "label": "Tournament Round 1"
+        },
+        {
+            "time": "03:00 PM",
+            "label": "Tournament Round 2"
+        },
+        {
+            "time": "05:00 PM",
+            "label": "Finals & Championship Match"
+        },
+        {
+            "time": "07:00 PM",
+            "label": "Award Ceremony & Closing"
+        }
+    ],
+    "rsvp": {
+        "enabled": true,
+        "provider": "tally",
+        "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1",
+        "deadline": "November 7, 2026",
+        "maxGuestsPerInvite": 4
+    },
+    "calendar": {
+        "enabled": true,
+        "defaultDurationHours": 9,
+        "providers": {
+            "google": true,
+            "apple": true,
+            "outlook": true
+        }
+    },
+    "design": {
+        "theme": "light",
+        "accentColor": "#f59e0b",
+        "heroImages": [
+            "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXNwb3J0fGVufDB8fDB8fHww",
+            "https://images.unsplash.com/photo-1587095951604-b9d924a3fda0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZXNwb3J0fGVufDB8fDB8fHww",
+            "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZXNwb3J0fGVufDB8fDB8fHww",
+            "https://images.unsplash.com/photo-1636487410350-278a0b522b09?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fGVzcG9ydHxlbnwwfHwwfHx8MA%3D%3D",
+            "https://images.unsplash.com/photo-1636036769389-343bb250f013?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZXNwb3J0fGVufDB8fDB8fHww"
+        ],
+        "sectionBackgrounds": [
+           "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXNwb3J0fGVufDB8fDB8fHww",
+            "https://images.unsplash.com/photo-1587095951604-b9d924a3fda0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZXNwb3J0fGVufDB8fDB8fHww",
+            "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZXNwb3J0fGVufDB8fDB8fHww",
+            "https://images.unsplash.com/photo-1636487410350-278a0b522b09?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fGVzcG9ydHxlbnwwfHwwfHx8MA%3D%3D",
+            "https://images.unsplash.com/photo-1636036769389-343bb250f013?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZXNwb3J0fGVufDB8fDB8fHww"
+        ]
+    },
+    "music": {
+        "enabled": true,
+        "loop": true,
+        "volume": 0.3,
+        "audioUrl": "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/audio/chill-abstract_intention.mp3"
+    },
+    "footer": {
+        "text": "Warning: May contain high-score bragging rights and caffeine-fueled trash talk.",
+        "branding": {
+            "link": "https://rainier-ps.github.io/Personal-Website/",
+            "logoUrl": "https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg",
+            "logoAlt": "Logo"
+        },
+        "credits": {
+            "designByLabel": "Created & Designed by",
+            "copyrightYear": "2026",
+            "authorName": "Victor Node",
+            "templateLabel": "Template by",
+            "templateAuthor": "Rainier Pearson Saputra",
+            "templateLink": "https://rainier-ps.github.io/Personal-Website/",
+            "repoLabel": "Open Repository",
+            "repoLink": "https://github.com/Rainier-PS/Invitation-Template"
+        }
+    }
+}

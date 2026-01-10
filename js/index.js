@@ -84,86 +84,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const eventDemos = [
         {
-            title: "[Event Title]",
-            subtitle: "Join us for a [Event Type] celebration",
-            date: "January 1, 2000",
-            author: "[Name]]",
-            url: "https://rainier-ps.github.io/Invitation-Template/Demo-1/invite-1.html"
-        },
-        {
             title: "404: Sleep Not Found",
-            subtitle: "An Extremely Serious Coding Party",
-            date: "April 1, 2026",
-            author: "Sleep-Deprived Developers",
+            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-2.avif",
             url: "https://rainier-ps.github.io/Invitation-Template/Demo-2/invite-2.html"
         },
         {
             title: "Emma & Liam's Wedding",
-            subtitle: "A Celebration of Love & Laughter",
-            date: "June 20, 2026",
-            author: "Linus Kern",
+            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-3.avif",
             url: "https://rainier-ps.github.io/Invitation-Template/Demo-3/invite-3.html"
         },
         {
             title: "Alex's 18th Birthday Bash",
-            subtitle: "Cake, Games & Epic Fun!",
-            date: "July 10, 2026",
-            author: "Max Heapford",
+            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-4.avif",
             url: "https://rainier-ps.github.io/Invitation-Template/Demo-4/invite-4.html"
         },
         {
             title: "Launch Day 2026",
-            subtitle: "Innovation, Networking & Celebration",
-            date: "October 5, 2026",
-            author: "Elliot Stackman",
+            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-5.avif",
             url: "https://rainier-ps.github.io/Invitation-Template/Demo-5/invite-5.html"
         },
         {
             title: "Ultimate eSports Showdown 2026",
-            subtitle: "Gaming, Tournaments & High Scores",
-            date: "November 14, 2026",
-            author: "Victor Node",
+            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-6.avif",
             url: "https://rainier-ps.github.io/Invitation-Template/Demo-6/invite-6.html"
         }
     ];
 
-    const track = document.querySelector(".carousel-track");
+    const track = document.querySelector(".demo-track");
 
-    // Populate slides
     eventDemos.forEach(ev => {
-        const slide = document.createElement("div");
-        slide.className = "carousel-slide";
+        const slide = document.createElement("a");
+        slide.className = "demo-slide";
+        slide.href = ev.url;
+        slide.target = "_blank";
+        slide.rel = "noopener";
         slide.innerHTML = `
+            <img src="${ev.thumbnail}" alt="${ev.title} thumbnail">
             <h3>${ev.title}</h3>
-            <h4>${ev.subtitle}</h4>
-            <p><strong>Date:</strong> ${ev.date}</p>
-            <p><strong>Author:</strong> ${ev.author}</p>
-            <a href="${ev.url}" class="primary-btn" target="_blank" rel="noopener">View Demo</a>
+            <a href="${ev.url}" class="primary-btn demo-btn" target="_blank" rel="noopener">View Demo</a>
         `;
         track.appendChild(slide);
     });
 
-    let currentIndex = 0;
-    const slides = document.querySelectorAll(".carousel-slide");
-    const totalSlides = slides.length;
-
-    // Buttons
-    document.querySelector(".carousel-btn.next").addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateCarousel();
-    });
-    document.querySelector(".carousel-btn.prev").addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateCarousel();
+    const slides = document.querySelectorAll(".demo-slide");
+    slides.forEach(slide => {
+        const clone = slide.cloneNode(true);
+        track.appendChild(clone);
     });
 
-    function updateCarousel() {
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    let maxHeight = 0;
+    slides.forEach(slide => {
+        const height = slide.offsetHeight;
+        if (height > maxHeight) maxHeight = height;
+    });
+    slides.forEach(slide => slide.style.height = `${maxHeight}px`);
+    document.querySelectorAll(".demo-slide").forEach(slide => slide.style.height = `${maxHeight}px`);
+
+    let scrollSpeed = 0.25;
+    let position = 0;
+
+    function animateLoop() {
+        position += scrollSpeed;
+        if (position >= track.scrollWidth / 2) {
+            position = 0;
+        }
+        track.style.transform = `translateX(-${position}px)`;
+        requestAnimationFrame(animateLoop);
     }
 
-    // Auto-rotate every 5 seconds
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateCarousel();
-    }, 5000);
+    animateLoop();
+
 });

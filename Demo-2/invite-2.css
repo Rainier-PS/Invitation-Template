@@ -293,7 +293,6 @@ footer>* {
     border-bottom: none;
 }
 
-/* --- Schedule Mobile Layout Lock --- */
 @media (max-width: 640px) {
     #schedule-list li {
         display: flex;
@@ -435,8 +434,7 @@ footer>* {
 .accessibility-fab {
     position: fixed;
     bottom: 2rem;
-
-    /* Slightly smaller on desktop */
+   
     width: 52px;
     height: 52px;
 
@@ -458,14 +456,12 @@ footer>* {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
-/* Icon sizing inside FAB */
 .audio-fab svg,
 .accessibility-fab svg {
     width: 22px;
     height: 22px;
 }
 
-/* --- Mobile Adjustments --- */
 @media (max-width: 768px) {
     .audio-fab,
     .accessibility-fab {
@@ -740,3 +736,4 @@ body.simple footer {
     text-align: center !important;
     align-items: center !important;
 }
+

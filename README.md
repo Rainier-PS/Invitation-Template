@@ -13,16 +13,22 @@ Check out this site live at: [Live Site](https://rainier-ps.github.io/Invitation
 - **Full-page Scrolling**: Smooth transitions between event sections.
 - **Dynamic Content**: All event details are managed in `event.json`.
 - **Integrated RSVP**: Easy integration with Tally.so or other form providers.
+- **Interactive Maps**: Embed Google Maps links for venue locations.
 - **Add to Calendar**: One-click Google Calendar integration for guests.
 - **Glassmorphism Design**: Modern, sleek UI with glass effects and micro-animations.
 - **Responsive & Premium**: Optimized for both mobile and desktop experiences.
+- Free & open-source under the **MIT License**
 
 ## Quick Start
 
-1. **Clone/Download** this repository.
-2. Open `event.json` and update the event details (Title, Date, Location, etc.).
-3. Upload the files to any static web host (GitHub Pages, Vercel, Netlify).
-4. Share your invitation link!
+Get your invitation website up and running in minutes:
+
+1. **Download** the latest release ZIP from [Releases](https://github.com/Rainier-PS/Invitation-Template/releases/latest) and unzip it.
+2. **Customize** your event using the [Usage & Customization Guide](docs/usage_guide.md) or the **JSON Builder**.
+3. **Create** your RSVP form (Tally.so) and add the embed URL to your `event.json`.
+4. **Host** your site on GitHub Pages, Vercel, or Netlify.
+
+> For full details, see [Usage & Customization Guide](docs/usage_guide.md).
 
 ## Documentation
 

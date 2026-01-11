@@ -492,7 +492,8 @@ footer>* {
     left: 2rem;
 }
 
-.accessibility-fab.scrolled-out {
+.accessibility-fab.scrolled-out,
+#simple-mode-toggle.scrolled-out {
     opacity: 0;
     pointer-events: none;
     transform: scale(0.8) translateY(20px);

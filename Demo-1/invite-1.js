@@ -2,16 +2,28 @@ const EVENT_JSON_URL = './event-1.json';
 
 function formatGoogleCalendarDate(dateStr, timeStr) {
     try {
-        const fullDateStr = `${dateStr} ${timeStr}`;
-        const date = new Date(fullDateStr);
+        const isoAttempt = `${dateStr}T${timeStr.replace(' ', '')}:00`;
+        let date = new Date(isoAttempt);
 
-        if (isNaN(date.getTime())) return null;
+        if (isNaN(date.getTime())) {
+            date = new Date(`${dateStr} ${timeStr}`);
+        }
 
-        const endDate = new Date(date.getTime() + 2 * 60 * 60 * 1000);
+        const durationHours = 2;
+        const endDate = new Date(date.getTime() + durationHours * 60 * 60 * 1000);
 
         const format = (d) => {
-            return d.toISOString().replace(/-|:|\.\d+/g, "");
+            const pad = n => String(n).padStart(2, '0');
+            return (
+                d.getFullYear() +
+                pad(d.getMonth() + 1) +
+                pad(d.getDate()) + 'T' +
+                pad(d.getHours()) +
+                pad(d.getMinutes()) +
+                pad(d.getSeconds())
+            );
         };
+
 
         return {
             start: format(date),
@@ -29,6 +41,7 @@ fetch(EVENT_JSON_URL)
         return res.json();
     })
     .then(data => {
+        window.__EVENT_DATA__ = data;
         document.title = data.event.title || "You're Invited";
 
         const metaTitle = document.querySelector('meta[property="og:title"]');
@@ -37,7 +50,6 @@ fetch(EVENT_JSON_URL)
         const metaDesc = document.querySelector('meta[property="og:description"]');
         if (metaDesc) metaDesc.content = data.event.description;
 
-        // textContent Injection
         const setText = (id, text) => {
             const el = document.getElementById(id);
             if (el) el.textContent = text || "";
@@ -121,7 +133,7 @@ fetch(EVENT_JSON_URL)
         }
 
         if (data.rsvp?.enabled && data.rsvp?.url) {
-            const rsvpFrame = document.querySelector('iframe[data-tally-src], iframe[title="RSVP"]');
+            const rsvpFrame = document.querySelector('#rsvp iframe');
             if (rsvpFrame) {
                 if (data.rsvp.provider === 'tally') {
                     rsvpFrame.setAttribute('data-tally-src', data.rsvp.url);
@@ -134,13 +146,12 @@ fetch(EVENT_JSON_URL)
                     rsvpFrame.src = data.rsvp.url;
                 }
             }
-        } else {
-
         }
 
         if (data.schedule?.length) {
             const section = document.getElementById("schedule-section");
             const list = document.getElementById("schedule-list");
+            if (!list) return;
             list.innerHTML = "";
 
             data.schedule.forEach(item => {
@@ -148,7 +159,12 @@ fetch(EVENT_JSON_URL)
                 if (typeof item === 'string') {
                     li.textContent = item;
                 } else {
-                    li.innerHTML = `<strong>${item.time}</strong> ${item.label}`;
+                    const strong = document.createElement("strong");
+                    strong.textContent = item.time || '';
+
+                    li.appendChild(strong);
+                    li.appendChild(document.createTextNode(` ${item.label}`));
+
                 }
                 list.appendChild(li);
             });
@@ -161,31 +177,35 @@ fetch(EVENT_JSON_URL)
         }
 
         const sections = document.querySelectorAll('section, footer');
+        const heroSection = document.querySelector('.hero');
 
-        if (data.design?.heroImages?.length && sections[0]) {
-            const heroSection = sections[0];
+        if (data.design?.heroImages?.length && heroSection) {
             const slideContainer = document.createElement('div');
             slideContainer.className = 'hero-slideshow';
 
             data.design.heroImages.forEach((url, i) => {
                 const slide = document.createElement('div');
                 slide.className = `hero-slide ${i === 0 ? 'active' : ''}`;
+                slide.setAttribute('aria-hidden', 'true');
                 slide.style.backgroundImage = `url('${url}')`;
                 slideContainer.appendChild(slide);
             });
 
             heroSection.insertBefore(slideContainer, heroSection.firstChild);
 
-            // Auto-rotate
             if (data.design.heroImages.length > 1) {
                 let currentSlide = 0;
                 const slides = slideContainer.querySelectorAll('.hero-slide');
 
-                setInterval(() => {
-                    slides[currentSlide].classList.remove('active');
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    slides[currentSlide].classList.add('active');
-                }, 5000); // 5 seconds per slide
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+                if (!prefersReducedMotion) {
+                    const slideshowInterval = setInterval(() => {
+                        slides[currentSlide].classList.remove('active');
+                        currentSlide = (currentSlide + 1) % slides.length;
+                        slides[currentSlide].classList.add('active');
+                    }, 5000); // 5 seconds per slide
+                }
             }
         } else if (data.design?.backgrounds?.length && sections[0]) {
             sections[0].style.backgroundImage = `url('${data.design.backgrounds[0]}')`;
@@ -220,6 +240,7 @@ fetch(EVENT_JSON_URL)
             // Only show toggle if enabled in JSON (defaults to false)
             const showToggle = data.meta?.showSimpleModeToggle === true;
             simpleToggleBtn.style.display = showToggle ? 'flex' : 'none';
+            simpleToggleBtn.classList.add('scrolled-out');
 
             const updateIcons = (isSimple) => {
                 if (standardIcon) standardIcon.style.display = isSimple ? 'none' : 'block';
@@ -227,68 +248,85 @@ fetch(EVENT_JSON_URL)
                 simpleToggleBtn.setAttribute('aria-label', isSimple ? 'Switch to Standard View' : 'Switch to Simple View');
             };
 
-            // Initial icon state based on body class
             updateIcons(document.body.classList.contains('simple'));
 
             simpleToggleBtn.addEventListener('click', () => {
                 const isSimple = document.body.classList.toggle('simple');
                 updateIcons(isSimple);
 
-                // Scroll to top when switching for better orientation
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // IntersectionObserver to hide button when scrolling out of Hero
-            const heroSection = document.querySelector('.hero');
-            if (heroSection) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
+            const heroForObserver = document.querySelector('.hero');
+
+            if (heroForObserver && showToggle) {
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
                         if (entry.isIntersecting) {
                             simpleToggleBtn.classList.remove('scrolled-out');
                         } else {
                             simpleToggleBtn.classList.add('scrolled-out');
                         }
-                    });
-                }, { threshold: 0.1 }); // 10% visibility to trigger
+                    },
+                    {
+                        threshold: 0.15
+                    }
+                );
 
-                observer.observe(heroSection);
+                observer.observe(heroForObserver);
+
+                window.addEventListener('beforeunload', () => observer.disconnect());
             }
         }
     })
     .catch(err => {
         console.error(err);
-        document.getElementById("event-title").textContent = "Unable to load event details";
-        document.getElementById("event-subtitle").textContent = "Please check back later.";
+        const title = document.getElementById("event-title");
+        const subtitle = document.getElementById("event-subtitle");
+
+        if (title) title.textContent = "Unable to load event details";
+        if (subtitle) subtitle.textContent = "Please check back later.";
     });
 
 // Audio Player
 document.addEventListener('DOMContentLoaded', () => {
-    const AUDIO_URL = "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/alarm-clock-90867.mp3";
-    const audio = new Audio(AUDIO_URL);
-    audio.loop = true;
-    audio.volume = 0.3;
+    const waitForData = () => {
+        if (!window.__EVENT_DATA__?.music?.enabled) {
+            setTimeout(waitForData, 50);
+            return;
+        }
+        const data = window.__EVENT_DATA__;
 
-    const btn = document.getElementById('audio-control');
-    const playIcon = document.getElementById('play-icon');
-    const pauseIcon = document.getElementById('pause-icon');
-    let isPlaying = false;
+        const audio = new Audio();
+        audio.src = data.music.audioUrl;
+        audio.load();
+        audio.loop = data.music.loop ?? true;
+        audio.volume = data.music.volume ?? 0.3;
 
-    if (btn) {
-        btn.hidden = false;
+        const btn = document.getElementById('audio-control');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        let isPlaying = false;
 
-        btn.addEventListener('click', () => {
-            if (isPlaying) {
-                audio.pause();
-                playIcon.style.display = 'block';
-                pauseIcon.style.display = 'none';
-                btn.classList.remove('playing');
-            } else {
-                audio.play().catch(e => console.log("Audio play blocked", e));
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
-                btn.classList.add('playing');
-            }
-            isPlaying = !isPlaying;
-        });
-    }
+        if (btn) {
+            btn.hidden = false;
+
+            btn.addEventListener('click', () => {
+                if (isPlaying) {
+                    audio.pause();
+                    playIcon.style.display = 'block';
+                    pauseIcon.style.display = 'none';
+                    btn.classList.remove('playing');
+                } else {
+                    audio.play().catch(e => console.log("Audio play blocked", e));
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'block';
+                    btn.classList.add('playing');
+                }
+                isPlaying = !isPlaying;
+            });
+        }
+    };
+
+    waitForData();
 });

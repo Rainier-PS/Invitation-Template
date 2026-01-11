@@ -10,7 +10,6 @@ Use this template to build your own RSVP form on [Tally.so](https://tally.so). T
 | **Will you be attending the event?** | Multiple Choice | Yes | - | Options: "Yes, I’ll be there" or "Sorry, I can’t make it". |
 | **How many people will be attending (including you)?** | Number | Yes | - | Set minimum value to **1**. |
 | **Names of additional guests** | Long Answer | Yes | - | List of names of people coming with the primary guest. |
-| **Dietary requirements** | Multi-select | No | - | Optional. Leave blank if none. |
 | **Contact email** | Email | Yes | - | To send confirmation and updates. |
 | **Invite code** | Short Answer | Yes | - | Unique code for verification. |
 | **Message to host** | Long Answer | No | Leave a short message or wishes | Optional wishes or notes for the host. |
@@ -23,7 +22,6 @@ For a professional experience, set up the following logic in Tally. By default, 
    - **Show** "How many people will be attending (including you)?" and make it **Required**.
    - **Show** "Contact email" and make it **Required**.
    - **Show** "Invite code" and make it **Required**.
-   - **Show** "Dietary requirements" (keep it **Optional**).
    - **Show** "Message to host" (keep it **Optional**).
 
 2. **If "Will you be attending the event?" is "Yes, I’ll be there" AND "How many people will be attending (including you)?" is > 1:**

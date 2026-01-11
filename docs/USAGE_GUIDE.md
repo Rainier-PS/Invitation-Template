@@ -1,61 +1,143 @@
 # Usage & Customization Guide
 
-This guide explains how to use and customize the Invitation Website for your own events.
+This guide explains how to use and customize the Invitation Website for your own events.  
+It assumes no prior knowledge of GitHub, web hosting, or form builders. Follow each step carefully.
 
-## 1. Modifying Event Details (`event.json`)
+---
 
-Almost all content on the website is controlled via `event.json`. Here is a breakdown of the key sections:
+## 1. Getting Started with GitHub
+
+The website is hosted on GitHub, a platform for storing and managing code. To use it, you’ll need a GitHub account.
+
+### Step 1: Create a GitHub Account
+1. Go to [https://github.com/join](https://github.com/join)  
+2. Fill in your username, email, and password.  
+3. Complete the verification steps and click **Create Account**.
+
+### Step 2: Fork or Clone the Repository
+- **Fork**: Creates your own copy of the Invitation Template repository on GitHub.
+  1. Go to [Invitation Template Repository](https://github.com/Rainier-PS/Invitation-Template)  
+  2. Click the **Fork** button in the top-right corner.  
+- **Clone** (optional for local editing): Download a copy to your computer.
+  1. Click the green **Code** button and copy the URL.  
+  2. Use GitHub Desktop or a Git client to clone to your computer.
+
+---
+
+## 2. Using the JSON Form Builder (Recommended)
+
+To simplify editing, use the **visual JSON builder**:
+
+1. Go to: [JSON Builder Form](https://rainier-ps.github.io/Invitation-Template/builder.html)  
+2. Fill in your event details, images, colors, schedule, RSVP form URL, etc.  
+3. Click **Export JSON** to generate your `event.json`.  
+4. Replace the `event.json` in your repository with the exported version.
+
+> This is the easiest way for beginners to customize the website without editing raw JSON.
+
+---
+
+## 3. Creating Your RSVP Form (Tally.so)
+
+1. Go to [https://tally.so](https://tally.so) and create a free account.  
+2. Build a new form with the following fields (recommended):
+   - Full name (Short Answer, Required)
+   - Will you attend? (Multiple Choice: Yes/No, Required)
+   - Number of guests (Number, Conditional)
+   - Names of additional guests (Long Answer, Conditional)
+   - Contact email (Email, Conditional)
+   - Invite code (Short Answer, Conditional)
+   - Message to host (Long Answer, Optional)
+3. Configure conditional logic to show fields based on responses.  
+4. Click **Share → Embed → Standard** and copy the iframe URL.  
+5. Paste it into your `event.json` under the `rsvp.url` field.
+
+> For detailed setup, see [Tally Form Structure](https://github.com/Rainier-PS/Invitation-Template/blob/main/docs/TALLY_FORM_STRUCTURE.md)
+
+---
+
+## 4. Modifying Event Details (Manual JSON Editing)
+
+If you prefer to edit JSON directly, `event.json` contains all your content:
 
 ### Event Info
-- `title`: The main heading of your invitation.
-- `subtitle`: A short description below the title.
-- `description`: The detailed text for the "Event Details" section.
+- `title`: Main heading  
+- `subtitle`: Short description under the title  
+- `description`: Detailed text for the "Event Details" section  
 
 ### Date & Time
-- `date`: Format it as you wish (e.g., "Saturday, June 12, 2026").
-- `startTime`: Starting time of the event.
-- `endTime`: Optional ending time.
+- `date`: Format like `"Saturday, June 12, 2026"`  
+- `startTime`: Start time  
+- `endTime`: Optional end time  
 
 ### Location
-- `name`: Venue name.
-- `address`: Full address for the location.
-- `mapsLink`: Link to Google Maps for the address.
+- `name`: Venue name  
+- `address`: Full address  
+- `mapsLink`: Google Maps link  
 
 ### Schedule
-Add items to the `schedule` array to list activities:
+Add items to the `schedule` array:
+
 ```json
 {
-    "time": "00:00 PM",
-    "label": "Activity 1"
+  "time": "00:00 PM",
+  "label": "Activity 1"
 }
 ```
 
-### RSVP (Tally.so)
-- `url`: Replace with your own Tally form embed URL.
-- **Important**: We recommend creating your own Tally form to manage your guests. See [TALLY_FORM_STRUCTURE.md](TALLY_FORM_STRUCTURE.md) for a recommended setup.
+### RSVP
+- `url`: Your Tally form embed URL  
+- `deadline`: Optional RSVP deadline  
 
-## 2. Visual Customization
+---
+
+## 5. Visual Customization
 
 ### Images
-Replace the URLs in the `design.heroImages` and `design.sectionBackgrounds` arrays with your own image URLs. For best results, use landscape images that are compressed and converted to modern formats such as AVIF or WebP. These formats provide high visual quality at much smaller file sizes, resulting in faster load times and a more eco-friendly website. Avoid using uncompressed or excessively large images.
+- Replace URLs in `design.heroImages` and `design.sectionBackgrounds`.  
+- Recommended: compressed, landscape images in **WebP** or **AVIF** for fast load times.  
 
 ### Colors & Styling
-You can modify the general look and feel in `styles.css`.
-- **CSS Variables**: Check the `:root` section in `styles.css` to change primary colors and fonts.
-- **Glassmorphism**: Adjust the `--glass-bg` and `--glass-border` variables to change the transparency of panels.
+- Edit `styles.css` for colors, fonts, and glassmorphism effects.  
+- Adjust CSS variables in the `:root` section, e.g., `--primary`, `--glass-bg`, `--glass-border`.
 
-## 3. Attribution Rules
+---
 
-This project is open-source, but proper attribution is required as per the MIT license.
+## 6. Attribution Rules
 
-- **Footer Branding**: You are free to modify the footer to match your event's branding or your own logo.
-- **Attribution**: You must keep the "Created & Designed by Rainier Pearson Saputra" text or a similar clear link back to the original author in your version.
+This project is **MIT licensed**. Proper attribution is required:
 
-## 4. Deployment
+- **Footer Branding**: You can modify the footer to match your event’s branding.  
+- **Attribution**: Keep “Created & Designed by Rainier Pearson Saputra” or a clear link back to the original author.
 
-Since this is a static website, you can host it for free on:
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+---
 
-Simply upload all files (`index.html`, `styles.css`, `script.js`, `event.json`, and the `docs/` folder) to your repository or hosting provider.
+## 7. Deployment (Hosting Your Website)
+
+### Option 1: GitHub Pages (Free)
+1. Go to your repository on GitHub.  
+2. Click **Settings → Pages**.  
+3. Under “Source,” select your main branch and folder (`/root`).  
+4. Click **Save**. Your site will be live at `https://USERNAME.github.io/REPO_NAME`.
+
+### Option 2: Vercel
+1. Go to [https://vercel.com](https://vercel.com) and sign up.  
+2. Connect your GitHub repository.  
+3. Vercel automatically deploys the site.  
+
+### Option 3: Netlify
+1. Go to [https://www.netlify.com](https://www.netlify.com) and sign up.  
+2. Drag and drop your repository folder, or connect via GitHub.  
+3. Netlify automatically hosts your site.
+
+---
+
+## 8. Summary Workflow (Beginner-Friendly)
+
+1. Create GitHub account → Fork repository  
+2. Use **JSON builder** → Generate `event.json`  
+3. Create **Tally RSVP form** → Copy embed URL to `event.json`  
+4. Customize images, colors, and schedule  
+5. Host site via **GitHub Pages**, **Vercel**, or **Netlify**  
+
+Your invitation website should now be live and fully customizable!

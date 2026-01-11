@@ -5,22 +5,23 @@ It assumes no prior knowledge of GitHub, web hosting, or form builders. Follow e
 
 ---
 
-## 1. Getting Started with GitHub
+## 1. Getting Started
 
-The website is hosted on GitHub, a platform for storing and managing code. To use it, you’ll need a GitHub account.
+If you plan to host on **GitHub Pages**, you’ll need a GitHub account:  
 
 ### Step 1: Create a GitHub Account
 1. Go to [https://github.com/join](https://github.com/join)  
 2. Fill in your username, email, and password.  
 3. Complete the verification steps and click **Create Account**.
 
-### Step 2: Fork or Clone the Repository
-- **Fork**: Creates your own copy of the Invitation Template repository on GitHub.
-  1. Go to [Invitation Template Repository](https://github.com/Rainier-PS/Invitation-Template)  
-  2. Click the **Fork** button in the top-right corner.  
-- **Clone** (optional for local editing): Download a copy to your computer.
-  1. Click the green **Code** button and copy the URL.  
-  2. Use GitHub Desktop or a Git client to clone to your computer.
+> For hosts like Netlify or Vercel, a GitHub account is optional.
+
+### Step 2: Downloading the Template
+1. Go to the latest release on GitHub: [Releases](https://github.com/Rainier-PS/Invitation-Template/releases/latest)  
+2. Download the ZIP file (e.g., `Invitation-Template-v1.1.zip`)  
+3. Unzip it to a folder on your computer
+
+> All necessary files (`index.html`, `styles.css`, `script.js`, `event.json`, `/media/`) are included.
 
 ---
 
@@ -40,7 +41,7 @@ To simplify editing, use the **visual JSON builder**:
 ## 3. Creating Your RSVP Form (Tally.so)
 
 1. Go to [https://tally.so](https://tally.so) and create a free account.  
-2. Build a new form with the following fields (recommended):
+2. Build a form with recommended fields:  
    - Full name (Short Answer, Required)
    - Will you attend? (Multiple Choice: Yes/No, Required)
    - Number of guests (Number, Conditional)
@@ -94,10 +95,11 @@ Add items to the `schedule` array:
 ## 5. Visual Customization
 
 ### Images
-- Replace URLs in `design.heroImages` and `design.sectionBackgrounds`.  
+- Place image and audio files in the `/media/` folder.
+- Replace URLs in `design.heroImages` and `design.sectionBackgrounds`.  (You can obtain the raw url after uploading your files in the Github repository.)
 - Recommended: compressed, landscape images in **WebP** or **AVIF** for fast load times.  
 
-### Colors & Styling
+### Colors & Styling (Advanced)
 - Edit `styles.css` for colors, fonts, and glassmorphism effects.  
 - Adjust CSS variables in the `:root` section, e.g., `--primary`, `--glass-bg`, `--glass-border`.
 
@@ -134,10 +136,10 @@ This project is **MIT licensed**. Proper attribution is required:
 
 ## 8. Summary Workflow (Beginner-Friendly)
 
-1. Create GitHub account → Fork repository  
+1. (Optional) Create GitHub account if using GitHub Pages → Download latest ZIP release  
 2. Use **JSON builder** → Generate `event.json`  
 3. Create **Tally RSVP form** → Copy embed URL to `event.json`  
-4. Customize images, colors, and schedule  
-5. Host site via **GitHub Pages**, **Vercel**, or **Netlify**  
+4. Customize images, colors, schedule, and media  
+5. Host site via **GitHub Pages**, **Netlify**, or **Vercel**  
 
-Your invitation website should now be live and fully customizable!
+Your invitation website is now live and fully customizable!

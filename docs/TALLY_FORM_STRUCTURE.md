@@ -89,6 +89,8 @@ The website does not inspect or validate form responses.
 
 > Note: All RSVP limits, validation, and deadlines must be enforced in the form provider (e.g. Tally).
 
+---
+
 ## Optional Next Steps (Future Upgrades)
 
 These are optional but can improve the RSVP experience:
@@ -98,6 +100,8 @@ These are optional but can improve the RSVP experience:
 - Use webhooks to collect responses in Google Sheets / Airtable / Supabase
 - Invite-code verification through a backend service
 
+---
+
 ## Easier JSON Editing
 
 For a simpler experience editing event.json, use the dedicated JSON builder I created:
@@ -105,5 +109,7 @@ For a simpler experience editing event.json, use the dedicated JSON builder I cr
 [JSON Builder Form](https://rainier-ps.github.io/Invitation-Template/builder.html)
 
 > It works like a visual form and generates valid JSON automatically.
+
+---
 
 *Note: You are free to use Rainier's original form as a reference, but please ensure you use your own form to collect your guests' data.*

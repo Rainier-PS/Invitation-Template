@@ -187,6 +187,19 @@ footer>* {
     transition: opacity 1.5s ease-in-out;
 }
 
+@media (min-width: 1024px) {
+    .hero-slide {
+        background-position: center center;
+    }
+}
+
+@media (min-width: 1440px) {
+    .hero-slideshow {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+}
+
 .hero-slide.active {
     opacity: 1;
 }

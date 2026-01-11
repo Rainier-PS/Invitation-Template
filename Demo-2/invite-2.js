@@ -240,6 +240,7 @@ fetch(EVENT_JSON_URL)
             // Only show toggle if enabled in JSON (defaults to false)
             const showToggle = data.meta?.showSimpleModeToggle === true;
             simpleToggleBtn.style.display = showToggle ? 'flex' : 'none';
+            simpleToggleBtn.classList.add('scrolled-out');
 
             const updateIcons = (isSimple) => {
                 if (standardIcon) standardIcon.style.display = isSimple ? 'none' : 'block';
@@ -257,16 +258,22 @@ fetch(EVENT_JSON_URL)
             });
 
             const heroForObserver = document.querySelector('.hero');
-            if (heroForObserver) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
+
+            if (heroForObserver && showToggle) {
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
                         if (entry.isIntersecting) {
                             simpleToggleBtn.classList.remove('scrolled-out');
                         } else {
                             simpleToggleBtn.classList.add('scrolled-out');
                         }
-                    });
-                }, { threshold: 0.1 });
+                    },
+                    {
+                        threshold: 0.15
+                    }
+                );
+
+                observer.observe(heroForObserver);
 
                 window.addEventListener('beforeunload', () => observer.disconnect());
             }

@@ -280,6 +280,30 @@ footer>* {
     border-bottom: none;
 }
 
+/* --- Schedule Mobile Layout Lock --- */
+@media (max-width: 640px) {
+    #schedule-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        justify-content: flex-start;
+    }
+
+    #schedule-list li time,
+    #schedule-list li span:first-child {
+        flex: 0 0 72px;
+        min-width: 72px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    #schedule-list li span:last-child {
+        flex: 1;
+        text-align: left;
+        word-break: break-word;
+    }
+}
+
 /* --- RSVP Section --- */
 #rsvp {
     justify-content: flex-start;

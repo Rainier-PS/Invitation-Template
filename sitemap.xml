@@ -2,21 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://rainier-ps.github.io/Invitation-Template/</loc>
-        <lastmod>2026-01-08</lastmod>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://rainier-ps.github.io/Invitation-Template/invite.html</loc>
-        <lastmod>2026-01-08</lastmod>
-        <changefreq>weekly</changefreq>
+        <loc>https://rainier-ps.github.io/Invitation-Template/builder.html</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.8</priority>
+    </url>
+        <url>
+        <loc>https://rainier-ps.github.io/Invitation-Template/Demo-1/invite-1.html</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://rainier-ps.github.io/Invitation-Template/builder.html</loc>
-        <lastmod>2026-01-08</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
+        <loc>https://rainier-ps.github.io/Invitation-Template/Demo-2/invite-2.html</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
-
+    <url>
+        <loc>https://rainier-ps.github.io/Invitation-Template/Demo-3/invite-3.html</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://rainier-ps.github.io/Invitation-Template/Demo-4/invite-4.html</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://rainier-ps.github.io/Invitation-Template/Demo-5/invite-5.html</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://rainier-ps.github.io/Invitation-Template/Demo-6/invite-6.html</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
 </urlset>

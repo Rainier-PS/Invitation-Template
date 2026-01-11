@@ -29,7 +29,7 @@ html,
 body {
     margin: 0;
     height: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
     background: var(--bg-base);
     color: var(--text);
     font-family: var(--font-body);
@@ -95,6 +95,13 @@ a:hover {
     border: 1px solid var(--glass-border);
     border-radius: var(--radius);
     padding: 2rem;
+}
+
+@supports not (backdrop-filter: blur(12px)) {
+    .glass-panel,
+    .section-card {
+        background: rgba(0, 0, 0, 0.85);
+    }
 }
 
 /* --- Animations --- */
@@ -391,8 +398,11 @@ footer>* {
 .accessibility-fab {
     position: fixed;
     bottom: 2rem;
-    width: 60px;
-    height: 60px;
+
+    /* Slightly smaller on desktop */
+    width: 52px;
+    height: 52px;
+
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(12px) brightness(0.8);
@@ -401,12 +411,53 @@ footer>* {
     color: #fff;
     cursor: pointer;
     z-index: 1000;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon sizing inside FAB */
+.audio-fab svg,
+.accessibility-fab svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* --- Mobile Adjustments --- */
+@media (max-width: 768px) {
+    .audio-fab,
+    .accessibility-fab {
+        width: 44px;
+        height: 44px;
+        bottom: max(1.25rem, env(safe-area-inset-bottom));
+    }
+
+    .audio-fab {
+        right: 1.25rem;
+    }
+
+    .accessibility-fab {
+        left: 1.25rem;
+    }
+
+    .audio-fab svg,
+    .accessibility-fab svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 380px) {
+    .audio-fab,
+    .accessibility-fab {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 .audio-fab {
@@ -423,11 +474,20 @@ footer>* {
     transform: scale(0.8) translateY(20px);
 }
 
-.audio-fab:hover,
-.accessibility-fab:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: scale(1.1) translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+@media (hover: hover) and (pointer: fine) {
+    .audio-fab:hover,
+    .accessibility-fab:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.1) translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+}
+
+@media (max-width: 480px) {
+    body.simple .audio-fab,
+    body.simple .accessibility-fab {
+        bottom: max(1rem, env(safe-area-inset-bottom));
+    }
 }
 
 /* --- Tooltips --- */

@@ -745,7 +745,7 @@ body.simple footer {
 .countdown-values strong {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--primary);
+    color: inherit;
 }
 
 .countdown-values span:first-child:has(strong:empty),

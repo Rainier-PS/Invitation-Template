@@ -803,3 +803,26 @@ body.simple footer {
 body.simple .event-datetime > div {
     line-height: 1.3 !important;
 }
+
+/* EVENT DETAILS – SAFE SPACING TIGHTENING */
+
+.section h2 + .event-datetime {
+    margin-top: -0.75rem;
+}
+
+.event-datetime {
+    margin-bottom: 0.75rem;
+}
+
+.event-datetime > div {
+    margin: 0;
+}
+
+/* Simple mode refinement */
+body.simple .section h2 + .event-datetime {
+    margin-top: -0.5rem !important;
+}
+
+body.simple .event-datetime {
+    margin-bottom: 1rem !important;
+}

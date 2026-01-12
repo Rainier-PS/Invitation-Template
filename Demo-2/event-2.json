@@ -4,7 +4,8 @@
         "version": "1.1",
         "private": false,
         "simpleMode": false,
-        "showSimpleModeToggle": true
+        "showSimpleModeToggle": true,
+        "countdown": true
     },
     "event": {
         "title": "404: Sleep Not Found",
@@ -44,17 +45,13 @@
     "rsvp": {
         "enabled": true,
         "provider": "tally",
-        "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1",
-        "deadline": "March 31, 2026",
-        "maxGuestsPerInvite": 1
+        "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
     },
     "calendar": {
         "enabled": true,
         "defaultDurationHours": 6,
         "providers": {
-            "google": true,
-            "apple": true,
-            "outlook": true
+            "google": true
         }
     },
     "design": {

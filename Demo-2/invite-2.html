@@ -49,17 +49,29 @@
             <p class="subtitle" id="event-subtitle"></p>
 
             <div class="hero-meta">
-                <time id="event-date"></time>
-                <span id="event-time"></span>
-
-                <!-- Countdown -->
                 <div id="countdown" class="countdown" aria-live="polite" hidden>
-                    <span class="countdown-label">Starts in</span>
-                    <div class="countdown-values">
-                        <span><strong id="cd-days">0</strong></span>
-                        <span><strong id="cd-hours">00</strong></span>
-                        <span><strong id="cd-minutes">00</strong></span>
-                        <span><strong id="cd-seconds">00</strong></span>
+                    <span class="countdown-label">Event starts in</span>
+
+                    <div class="countdown-grid">
+                        <div class="countdown-unit">
+                            <strong id="cd-days">0</strong>
+                            <span>Days</span>
+                        </div>
+
+                        <div class="countdown-unit">
+                            <strong id="cd-hours">00</strong>
+                            <span>Hours</span>
+                        </div>
+
+                        <div class="countdown-unit">
+                            <strong id="cd-minutes">00</strong>
+                            <span>Minutes</span>
+                        </div>
+
+                        <div class="countdown-unit">
+                            <strong id="cd-seconds">00</strong>
+                            <span>Seconds</span>
+                        </div>
                     </div>
                 </div>
 
@@ -75,6 +87,18 @@
 
         <section class="section">
             <h2>Event Details</h2>
+
+            <p>
+                <strong>Date:</strong>
+                <time id="event-date"></time>
+            </p>
+
+            <p>
+                <strong>Time:</strong>
+                <span id="event-time"></span>
+            </p>
+
+
             <p id="event-description"></p>
 
             <address class="location">

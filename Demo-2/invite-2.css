@@ -409,11 +409,14 @@ footer>* {
     margin-top: 1rem;
 }
 
-.fab {
+.audio-fab,
+.accessibility-fab {
     position: fixed;
     bottom: 2rem;
+   
     width: 52px;
     height: 52px;
+
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(12px) brightness(0.8);
@@ -422,16 +425,15 @@ footer>* {
     color: #fff;
     cursor: pointer;
     z-index: 1000;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
-
-.audio-fab { right: 2rem; }
-.accessibility-fab { left: 2rem; }
 
 .audio-fab svg,
 .accessibility-fab svg {

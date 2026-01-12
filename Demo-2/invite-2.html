@@ -51,8 +51,22 @@
             <div class="hero-meta">
                 <time id="event-date"></time>
                 <span id="event-time"></span>
+
+                <!-- Countdown -->
+                <div id="countdown" class="countdown" aria-live="polite" hidden>
+                    <span class="countdown-label">Starts in</span>
+                    <div class="countdown-values">
+                        <span><strong id="cd-days">0</strong>d</span>
+                        <span><strong id="cd-hours">00</strong>h</span>
+                        <span><strong id="cd-minutes">00</strong>m</span>
+                        <span><strong id="cd-seconds">00</strong>s</span>
+                    </div>
+                </div>
+
                 <div id="calendar-actions" hidden>
-                    <a id="google-calendar-link" target="_blank" rel="noopener">Add to Google Calendar</a>
+                    <a id="google-calendar-link" target="_blank" rel="noopener">
+                        Add to Google Calendar
+                    </a>
                 </div>
             </div>
 

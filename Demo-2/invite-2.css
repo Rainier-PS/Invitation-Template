@@ -200,10 +200,10 @@ footer>* {
 .hero-meta {
     font-size: 1.3rem;
     font-weight: 400;
-    margin: 2rem 0;
+    margin: 1.25rem 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
 
 #calendar-actions {
@@ -705,8 +705,8 @@ body.simple footer {
 /* HERO COUNTDOWN */
 
 .countdown {
-    margin-top: 1.5rem;
-    padding: 1.25rem 1.75rem;
+    margin-top: 0.75rem;
+    padding: 1rem 1.25rem;
 
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
@@ -751,7 +751,16 @@ body.simple footer {
     margin-top: 0.25rem;
 }
 
-/* Mobile refinement */
+@media (max-width: 768px) {
+    body.simple .countdown {
+        display: none !important;
+    }
+
+    body.simple .event-datetime {
+        margin: 0.25rem 0 1rem !important;
+    }
+}
+
 @media (max-width: 480px) {
     .countdown-grid {
         gap: 0.75rem;
@@ -760,4 +769,29 @@ body.simple footer {
     .countdown-unit strong {
         font-size: 1.4rem;
     }
+}
+
+@media (max-width: 360px) {
+    .countdown-grid {
+        grid-template-columns: repeat(4, minmax(48px, 1fr));
+        gap: 0.5rem;
+    }
+
+    .countdown-unit span {
+        font-size: 0.6rem;
+        line-height: 1.1;
+        white-space: normal;
+        word-break: break-word;
+    }
+}
+
+.event-datetime {
+    margin: 0.5rem 0 1.25rem;
+    font-size: 1.15rem;
+    line-height: 1.4;
+}
+
+.event-datetime time,
+.event-datetime span {
+    display: block;
 }

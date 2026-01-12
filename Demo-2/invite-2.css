@@ -702,89 +702,62 @@ body.simple footer {
     align-items: center !important;
 }
 
-/* COUNTDOWN TIMER */
+/* HERO COUNTDOWN */
 
 .countdown {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-
-    margin-top: 0.75rem;
-    padding: 0.75rem 1.25rem;
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.75rem;
 
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
-    border-radius: 999px;
+    border-radius: 24px;
     border: 1px solid rgba(255, 255, 255, 0.15);
 
-    font-size: 1rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 .countdown-label {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     opacity: 0.75;
 }
 
-.countdown-values {
-    display: flex;
-    gap: 0.75rem;
-    font-variant-numeric: tabular-nums;
+.countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(60px, 1fr));
+    gap: 1rem;
+    text-align: center;
 }
 
-.countdown-values span {
-    display: flex;
-    align-items: baseline;
-    gap: 0.15rem;
-}
-
-.countdown-values strong {
-    font-size: 1.25rem;
+.countdown-unit strong {
+    display: block;
+    font-size: 1.6rem;
     font-weight: 600;
-    color: inherit;
+    color: var(--text);
+    line-height: 1;
 }
 
-.countdown-values span:first-child:has(strong:empty),
-.countdown-values span:first-child strong:where(:empty, :not(:empty)):not(:has(+ *)) {
-    display: none;
+.countdown-unit span {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-top: 0.25rem;
 }
 
-/* SIMPLE MODE OVERRIDES */
+/* Mobile refinement */
+@media (max-width: 480px) {
+    .countdown-grid {
+        gap: 0.75rem;
+    }
 
-body.simple .countdown {
-    align-items: flex-start;
-    padding: 0;
-    margin-top: 1rem;
-
-    background: none;
-    border: none;
-    backdrop-filter: none;
-
-    text-transform: none;
-    letter-spacing: normal;
+    .countdown-unit strong {
+        font-size: 1.4rem;
+    }
 }
-
-body.simple .countdown-label {
-    font-size: 1rem;
-    opacity: 1;
-    font-weight: 500;
-}
-
-body.simple .countdown-values {
-    gap: 0.5rem;
-}
-
-body.simple .countdown-values strong {
-    font-size: 1.4rem;
-}
-
-body.simple #cd-seconds,
-body.simple #cd-seconds + * {
-    display: none;
-}
-
-

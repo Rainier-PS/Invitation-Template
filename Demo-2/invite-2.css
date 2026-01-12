@@ -769,6 +769,10 @@ body.simple footer {
     .countdown-unit strong {
         font-size: 1.4rem;
     }
+
+    .event-datetime p {
+        margin: 0.1rem 0;
+    }
 }
 
 @media (max-width: 360px) {
@@ -785,23 +789,7 @@ body.simple footer {
     }
 }
 
-.event-datetime {
-    margin: 0.5rem 0 1.25rem;
-    font-size: 1.15rem;
+.event-datetime p {
+    margin: 0.15rem 0;
     line-height: 1.4;
-}
-
-.event-datetime time,
-.event-datetime span {
-    display: block;
-}
-
-#event-date,
-#event-time {
-    line-height: 1.3;
-}
-
-#event-time {
-    margin-top: -0.25rem;
-    display: block;
 }

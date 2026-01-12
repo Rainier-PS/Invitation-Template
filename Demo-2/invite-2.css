@@ -1,8 +1,5 @@
-/* ============================================
-   CORE STYLES - Reusable Base Styles
-   ============================================ */
+/* CORE STYLES - Reusable Base Styles */
 
-/* --- CSS Variables --- */
 :root {
     --bg-base: #000000;
     --text: #f8f9fa;
@@ -18,7 +15,6 @@
     --glass-border: rgba(255, 255, 255, 0.1);
 }
 
-/* --- Reset & Base --- */
 *,
 *::before,
 *::after {
@@ -35,7 +31,6 @@ body {
     font-family: var(--font-body);
 }
 
-/* --- Typography --- */
 h1,
 h2,
 h3 {
@@ -62,7 +57,6 @@ p {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* --- Links --- */
 a {
     color: inherit;
     transition: opacity 0.2s;
@@ -81,12 +75,10 @@ a:hover {
     opacity: 0.9;
 }
 
-/* --- Utility Classes --- */
 .hidden-icon {
     display: none;
 }
 
-/* --- Glass Effect Component --- */
 .glass-panel,
 .section-card {
     background: var(--glass-bg);
@@ -104,7 +96,6 @@ a:hover {
     }
 }
 
-/* --- Animations --- */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -118,11 +109,8 @@ a:hover {
 }
 
 
-/* ============================================
-   TEMPLATE-SPECIFIC STYLES
-   ============================================ */
+/* TEMPLATE-SPECIFIC STYLES */
 
-/* --- App Container --- */
 #app {
     height: 100%;
     overflow-y: scroll;
@@ -133,7 +121,6 @@ a:hover {
     margin: 0;
 }
 
-/* --- Sections Layout --- */
 section,
 footer {
     height: 100vh;
@@ -151,7 +138,6 @@ footer {
     background-repeat: no-repeat;
 }
 
-/* Background overlay */
 section::before,
 footer::before {
     content: '';
@@ -161,7 +147,6 @@ footer::before {
     z-index: 1;
 }
 
-/* Content above overlay */
 section>*,
 footer>* {
     position: relative;
@@ -170,7 +155,6 @@ footer>* {
     width: 100%;
 }
 
-/* --- Hero Section --- */
 .hero-slideshow {
     position: absolute;
     inset: 0;
@@ -263,7 +247,6 @@ footer>* {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* --- Event Details Section --- */
 .location address {
     font-style: normal;
     margin-top: 1rem;
@@ -275,7 +258,6 @@ footer>* {
     text-underline-offset: 4px;
 }
 
-/* --- Schedule Section --- */
 #schedule-list {
     list-style: none;
     padding: 0;
@@ -316,7 +298,6 @@ footer>* {
     }
 }
 
-/* --- RSVP Section --- */
 #rsvp {
     justify-content: flex-start;
     padding-top: clamp(2rem, 8vh, 5rem);
@@ -371,7 +352,6 @@ footer>* {
     border: none;
 }
 
-/* --- Footer Section --- */
 .footer-branding {
     display: flex;
     flex-direction: column;
@@ -429,7 +409,6 @@ footer>* {
     margin-top: 1rem;
 }
 
-/* --- Floating Action Buttons --- */
 .audio-fab,
 .accessibility-fab {
     position: fixed;
@@ -524,7 +503,6 @@ footer>* {
     }
 }
 
-/* --- Tooltips --- */
 [data-tooltip] {
     position: relative;
 }
@@ -567,7 +545,6 @@ footer>* {
     transform: translateY(-8px);
 }
 
-/* --- Fade-in Animations --- */
 section>* {
     animation: fadeIn 1s ease-out forwards;
 }
@@ -596,12 +573,8 @@ footer .footer-info {
     animation-delay: 0.4s;
 }
 
+/* SIMPLE MODE STYLES */
 
-/* ============================================
-   SIMPLE MODE STYLES
-   ============================================ */
-
-/* Body & Container */
 body.simple {
     overflow-y: auto !important;
     background: #fbfbfb !important;
@@ -618,7 +591,6 @@ body.simple #app {
     padding: 2rem 1rem !important;
 }
 
-/* Sections & Footer */
 body.simple section,
 body.simple footer {
     height: auto !important;
@@ -639,7 +611,6 @@ body.simple footer::before {
     display: none !important;
 }
 
-/* Typography */
 body.simple h1 {
     font-size: clamp(3rem, 10vw, 4rem) !important;
     color: #000000 !important;
@@ -691,7 +662,6 @@ body.simple .subtitle {
     color: #555 !important;
 }
 
-/* Buttons */
 body.simple .primary-btn {
     background: var(--primary) !important;
     color: #ffffff !important;
@@ -705,12 +675,10 @@ body.simple .primary-btn {
     text-align: center !important;
 }
 
-/* Hero Slideshow - Hidden in Simple Mode */
 body.simple .hero-slideshow {
     display: none !important;
 }
 
-/* FABs - Dark background in Simple Mode */
 body.simple .accessibility-fab,
 body.simple .audio-fab {
     background: rgba(0, 0, 0, 0.8) !important;
@@ -719,21 +687,104 @@ body.simple .audio-fab {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* Audio tooltip visible in Simple Mode */
 body.simple .audio-fab[data-tooltip]::after {
     display: block;
 }
 
-/* Form Embed */
 body.simple .form-embed {
     border: 2px solid rgba(0, 0, 0, 0.1) !important;
     border-radius: 20px !important;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Footer - Centered in Simple Mode */
 body.simple footer {
     text-align: center !important;
     align-items: center !important;
 }
+
+/* COUNTDOWN TIMER */
+
+.countdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    margin-top: 0.75rem;
+    padding: 0.75rem 1.25rem;
+
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.countdown-label {
+    font-size: 0.7rem;
+    opacity: 0.75;
+}
+
+.countdown-values {
+    display: flex;
+    gap: 0.75rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.countdown-values span {
+    display: flex;
+    align-items: baseline;
+    gap: 0.15rem;
+}
+
+.countdown-values strong {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.countdown-values span:first-child:has(strong:empty),
+.countdown-values span:first-child strong:where(:empty, :not(:empty)):not(:has(+ *)) {
+    display: none;
+}
+
+/* SIMPLE MODE OVERRIDES */
+
+body.simple .countdown {
+    align-items: flex-start;
+    padding: 0;
+    margin-top: 1rem;
+
+    background: none;
+    border: none;
+    backdrop-filter: none;
+
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+body.simple .countdown-label {
+    font-size: 1rem;
+    opacity: 1;
+    font-weight: 500;
+}
+
+body.simple .countdown-values {
+    gap: 0.5rem;
+}
+
+body.simple .countdown-values strong {
+    font-size: 1.4rem;
+}
+
+body.simple #cd-seconds,
+body.simple #cd-seconds + * {
+    display: none;
+}
+
 

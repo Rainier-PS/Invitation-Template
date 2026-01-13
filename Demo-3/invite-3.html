@@ -17,8 +17,8 @@
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Outfit:wght@300;400;600&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="./invite-3.css">
-    <script defer src="./invite-3.js"></script>
+    <link rel="stylesheet" href="./invite-4.css">
+    <script defer src="./invite-4.js"></script>
 
     <script async src="https://tally.so/widgets/embed.js"></script>
 </head>
@@ -49,18 +49,56 @@
             <p class="subtitle" id="event-subtitle"></p>
 
             <div class="hero-meta">
-                <time id="event-date"></time>
-                <span id="event-time"></span>
+                <div id="countdown" class="countdown" aria-live="polite" hidden>
+                    <span class="countdown-label">Event starts in</span>
+
+                    <div class="countdown-grid">
+                        <div class="countdown-unit">
+                            <strong id="cd-days">0</strong>
+                            <span>Days</span>
+                        </div>
+
+                        <div class="countdown-unit">
+                            <strong id="cd-hours">00</strong>
+                            <span>Hours</span>
+                        </div>
+
+                        <div class="countdown-unit">
+                            <strong id="cd-minutes">00</strong>
+                            <span>Minutes</span>
+                        </div>
+
+                        <div class="countdown-unit">
+                            <strong id="cd-seconds">00</strong>
+                            <span>Seconds</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div id="calendar-actions" hidden>
-                    <a id="google-calendar-link" target="_blank" rel="noopener">Add to Google Calendar</a>
+                    <a id="google-calendar-link" target="_blank" rel="noopener">
+                        Add to Google Calendar
+                    </a>
                 </div>
             </div>
 
             <a href="#rsvp" class="primary-btn">RSVP</a>
         </section>
 
-        <section class="section">
+        <section class="section event-details">
             <h2>Event Details</h2>
+
+            <div class="event-datetime">
+                <div>
+                    <strong>Date:</strong>
+                    <time id="event-date"></time>
+                </div>
+                <div>
+                    <strong>Time:</strong>
+                    <span id="event-time"></span>
+                </div>
+            </div>
+
             <p id="event-description"></p>
 
             <address class="location">

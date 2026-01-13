@@ -6,7 +6,8 @@
         "_comment_simpleMode": "Force 'Easy Reading' mode by default for all users",
         "simpleMode": false,
         "_comment_showSimpleModeToggle": "RECOMMENDED: Set to true if you want the accessibility toggle visible on the first page",
-        "showSimpleModeToggle": true
+        "showSimpleModeToggle": true,
+        "countdown": true
     },
     "_event_comment": "EVENT CONTENT",
     "event": {

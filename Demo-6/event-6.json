@@ -13,7 +13,7 @@
         "description": "Join top gamers for a day of intense competition, epic matches, and spectator fun. Whether you play or cheer, the thrill is real!"
     },
     "datetime": {
-        "date": "November 14, 2026",
+        "date": "2026-11-14",
         "startTime": "11:00 AM",
         "endTime": "08:00 PM",
         "timezone": "local",
@@ -53,7 +53,6 @@
     },
     "calendar": {
         "enabled": true,
-        "defaultDurationHours": 9,
         "providers": {
             "google": true
         }

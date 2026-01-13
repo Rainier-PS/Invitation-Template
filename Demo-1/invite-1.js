@@ -1,49 +1,100 @@
 const EVENT_JSON_URL = './event-1.json';
 
-function formatGoogleCalendarDate(dateStr, timeStr) {
-    try {
-        const isoAttempt = `${dateStr}T${timeStr.replace(' ', '')}:00`;
-        let date = new Date(isoAttempt);
+function parseEventDate(dateStr, timeStr, timezone = 'local') {
+    if (!dateStr) return null;
 
+    const time = timeStr ? timeStr.replace(' ', '') : '00:00';
+
+    let date;
+    if (timezone === 'UTC') {
+        date = new Date(`${dateStr}T${time}:00Z`);
+    } else {
+        date = new Date(`${dateStr}T${time}:00`);
         if (isNaN(date.getTime())) {
-            date = new Date(`${dateStr} ${timeStr}`);
+            date = new Date(`${dateStr} ${timeStr || ''}`);
         }
+    }
 
-        const durationHours = 2;
-        const endDate = new Date(date.getTime() + durationHours * 60 * 60 * 1000);
+    return isNaN(date.getTime()) ? null : date;
+}
+
+function normalizeEventDatetime(data) {
+    data.datetime ??= {};
+
+    const dt = data.datetime;
+    dt.allDay = dt.allDay === true;
+
+    if (typeof dt.date !== 'string' || !dt.date.trim()) {
+        dt.date = null;
+        return;
+    }
+
+    const start = parseEventDate(dt.date, dt.allDay ? null : dt.startTime, dt.timezone);
+    if (!start) {
+        dt.date = null;
+        return;
+    }
+
+    let end = null;
+    if (dt.allDay) {
+        end = new Date(start);
+        end.setDate(end.getDate() + 1);
+    } else if (dt.endTime) {
+        end = parseEventDate(dt.date, dt.endTime, dt.timezone);
+        if (end && end <= start) {
+            console.warn("Invalid endTime; ignoring and using start time only");
+            end = null;
+        }
+    }
+
+    if (!end) end = new Date(start);
+
+    dt.__start = start;
+    dt.__end = end;
+}
+
+function formatGoogleCalendarDate(data) {
+    try {
+        const dt = data.datetime || {};
+
+        const start = dt.__start;
+        const end = dt.__end;
+
+        if (!start || !end) return null;
 
         const format = (d) => {
             const pad = n => String(n).padStart(2, '0');
             return (
-                d.getFullYear() +
-                pad(d.getMonth() + 1) +
-                pad(d.getDate()) + 'T' +
-                pad(d.getHours()) +
-                pad(d.getMinutes()) +
-                pad(d.getSeconds())
+                d.getUTCFullYear() +
+                pad(d.getUTCMonth() + 1) +
+                pad(d.getUTCDate()) + 'T' +
+                pad(d.getUTCHours()) +
+                pad(d.getUTCMinutes()) +
+                pad(d.getUTCSeconds()) + 'Z'
             );
         };
 
-
         return {
-            start: format(date),
-            end: format(endDate)
+            start: format(start),
+            end: format(end)
         };
     } catch (e) {
-        console.error("Date parse error", e);
+        console.error("Calendar date error", e);
         return null;
     }
 }
 
-function startCountdown(dateStr, timeStr) {
+function startCountdown(data) {
     const container = document.getElementById('countdown');
-    if (!container || !dateStr || !timeStr) return;
+    if (!container) return;
 
-    let target = new Date(`${dateStr}T${timeStr.replace(' ', '')}:00`);
-    if (isNaN(target.getTime())) {
-        target = new Date(`${dateStr} ${timeStr}`);
+    const dt = data.datetime || {};
+    const target = dt.__start; // use only normalized start
+
+    if (!target || target <= new Date()) {
+        container.hidden = true;
+        return;
     }
-    if (isNaN(target.getTime())) return;
 
     const dEl = document.getElementById('cd-days');
     const hEl = document.getElementById('cd-hours');
@@ -56,7 +107,7 @@ function startCountdown(dateStr, timeStr) {
 
         if (diff <= 0) {
             clearInterval(timer);
-            container.textContent = 'Event has started';
+            container.hidden = true;
             return;
         }
 
@@ -83,6 +134,14 @@ fetch(EVENT_JSON_URL)
         return res.json();
     })
     .then(data => {
+        data.datetime ??= {};
+        data.meta ??= {};
+        data.calendar ??= {};
+        data.location ??= {};
+        data.event ??= {};
+
+        normalizeEventDatetime(data);
+
         window.__EVENT_DATA__ = data;
         document.title = data.event.title || "You're Invited";
 
@@ -102,10 +161,15 @@ fetch(EVENT_JSON_URL)
         setText("event-description", data.event.description);
 
         setText("event-date", data.datetime.date);
-        setText("event-time", data.datetime.startTime);
+
+        if (data.datetime.allDay) {
+            setText("event-time", "All Day");
+        } else {
+            setText("event-time", data.datetime.startTime);
+        }
         
         if (data.meta?.countdown !== false) {
-            startCountdown(data.datetime.date, data.datetime.startTime);
+            startCountdown(data);
         }
 
         setText("venue-name", data.location.name);
@@ -117,7 +181,7 @@ fetch(EVENT_JSON_URL)
         }
 
         if (data.calendar?.enabled && data.calendar?.providers?.google) {
-            const dates = formatGoogleCalendarDate(data.datetime.date, data.datetime.startTime);
+            const dates = formatGoogleCalendarDate(data);
             if (dates) {
                 const calBase = "https://calendar.google.com/calendar/render?action=TEMPLATE";
                 const params = new URLSearchParams();
@@ -276,7 +340,6 @@ fetch(EVENT_JSON_URL)
             document.body.classList.add("simple");
         }
 
-        // Simple Mode Toggle & Visibility Logic
         const simpleToggleBtn = document.getElementById('simple-mode-toggle');
         const standardIcon = document.getElementById('standard-view-icon');
         const simpleIcon = document.getElementById('simple-view-icon');

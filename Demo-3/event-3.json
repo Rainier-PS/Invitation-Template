@@ -13,7 +13,7 @@
         "description": "Join us for a magical day filled with love, vows, dancing, and memories that will last a lifetime."
     },
     "datetime": {
-        "date": "June 20, 2026",
+        "date": "2026-06-20",
         "startTime": "04:00 PM",
         "endTime": "11:00 PM",
         "timezone": "local",
@@ -49,7 +49,6 @@
     },
     "calendar": {
         "enabled": true,
-        "defaultDurationHours": 7,
         "providers": {
             "google": true
         }

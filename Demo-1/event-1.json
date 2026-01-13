@@ -45,17 +45,13 @@
         "enabled": true,
         "provider": "tally",
         "_comment_url": "Supports Tally forms, Google Forms, or any embeddable URL",
-        "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1",
-        "deadline": "",
-        "maxGuestsPerInvite": 0
+        "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
     },
     "calendar": {
         "enabled": true,
         "defaultDurationHours": 2,
         "providers": {
-            "google": true,
-            "apple": false,
-            "outlook": false
+            "google": true
         }
     },
     "_design_comment": "AESTHETICS & THEME",

@@ -4,7 +4,8 @@
         "version": "1.2",
         "private": false,
         "simpleMode": false,
-        "showSimpleModeToggle": false
+        "showSimpleModeToggle": false,
+        "countdown": true
     },
     "event": {
         "title": "Emma & Liam's Wedding",

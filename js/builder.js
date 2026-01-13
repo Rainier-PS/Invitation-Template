@@ -66,9 +66,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const getValue = (id) => sanitize(document.getElementById(id).value);
         const getCheck = (id) => document.getElementById(id).checked;
 
-        // Schedule
+        // Convert input date to ISO format YYYY-MM-DD
+        const formatDateISO = (dateStr) => {
+            if (!dateStr) return "";
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return dateStr; // fallback if invalid
+            const pad = n => String(n).padStart(2, '0');
+            return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+        };
+
         const schedule = [];
-        document.querySelectorAll('.dynamic-list-item').forEach(item => {
+        document.querySelectorAll('#schedule-list-builder .dynamic-list-item').forEach(item => {
             const time = item.querySelector('.sched-time');
             const label = item.querySelector('.sched-label');
             if (time && label) {
@@ -79,26 +87,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Hero Images
         const heroImages = [];
         document.querySelectorAll('.hero-img-url').forEach(input => {
             heroImages.push(input.value);
         });
 
-        // Section Backgrounds
         const sectionBackgrounds = [];
         document.querySelectorAll('.section-bg-url').forEach(input => {
             sectionBackgrounds.push(input.value);
         });
 
-        // Build JSON
         const json = {
             "_meta_comment": "TEMPLATE CONFIGURATION",
             "meta": {
                 "version": "1.1",
                 "private": false,
                 "simpleMode": getCheck('input-simpleMode'),
-                "showSimpleModeToggle": getCheck('input-showSimpleModeToggle')
+                "showSimpleModeToggle": getCheck('input-showSimpleModeToggle'),
+                "countdown": true
             },
             "event": {
                 "title": getValue('input-title'),
@@ -106,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "description": getValue('input-description')
             },
             "datetime": {
-                "date": getValue('input-date'),
+                "date": formatDateISO(getValue('input-date')), // <- auto ISO format
                 "startTime": getValue('input-startTime'),
                 "endTime": getValue('input-endTime'),
                 "timezone": "local",
@@ -121,17 +127,12 @@ document.addEventListener('DOMContentLoaded', () => {
             "rsvp": {
                 "enabled": getCheck('input-rsvp-enabled'),
                 "provider": getValue('input-rsvp-provider'),
-                "url": getValue('input-rsvp-url'),
-                "deadline": "",
-                "maxGuestsPerInvite": 0
+                "url": getValue('input-rsvp-url')
             },
             "calendar": {
                 "enabled": true,
-                "defaultDurationHours": 2,
                 "providers": {
-                    "google": true,
-                    "apple": false,
-                    "outlook": false
+                    "google": true
                 }
             },
             "design": {

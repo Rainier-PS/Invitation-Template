@@ -35,6 +35,48 @@ function formatGoogleCalendarDate(dateStr, timeStr) {
     }
 }
 
+function startCountdown(dateStr, timeStr) {
+    const container = document.getElementById('countdown');
+    if (!container || !dateStr || !timeStr) return;
+
+    let target = new Date(`${dateStr}T${timeStr.replace(' ', '')}:00`);
+    if (isNaN(target.getTime())) {
+        target = new Date(`${dateStr} ${timeStr}`);
+    }
+    if (isNaN(target.getTime())) return;
+
+    const dEl = document.getElementById('cd-days');
+    const hEl = document.getElementById('cd-hours');
+    const mEl = document.getElementById('cd-minutes');
+    const sEl = document.getElementById('cd-seconds');
+
+    const update = () => {
+        const now = new Date();
+        const diff = target - now;
+
+        if (diff <= 0) {
+            clearInterval(timer);
+            container.textContent = 'Event has started';
+            return;
+        }
+
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        if (dEl) dEl.textContent = days;
+        if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+        if (mEl) mEl.textContent = String(minutes).padStart(2, '0');
+        if (sEl) sEl.textContent = String(seconds).padStart(2, '0');
+    };
+
+    update();
+    container.hidden = false;
+    const timer = setInterval(update, 1000);
+}
+
 fetch(EVENT_JSON_URL)
     .then(res => {
         if (!res.ok) throw new Error("Failed to load event JSON");
@@ -61,6 +103,10 @@ fetch(EVENT_JSON_URL)
 
         setText("event-date", data.datetime.date);
         setText("event-time", data.datetime.startTime);
+        
+        if (data.meta?.countdown !== false) {
+            startCountdown(data.datetime.date, data.datetime.startTime);
+        }
 
         setText("venue-name", data.location.name);
         setText("venue-address", data.location.address);
@@ -92,7 +138,6 @@ fetch(EVENT_JSON_URL)
             }
         }
 
-        // Footer Injection
         setText("footer-text", data.footer?.text);
 
         if (data.footer?.branding) {

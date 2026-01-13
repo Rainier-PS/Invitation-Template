@@ -4,7 +4,8 @@
         "version": "1.5",
         "private": false,
         "simpleMode": false,
-        "showSimpleModeToggle": false
+        "showSimpleModeToggle": false,
+        "countdown": true
     },
     "event": {
         "title": "Ultimate eSports Showdown 2026",
@@ -48,17 +49,13 @@
     "rsvp": {
         "enabled": true,
         "provider": "tally",
-        "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1",
-        "deadline": "November 7, 2026",
-        "maxGuestsPerInvite": 4
+        "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
     },
     "calendar": {
         "enabled": true,
         "defaultDurationHours": 9,
         "providers": {
-            "google": true,
-            "apple": true,
-            "outlook": true
+            "google": true
         }
     },
     "design": {

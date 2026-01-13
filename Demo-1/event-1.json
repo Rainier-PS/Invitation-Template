@@ -16,7 +16,7 @@
         "description": "A description of your event goes here."
     },
     "datetime": {
-        "date": "January 1, 2000",
+        "date": "2027-01-01",
         "startTime": "00:00 PM",
         "endTime": "",
         "timezone": "local",
@@ -50,7 +50,6 @@
     },
     "calendar": {
         "enabled": true,
-        "defaultDurationHours": 2,
         "providers": {
             "google": true
         }

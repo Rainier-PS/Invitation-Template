@@ -70,9 +70,17 @@
                         <div class="glass-panel">
                             <h3>Date & Schedule</h3>
                             <div class="form-group">
-                                <label for="input-date">Date Display</label>
-                                <input type="text" id="input-date" placeholder="January 1, 2026"
-                                    value="January 1, 2000">
+                                <label for="input-date">Event Date</label>
+                                <input 
+                                    type="text" 
+                                    id="input-date" 
+                                    placeholder="Enter date in ISO format: 2026-12-25" 
+                                    value="" 
+                                    pattern="\d{4}-\d{2}-\d{2}" 
+                                    title="Use ISO format: YYYY-MM-DD"
+                                    aria-required="true"
+                                >
+                                <small class="hint">Format: YYYY-MM-DD (ISO). Example: 2026-12-25</small>
                             </div>
                             <div class="grid">
                                 <div class="form-group">
@@ -312,15 +320,6 @@
             `;
             container.appendChild(div);
         }
-
-        window.addEventListener('load', () => {
-            if (document.getElementById('schedule-list-builder').children.length === 0) {
-                addScheduleItem("06:00 PM", "Welcome Drinks");
-            }
-            if (document.getElementById('hero-images-builder').children.length === 0) {
-            }
-
-        });
     </script>
 </body>
 

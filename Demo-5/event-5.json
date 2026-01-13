@@ -13,7 +13,7 @@
         "description": "Celebrate the unveiling of our latest product! Expect demos, keynote talks, networking, and a few surprises along the way."
     },
     "datetime": {
-        "date": "October 5, 2026",
+        "date": "2026-10-05",
         "startTime": "02:00 PM",
         "endTime": "08:00 PM",
         "timezone": "local",
@@ -53,7 +53,6 @@
     },
     "calendar": {
         "enabled": true,
-        "defaultDurationHours": 6,
         "providers": {
             "google": true
         }

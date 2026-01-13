@@ -44,17 +44,13 @@
     "rsvp": {
         "enabled": true,
         "provider": "tally",
-        "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1",
-        "deadline": "June 10, 2026",
-        "maxGuestsPerInvite": 2
+        "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
     },
     "calendar": {
         "enabled": true,
         "defaultDurationHours": 7,
         "providers": {
-            "google": true,
-            "apple": true,
-            "outlook": true
+            "google": true
         }
     },
     "design": {

@@ -1,4 +1,4 @@
-const EVENT_JSON_URL = 'https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/Demo-1/event.json';
+const EVENT_JSON_URL = './event-1.json';
 
 function parseEventDate(dateStr, timeStr, timezone = 'local') {
     if (!dateStr) return null;

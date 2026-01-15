@@ -84,6 +84,19 @@ function formatGoogleCalendarDate(data) {
     }
 }
 
+function formatDisplayDate(isoDate, locale = undefined) {
+    if (!isoDate) return "";
+
+    const date = new Date(isoDate);
+    if (isNaN(date.getTime())) return isoDate;
+
+    return date.toLocaleDateString(locale, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+}
+
 function startCountdown(data) {
     const container = document.getElementById('countdown');
     if (!container) return;
@@ -128,6 +141,90 @@ function startCountdown(data) {
     const timer = setInterval(update, 1000);
 }
 
+function detectFormProvider(url) {
+    if (!url) return 'iframe';
+    if (url.includes('tally.so')) return 'tally';
+    if (url.includes('docs.google.com/forms')) return 'google';
+    if (url.includes('forms.office.com')) return 'microsoft';
+    if (url.includes('typeform.com')) return 'typeform';
+    if (url.includes('jotform.com')) return 'jotform';
+    return 'iframe';
+}
+
+function renderRSVPForm(container, rsvp) {
+    if (!container || !rsvp?.url) return;
+
+    const provider = rsvp.provider === 'auto' || !rsvp.provider
+        ? detectFormProvider(rsvp.url)
+        : rsvp.provider;
+
+    container.innerHTML = '';
+
+    const iframe = document.createElement('iframe');
+    iframe.width = '100%';
+    iframe.loading = 'lazy';
+    iframe.frameBorder = '0';
+    iframe.title = 'RSVP';
+
+    const defaultHeights = {
+        tally: 580,
+        google: 800,
+        microsoft: 800,
+        typeform: 650,
+        jotform: 650,
+        iframe: 600
+    };
+
+    iframe.height = rsvp.height || defaultHeights[provider] || 600;
+
+        if (provider === 'tally') {
+        let src = rsvp.url;
+
+        iframe.setAttribute('data-tally-src', src);
+        container.appendChild(iframe);
+
+        const loadTally = () => {
+            if (window.Tally?.loadEmbeds) {
+                window.Tally.loadEmbeds();
+            }
+        };
+
+        if (!window.Tally) {
+            const script = document.createElement('script');
+            script.src = 'https://tally.so/widgets/embed.js';
+            script.async = true;
+            script.onload = loadTally;
+            document.body.appendChild(script);
+        } else {
+            loadTally();
+        }
+
+        return;
+    }
+
+    if (provider === 'google') {
+        let src = rsvp.url;
+
+        if (!src.includes('embedded=true')) {
+            src += (src.includes('?') ? '&' : '?') + 'embedded=true';
+        }
+
+        iframe.src = src;
+        container.appendChild(iframe);
+        return;
+    }
+
+    iframe.src = rsvp.url;
+    container.appendChild(iframe);
+}
+
+function removeRSVPSection() {
+    const rsvpSection = document.getElementById('rsvp');
+    if (rsvpSection) {
+        rsvpSection.remove();
+    }
+}
+
 fetch(EVENT_JSON_URL)
     .then(res => {
         if (!res.ok) throw new Error("Failed to load event JSON");
@@ -160,7 +257,7 @@ fetch(EVENT_JSON_URL)
         setText("event-subtitle", data.event.subtitle);
         setText("event-description", data.event.description);
 
-        setText("event-date", data.datetime.date);
+        setText("event-date", formatDisplayDate(data.datetime.date));
 
         if (data.datetime.allDay) {
             setText("event-time", "All Day");
@@ -241,20 +338,18 @@ fetch(EVENT_JSON_URL)
             }
         }
 
-        if (data.rsvp?.enabled && data.rsvp?.url) {
-            const rsvpFrame = document.querySelector('#rsvp iframe');
-            if (rsvpFrame) {
-                if (data.rsvp.provider === 'tally') {
-                    rsvpFrame.setAttribute('data-tally-src', data.rsvp.url);
-                    if (window.Tally) {
-                        try {
-                            window.Tally.loadEmbeds();
-                        } catch (e) { console.log("Tally reload skipped"); }
-                    }
-                } else {
-                    rsvpFrame.src = data.rsvp.url;
-                }
-            }
+        const rsvp = data.rsvp;
+
+        const rsvpEnabled = rsvp?.enabled !== false;
+
+        if (!rsvp || !rsvpEnabled) {
+            removeRSVPSection();
+        } else if (!rsvp.url) {
+            console.warn('[RSVP] enabled=true but no url provided. Removing RSVP section.');
+            removeRSVPSection();
+        } else {
+            const formContainer = document.querySelector('#rsvp .form-embed');
+            renderRSVPForm(formContainer, rsvp);
         }
 
         if (data.schedule?.length) {

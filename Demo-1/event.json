@@ -44,8 +44,8 @@
     ],
     "rsvp": {
       "enabled": true,
-      "provider": "google",
-      "url": "https://docs.google.com/forms/d/e/1FAIpQLSeRqLLPIXlav6XqnbOfMFtwN_8PsOO92Q_RfvVCuwO9XvqGCw/viewform"
+      "provider": "microsoft",
+      "url": "https://forms.office.com/Pages/ResponsePage.aspx?id=Y7mFNLqCb0qBD7XMIm_4mMztSEqOpd9CtHO3WRF6yOFUNEVKQlVJRFk0TzhISFZBWjZLWFA5VDFWUy4u&embed=true"
     },
     "calendar": {
         "enabled": true,

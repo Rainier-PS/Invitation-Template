@@ -126,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
             "schedule": schedule,
             "rsvp": {
                 "enabled": getCheck('input-rsvp-enabled'),
-                "provider": getValue('input-rsvp-provider'),
                 "url": getValue('input-rsvp-url')
             },
             "calendar": {

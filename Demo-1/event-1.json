@@ -44,6 +44,7 @@
     ],
     "rsvp": {
         "enabled": true,
+        "provider": "tally",
         "url": "https://tally.so/embed/gDdp0d?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
     },
     "calendar": {
@@ -95,6 +96,3 @@
         }
     }
 }
-
-
-

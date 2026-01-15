@@ -4,200 +4,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitation Template | Premium Glassmorphic Digital Invitations</title>
-    <meta name="description"
-        content="A free, premium digital invitation template with a stunning glassmorphic design. Easy to customize, responsive, and accessible. Create yours in minutes!">
-    <meta name="keywords"
-        content="digital invitation, wedding template, glassmorphism, free invitation template, open source invitation template, responsive invitation, accessible web design, event configuration, event.json">
-
-    <meta name="google-site-verification" content="KclOAJlsOojPDo-nzZw4U5gCyo-2dL3ZP09HrbI7NYk" />
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Invitation Template | Premium Glassmorphic Design">
-    <meta property="og:description"
-        content="Create stunning digital invitations for free. High-end design meets effortless customization.">
-    <meta property="og:image"
-        content="https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/preview.jpg">
-
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Invitation Template | Premium Glassmorphic Design">
-    <meta property="twitter:description"
-        content="Create stunning digital invitations for free. High-end design meets effortless customization.">
-
+    <title>Invitation Builder | event.json Generator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css">
-    <script defer src="js/index.js"></script>
+    <link rel="stylesheet" href="css/builder.css">
+    <script defer src="js/builder.js"></script>
 </head>
 
 <body>
     <nav aria-label="Main Navigation">
         <a href="index.html" class="logo">Invitation Template</a>
         <div class="nav-links">
+            <a href="index.html">Home</a>
             <a href="invite.html">Live Demo</a>
-            <a href="builder.html">Create Yours</a>
             <a href="https://github.com/Rainier-PS/Invitation-Template" target="_blank" rel="noopener">GitHub</a>
         </div>
     </nav>
 
-    <main class="container">
-        <header class="hero-header">
-            <div class="badge-container">
-                <span class="badge-dot"></span>
-                <span class="badge-text">Free
-                    & Open Source • MIT License</span>
-            </div>
-            <h1>Stunning Digital Invitations</h1>
-            <p class="hero-description">
-                A sophisticated, glassmorphic invitation template designed for elegance and ease of use.
-                Perfect for weddings, parties, and corporate events.
+    <main class="container-wide">
+        <header class="page-header">
+            <p class="subtitle">CONFIGURATION TOOL</p>
+            <h1>Event Builder</h1>
+            <p class="muted-text">Fill out the form to generate your <code>event.json</code> configuration.
             </p>
-            <div class="button-container">
-                <a href="builder.html" class="primary-btn">Start Configuring</a>
-                <a href="#demo-section" class="secondary-btn">View Demo</a>
-            </div>
         </header>
 
-        <section class="features-grid">
-            <div class="feature-card">
-                <div class="icon-wrapper">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2" />
-                        <path d="M7 8h10" />
-                        <path d="M7 12h10" />
-                        <path d="M7 16h10" />
-                    </svg>
+        <div class="builder-layout">
+            <div class="form-scroll-area" id="builder-scroll-root">
+                <div class="section-nav section-nav-sticky" id="section-nav" role="tablist">
+                    <a href="#section-event" class="nav-btn active" role="tab">Basic Info</a>
+                    <a href="#section-datetime" class="nav-btn" role="tab">Date & Time</a>
+                    <a href="#section-location" class="nav-btn" role="tab">Location</a>
+                    <a href="#section-rsvp" class="nav-btn" role="tab">RSVP</a>
+                    <a href="#section-design" class="nav-btn" role="tab">Design</a>
+                    <a href="#section-music" class="nav-btn" role="tab">Music</a>
+                    <a href="#section-footer" class="nav-btn" role="tab">Footer</a>
                 </div>
-                <h3>Glassmorphism Design</h3>
-                <p>Sophisticated frosted glass aesthetic that adapts beautifully to any background image.</p>
-            </div>
 
-            <div class="feature-card">
-                <div class="icon-wrapper" style="margin-bottom: 1.5rem; color: var(--primary);">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="3 6 5 6 21 6" />
-                        <polyline points="3 12 5 12 21 12" />
-                        <polyline points="3 18 5 18 21 18" />
-                    </svg>
+                <div class="form-scroll-content">
+                    <form id="event-form">
+                    <div class="form-section-stack" id="section-event">
+                        <div class="glass-panel">
+                            <h3>Basic Information</h3>
+
+                            <div class="form-group">
+                                <label for="input-title">Event Title</label>
+                                <input type="text" id="input-title" placeholder="Our Wedding" aria-required="true">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input-subtitle">Subtitle</label>
+                                <input type="text" id="input-subtitle" placeholder="Join us for a celebration">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input-description">Description</label>
+                                <textarea id="input-description" rows="4"
+                                    placeholder="Tell your guests about the event..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section-stack" id="section-datetime">
+                        <div class="glass-panel">
+                            <h3>Date & Schedule</h3>
+                            <div class="form-group">
+                                <label for="input-date">Event Date</label>
+                                <input 
+                                    type="text" 
+                                    id="input-date" 
+                                    placeholder="Enter date in ISO format: 2026-12-25" 
+                                    value="" 
+                                    pattern="\d{4}-\d{2}-\d{2}" 
+                                    title="Use ISO format: YYYY-MM-DD"
+                                    aria-required="true"
+                                >
+                                <small class="hint">Format: YYYY-MM-DD (ISO). Example: 2026-12-25</small>
+                            </div>
+                            <div class="grid">
+                                <div class="form-group">
+                                    <label for="input-startTime">Start Time</label>
+                                    <input type="text" id="input-startTime" placeholder="06:00 PM" value="00:00 PM">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-endTime">End Time (Optional)</label>
+                                    <input type="text" id="input-endTime" placeholder="09:00 PM">
+                                </div>
+                            </div>
+
+                            <h4>Schedule Activities</h4>
+                            <div id="schedule-list-builder">
+                            </div>
+                            <button type="button" class="secondary-btn add-item-btn" onclick="addScheduleItem()">+ Add
+                                Activity</button>
+                        </div>
+                    </div>
+
+                    <div class="form-section-stack" id="section-location">
+                        <div class="glass-panel">
+                            <h3>Venue & Location</h3>
+                            <div class="form-group">
+                                <label for="input-venue-name">Venue Name</label>
+                                <input type="text" id="input-venue-name" placeholder="Grand Ballroom"
+                                    value="Venue Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-venue-address">Full Address</label>
+                                <input type="text" id="input-venue-address"
+                                    placeholder="123 Party Lane, Celebration City" value="Address">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-mapsLink">Maps Link</label>
+                                <input type="url" id="input-mapsLink" placeholder="https://maps.google.com/maps?..."
+                                    value="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section-stack" id="section-rsvp">
+                        <div class="glass-panel">
+                            <h3>RSVP & Registration</h3>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="input-rsvp-enabled" checked class="checkbox-inline">
+                                    <span>Enable Registration Section</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-rsvp-url">Form Embed/URL</label>
+                                <input type="url" id="input-rsvp-url" placeholder="https://tally.so/embed/gDdp0d?..."
+                                    value="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section-stack" id="section-design">
+                        <div class="glass-panel">
+                            <h3>Visual Styling</h3>
+                            <div class="form-group">
+                                <label for="input-accentColor">Theme Accent Color</label>
+                                <div class="color-picker-container">
+                                    <input type="color" id="input-accentColor" value="#3b82f6" class="color-input">
+                                    <input type="text" id="input-accentColor-text" value="#3b82f6"
+                                        class="text-input-flex">
+                                </div>
+                            </div>
+
+                            <h4>Hero Gallery URLs</h4>
+                            <div id="hero-images-builder">
+                            </div>
+                            <button type="button" class="secondary-btn add-item-btn" onclick="addHeroImage()">+ Add
+                                Image Link</button>
+
+                            <h4>Additional Design Options</h4>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="input-simpleMode" class="checkbox-inline">
+                                    <span>Enable Simple Mode</span>
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="input-showSimpleModeToggle" checked
+                                        class="checkbox-inline">
+                                    <span>Show Simple Mode Toggle</span>
+                                </label>
+                            </div>
+
+                            <h4>Section Backgrounds URLs</h4>
+                            <div id="section-backgrounds-builder"></div>
+                            <button type="button" class="secondary-btn add-item-btn" onclick="addSectionBackground()">+
+                                Add Section Background</button>
+                        </div>
+                    </div>
+
+                    <div class="form-section-stack" id="section-music">
+                        <div class="glass-panel">
+                            <h3>Background Music</h3>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="input-music-enabled" checked class="checkbox-inline">
+                                    <span>Enable Music</span>
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="input-music-loop" checked class="checkbox-inline">
+                                    <span>Loop</span>
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input-music-volume">Volume (0.0 - 1.0)</label>
+                                <input type="number" id="input-music-volume" min="0" max="1" step="0.05"
+                                    value="0.3">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input-music-audioUrl">Audio URL</label>
+                                <input type="url" id="input-music-audioUrl"
+                                    placeholder="https://example.com/audio.mp3">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section-stack" id="section-footer">
+                        <div class="glass-panel">
+                            <h3>Branding & Footer</h3>
+                            <div class="form-group">
+                                <label for="input-authorName">Author Name</label>
+                                <input type="text" id="input-authorName" placeholder="Your Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-logoUrl">Logo URL</label>
+                                <input type="url" id="input-logoUrl" placeholder="https://..."
+                                    value="https://raw.githubusercontent.com/Rainier-PS/Personal-Website/main/images/site/Rainier%20Logo-Primary.svg">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-footerText">Footer Note</label>
+                                <input type="text" id="input-footerText" placeholder="Hope to see you there!">
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 </div>
-                <h3>No-Code Editing</h3>
-                <p>Create and customize your invitation using a visual form, with optional backend-free RSVP forms.</p>
             </div>
 
-            <div class="feature-card">
-                <div class="icon-wrapper" style="margin-bottom: 1.5rem; color: var(--primary);">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
-                        <path d="M12 18h.01" />
-                    </svg>
+            <!-- Preview Side -->
+            <div class="preview-sticky-side">
+                <div class="glass-panel preview-panel">
+                    <div class="preview-header">
+                        <h3 class="preview-title">Code Preview</h3>
+                        <div class="json-badge">event.json</div>
+                    </div>
+                    <pre id="json-preview">{ ... }</pre>
+                    <div class="preview-actions">
+                        <button onclick="copyJson()" class="primary-btn full-width-btn">Copy event.json</button>
+                        <button onclick="downloadJson()" class="secondary-btn full-width-btn">Download
+                            event.json</button>
+                        <p class="preview-note">Replace your local file with this code.</p>
+                    </div>
                 </div>
-                <h3>Mobile & Accessible</h3>
-                <p>Optimized for all devices with built-in Simple Mode and full screen-reader support.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-wrapper" style="margin-bottom: 1.5rem; color: var(--primary);">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                        <line x1="16" y1="2" x2="16" y2="6" />
-                        <line x1="8" y1="2" x2="8" y2="6" />
-                        <line x1="3" y1="10" x2="21" y2="10" />
-                    </svg>
-                </div>
-                <h3>Smart Calendar Sync</h3>
-                <p>One-click Add to Google Calendar so guests never miss your event.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-wrapper" style="margin-bottom: 1.5rem; color: var(--primary);">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 18V5l12-2v13" />
-                        <circle cx="6" cy="18" r="3" />
-                        <circle cx="18" cy="16" r="3" />
-                    </svg>
-                </div>
-                <h3>Background Music</h3>
-                <p>Optional ambient audio with smooth controls and respectful autoplay handling.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-wrapper" style="margin-bottom: 1.5rem; color: var(--primary);">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 12l18-9-4 18-4-7-6-2z" />
-                    </svg>
-                </div>
-                <h3>Free Hosting Ready</h3>
-                <p>Deploy instantly on GitHub Pages, Vercel, or Netlify with no backend required.</p>
-            </div>
-        </section>
-
-
-        <section class="glass-panel">
-            <h2>How to Use</h2>
-            <ol class="how-to-list">
-                <li><strong>Remix:</strong> Use our <a href="builder.html">Form
-                        Builder</a>
-                    to generate your custom <code>event.json</code>.</li>
-                <li><strong>Download:</strong> Fork or clone the repository from <a
-                        href="https://github.com/Rainier-PS/Invitation-Template">GitHub</a>.</li>
-                <li><strong>Replace:</strong> Overwrite the existing
-                    <code>event.json</code> with your generated code.
-                </li>
-                <li><strong>Deploy:</strong> Host it for free on GitHub Pages, Vercel, or
-                    Netlify.</li>
-            </ol>
-
-            <div class="full-guide-cta">
-                <a href="https://github.com/Rainier-PS/Invitation-Template/blob/main/docs/USAGE_GUIDE.md" class="primary-btn" aria-label="Open the full setup guide">
-                    Open Full Guide
-                </a>
-                <p class="guide-note">
-                    Step-by-step documentation with screenshots and deployment tips.
-                </p>
-            </div>
-        </section>
-
-        <section class="demo-section" id="demo-section">
-            <h2>Event Demos</h2>
-            <div class="demo-track-wrapper">
-                <div class="demo-track">
-                    <!-- Slides will be populated by JS -->
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="footer-support">
-            <h3>Support & Contributions</h3>
-            <p>Found a bug or have a suggestion? Help us improve by reporting issues or
-                contributing on <a href="https://github.com/Rainier-PS/Invitation-Template" target="_blank"
-                    rel="noopener">GitHub</a>.</p>
-            <div id="contact-container">
-                <!-- Email protected by JS -->
             </div>
         </div>
+    </main>
 
+
+    <footer class="site-footer">
         <p>&copy; 2026 Invitation Template Builder</p>
         <p class="low-profile">Designed by <a href="https://rainier-ps.github.io/Personal-Website/">Rainier Pearson
                 Saputra</a></p>
     </footer>
 
-    <button id="back-to-top" aria-label="Back to top">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 19V5" />
-            <polyline points="5 12 12 5 19 12" />
-        </svg>
-    </button>
+    <script>
+        function addScheduleItem(time = "06:00 PM", label = "Welcome") {
+            const container = document.getElementById('schedule-list-builder');
+            const div = document.createElement('div');
+            div.className = 'dynamic-list-item';
+            div.innerHTML = `
+                <div class="flex-1">
+                    <label>Time</label>
+                    <input type="text" class="sched-time" value="${time}">
+                </div>
+                <div class="flex-2">
+                    <label>Activity</label>
+                    <input type="text" class="sched-label" value="${label}">
+                </div>
+                <button type="button" class="remove-btn" title="Remove Item" onclick="this.parentElement.remove()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                </button>
+            `;
+            container.appendChild(div);
+        }
+
+        function addHeroImage(url = "") {
+
+            const container = document.getElementById('hero-images-builder');
+            const div = document.createElement('div');
+            div.className = 'dynamic-list-item';
+            div.innerHTML = `
+                <div class="flex-1">
+                    <input type="url" class="hero-img-url" value="${url}" placeholder="https://...">
+                </div>
+                <button type="button" class="remove-btn" title="Remove Link" onclick="this.parentElement.remove()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                </button>
+            `;
+            container.appendChild(div);
+        }
+
+        function addSectionBackground(url = "") {
+            const container = document.getElementById('section-backgrounds-builder');
+            const div = document.createElement('div');
+            div.className = 'dynamic-list-item';
+            div.innerHTML = `
+                <div class="flex-1">
+                    <input type="url" class="section-bg-url" value="${url}" placeholder="https://example.com/bg.jpg">
+                </div>
+                <button type="button" class="remove-btn" title="Remove Link" onclick="this.parentElement.remove()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                </button>
+            `;
+            container.appendChild(div);
+        }
+    </script>
 </body>
 
 </html>

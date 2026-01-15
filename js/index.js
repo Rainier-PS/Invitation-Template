@@ -84,6 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const eventDemos = [
         {
+            title: "Hello 2027!",
+            thumbnail: "",
+            url: "https://rainier-ps.github.io/Invitation-Template/Demo-1/invite-1.html"
+        },
+        {
             title: "404: Sleep Not Found",
             thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-2.avif",
             url: "https://rainier-ps.github.io/Invitation-Template/Demo-2/invite-2.html"

@@ -42,7 +42,7 @@ To simplify editing, use the **visual JSON builder**:
 
 You may use any form service. The most common and beginner-friendly options are listed below.
 
-For full question structure and conditional logic, see the full guide:
+> For full question structure and conditional logic, see the full guide:
 [RSVP Form Guide](https://github.com/Rainier-PS/Invitation-Template/blob/main/docs/RSVP_FORM_STRUCTURE.md)
 
 ---
@@ -50,7 +50,7 @@ For full question structure and conditional logic, see the full guide:
 Option A: Google Forms
 
 1. Go to https://forms.google.com
-2. Create your RSVP form following the RSVP Form Guide
+2. Create your RSVP form following the [RSVP Form Guide](https://github.com/Rainier-PS/Invitation-Template/blob/main/docs/RSVP_FORM_STRUCTURE.md)
 3. Click Send and copy the responder link
 4. Paste the link into the RSVP URL field in your event.json
 

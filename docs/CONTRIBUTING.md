@@ -301,7 +301,7 @@ Before submitting:
 
 ## Code of Conduct
 
-Be respectful and inclusive. Harassment or hostile behavior will not be tolerated.
+Be respectful and inclusive.
 
 ---
 
@@ -312,3 +312,4 @@ This template exists so anyone can edit a JSON file, swap a CSS file, and get a 
 Your contributions help keep that promise.
 
 Happy building
+

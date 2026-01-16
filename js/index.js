@@ -86,32 +86,32 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             title: "Hello 2027!",
             thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-1.avif",
-            url: "https://rainier-ps.github.io/Invitation-Template/Demo-1/invite-1.html"
+            url: "https://rainier-ps.github.io/Invitation-Template/demo/invite-1.html"
         },
         {
             title: "404: Sleep Not Found",
             thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-2.avif",
-            url: "https://rainier-ps.github.io/Invitation-Template/Demo-2/invite-2.html"
+            url: "https://rainier-ps.github.io/Invitation-Template/demo/invite-2.html"
         },
         {
             title: "Emma & Liam's Wedding",
             thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-3.avif",
-            url: "https://rainier-ps.github.io/Invitation-Template/Demo-3/invite-3.html"
+            url: "https://rainier-ps.github.io/Invitation-Template/demo/invite-3.html"
         },
         {
             title: "Alex's 18th Birthday Bash",
             thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-4.avif",
-            url: "https://rainier-ps.github.io/Invitation-Template/Demo-4/invite-4.html"
+            url: "https://rainier-ps.github.io/Invitation-Template/demo/invite-4.html"
         },
         {
             title: "Launch Day 2026",
             thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-5.avif",
-            url: "https://rainier-ps.github.io/Invitation-Template/Demo-5/invite-5.html"
+            url: "https://rainier-ps.github.io/Invitation-Template/demo/invite-5.html"
         },
         {
             title: "Ultimate eSports Showdown 2026",
             thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-6.avif",
-            url: "https://rainier-ps.github.io/Invitation-Template/Demo-6/invite-6.html"
+            url: "https://rainier-ps.github.io/Invitation-Template/demo/invite-6.html"
         }
     ];
 
@@ -160,3 +160,4 @@ document.addEventListener('DOMContentLoaded', () => {
     animateLoop();
 
 });
+

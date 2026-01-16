@@ -1,4 +1,4 @@
-const EVENT_JSON_URL = '.../data/event-4.json';
+const EVENT_JSON_URL = '../data/event-4.json';
 
 function parseEventDate(dateStr, timeStr, timezone = 'local') {
     if (!dateStr) return null;

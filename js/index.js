@@ -82,82 +82,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const eventDemos = [
-        {
-            title: "Hello 2027!",
-            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-1.avif",
-            url: "https://rainier-ps.github.io/Invitation-Template/demo/invite-1.html"
-        },
-        {
-            title: "404: Sleep Not Found",
-            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-2.avif",
-            url: "https://rainier-ps.github.io/Invitation-Template/demo/invite-2.html"
-        },
-        {
-            title: "Emma & Liam's Wedding",
-            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-3.avif",
-            url: "https://rainier-ps.github.io/Invitation-Template/demo/invite-3.html"
-        },
-        {
-            title: "Alex's 18th Birthday Bash",
-            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-4.avif",
-            url: "https://rainier-ps.github.io/Invitation-Template/demo/invite-4.html"
-        },
-        {
-            title: "Launch Day 2026",
-            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-5.avif",
-            url: "https://rainier-ps.github.io/Invitation-Template/demo/invite-5.html"
-        },
-        {
-            title: "Ultimate eSports Showdown 2026",
-            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-6.avif",
-            url: "https://rainier-ps.github.io/Invitation-Template/demo/invite-6.html"
-        }
-    ];
+    fetch('../data/demos.json')
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to load demos JSON");
+            return res.json();
+        })
+        .then(eventDemos => {
+            const track = document.querySelector(".demo-track");
 
-    const track = document.querySelector(".demo-track");
-
-    eventDemos.forEach(ev => {
-        const slide = document.createElement("a");
-        slide.className = "demo-slide";
-        slide.href = ev.url;
-        slide.target = "_blank";
-        slide.rel = "noopener";
-        slide.innerHTML = `
+            eventDemos.forEach(ev => {
+                const slide = document.createElement("a");
+                slide.className = "demo-slide";
+                slide.href = ev.url;
+                slide.target = "_blank";
+                slide.rel = "noopener";
+                slide.innerHTML = `
             <img src="${ev.thumbnail}" alt="${ev.title} thumbnail">
             <h3>${ev.title}</h3>
             <a href="${ev.url}" class="primary-btn demo-btn" target="_blank" rel="noopener">View Demo</a>
         `;
-        track.appendChild(slide);
-    });
+                track.appendChild(slide);
+            });
 
-    const slides = document.querySelectorAll(".demo-slide");
-    slides.forEach(slide => {
-        const clone = slide.cloneNode(true);
-        track.appendChild(clone);
-    });
+            const slides = document.querySelectorAll(".demo-slide");
+            slides.forEach(slide => {
+                const clone = slide.cloneNode(true);
+                track.appendChild(clone);
+            });
 
-    let maxHeight = 0;
-    slides.forEach(slide => {
-        const height = slide.offsetHeight;
-        if (height > maxHeight) maxHeight = height;
-    });
-    slides.forEach(slide => slide.style.height = `${maxHeight}px`);
-    document.querySelectorAll(".demo-slide").forEach(slide => slide.style.height = `${maxHeight}px`);
+            let maxHeight = 0;
+            slides.forEach(slide => {
+                const height = slide.offsetHeight;
+                if (height > maxHeight) maxHeight = height;
+            });
+            slides.forEach(slide => slide.style.height = `${maxHeight}px`);
+            document.querySelectorAll(".demo-slide").forEach(slide => slide.style.height = `${maxHeight}px`);
 
-    let scrollSpeed = 0.25;
-    let position = 0;
+            let scrollSpeed = 0.25;
+            let position = 0;
 
-    function animateLoop() {
-        position += scrollSpeed;
-        if (position >= track.scrollWidth / 2) {
-            position = 0;
-        }
-        track.style.transform = `translateX(-${position}px)`;
-        requestAnimationFrame(animateLoop);
-    }
+            function animateLoop() {
+                position += scrollSpeed;
+                if (position >= track.scrollWidth / 2) {
+                    position = 0;
+                }
+                track.style.transform = `translateX(-${position}px)`;
+                requestAnimationFrame(animateLoop);
+            }
 
-    animateLoop();
+            animateLoop();
+        })
+        .catch(err => {
+            console.error("Error loading demos:", err);
+        });
 
 });
-

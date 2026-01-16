@@ -38,7 +38,7 @@ To simplify editing, use the **visual JSON builder**:
 
 ---
 
-## 3. Creating Your RSVP Form (Tally.so)
+## 3. Creating Your RSVP Form
 
 1. Go to [https://tally.so](https://tally.so) and create a free account.  
 2. Build a form with recommended fields:  
@@ -53,7 +53,7 @@ To simplify editing, use the **visual JSON builder**:
 4. Click **Share → Embed → Standard** and copy the iframe URL.  
 5. Paste it into your `event.json` under the `rsvp.url` field.
 
-> For detailed setup, see [Tally Form Structure](https://github.com/Rainier-PS/Invitation-Template/blob/main/docs/TALLY_FORM_STRUCTURE.md)
+> For detailed setup, see [RSVP Form Structure](https://github.com/Rainier-PS/Invitation-Template/blob/main/docs/RSVP_FORM_STRUCTURE.md)
 
 ---
 

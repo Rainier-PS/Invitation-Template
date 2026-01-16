@@ -1,4 +1,4 @@
-const EVENT_JSON_URL = './event-1.json';
+const EVENT_JSON_URL = '.../data/event-1.json';
 
 function parseEventDate(dateStr, timeStr, timezone = 'local') {
     if (!dateStr) return null;
@@ -533,3 +533,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     waitForData();
 });
+

@@ -37,6 +37,16 @@ For detailed instructions on how to customize this website, please refer to the 
 - [**Usage & Customization Guide**](docs/USAGE_GUIDE.md) - Learn how to modify the event details and styles.
 - [**Tally Form Structure**](docs/TALLY_FORM_STRUCTURE.md) - A template for setting up your RSVP form.
 
+## Contributing
+
+## Contributing
+
+Contributions are welcome and encouraged. If you want to fix a bug, improve accessibility, refine documentation, or create a new theme, this is the place to do it.
+
+For full guidelines, rules, and best practices, please read the contributing guide:
+
+**[CONTRIBUTING.md](https://github.com/Rainier-PS/Invitation-Template/blob/main/docs/CONTRIBUTING.md)**
+
 ## License & Attribution
 
 This project is licensed under the **MIT License**.

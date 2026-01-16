@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    fetch('../data/demos.json')
+    fetch('https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/data/demos.json')
         .then(res => {
             if (!res.ok) throw new Error("Failed to load demos JSON");
             return res.json();
@@ -137,3 +137,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
 });
+

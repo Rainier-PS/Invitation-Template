@@ -39,7 +39,7 @@
         },
         {
             "time": "02:30 AM",
-            "label": "\"One Last Commit\" (Lies)"
+            "label": "\"One Last Commit\""
         }
     ],
     "rsvp": {
@@ -95,4 +95,5 @@
         }
     }
 }
+
 

@@ -35,7 +35,7 @@ Get your invitation website up and running in minutes:
 For detailed instructions on how to customize this website, please refer to the following guides:
 
 - [**Usage & Customization Guide**](docs/USAGE_GUIDE.md) - Learn how to modify the event details and styles.
-- [**Tally Form Structure**](docs/TALLY_FORM_STRUCTURE.md) - A template for setting up your RSVP form.
+- [**Tally Form Structure**](docs/RSVP_FORM_STRUCTURE.md) - A template for setting up your RSVP form.
 
 ## Contributing
 

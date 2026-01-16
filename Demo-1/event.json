@@ -44,8 +44,7 @@
     ],
     "rsvp": {
         "enabled": true,
-        "provider": "tally",
-        "url": "https://docs.google.com/forms/d/e/1FAIpQLSeRqLLPIXlav6XqnbOfMFtwN_8PsOO92Q_RfvVCuwO9XvqGCw/viewform?usp=sharing&ouid=108698636725450117562"
+        "url": "https://forms.gle/9iuzFWbx9UFii7Pz5"
     },
     "calendar": {
         "enabled": true,

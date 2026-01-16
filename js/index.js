@@ -1,216 +1,162 @@
+// Main site logic
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('event-form');
-    const preview = document.getElementById('json-preview');
-    const navButtons = document.querySelectorAll('#section-nav .nav-btn');
-    const sections = document.querySelectorAll('.form-section-stack');
+    console.log('Main site loaded');
 
-    // XSS Protection / Sanitization
-    const sanitize = (str) => {
-        if (typeof str !== 'string') return str;
-        return str.replace(/[<>]/g, (tag) => ({
-            '<': '&lt;',
-            '>': '&gt;'
-        }[tag] || tag));
-    };
-
-    const scrollRoot = document.getElementById('builder-scroll-root');
-    const scrollContent = document.querySelector('.form-scroll-content') || scrollRoot;
-
-    navButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const targetId = btn.getAttribute('href');
-            const targetEl = document.querySelector(targetId);
-            if (targetEl && scrollContent) {
-                const targetPos = targetEl.offsetTop - 80;
-                scrollContent.scrollTo({
-                    top: targetPos,
-                    behavior: 'smooth'
-                });
-            }
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
         });
     });
 
-    const observerOptions = {
-        root: scrollContent,
-        rootMargin: '-10% 0px -80% 0px',
-        threshold: 0
-    };
+    // Email Obfuscation for Bot Protection
+    const contactContainer = document.getElementById('contact-container');
+    if (contactContainer) {
+        const u = "rainierps8";
+        const d = "gmail.com";
+        const email = `${u}@${d}`;
 
-    const navObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                navButtons.forEach(btn => {
-                    btn.classList.toggle('active', btn.getAttribute('href') === `#${id}`);
-                });
-            }
+        const link = document.createElement('a');
+        link.href = "javascript:void(0)";
+        link.className = "secondary-btn";
+        link.style.display = "inline-flex";
+        link.style.alignItems = "center";
+        link.style.gap = "0.5rem";
+        link.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Email Developer
+        `;
+
+        link.addEventListener('click', () => {
+            window.location.href = `mailto:${email}?subject=Bug Report/Contribution - Invitation Template`;
         });
-    }, observerOptions);
 
-    sections.forEach(section => navObserver.observe(section));
+        contactContainer.appendChild(link);
+    }
 
-    const colorPicker = document.getElementById('input-accentColor');
-    const colorText = document.getElementById('input-accentColor-text');
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (!backToTopBtn) return;
 
-    colorPicker.addEventListener('input', (e) => {
-        colorText.value = e.target.value;
-        updateJson();
+    const minScrollableHeight = 600;
+    if (document.body.scrollHeight - window.innerHeight < minScrollableHeight) {
+        backToTopBtn.style.display = 'none';
+        return;
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let lastScrollY = window.scrollY;
+    let lastTimestamp = performance.now();
+
+    window.addEventListener('scroll', () => {
+        const now = performance.now();
+        const deltaY = Math.abs(window.scrollY - lastScrollY);
+        const deltaTime = now - lastTimestamp;
+
+        const velocity = deltaTime > 0 ? deltaY / deltaTime : 0;
+
+        if (window.scrollY > 700) {
+            backToTopBtn.classList.add('visible');
+
+            if (!prefersReducedMotion) {
+                const opacity = Math.min(1, 0.3 + velocity * 4);
+                backToTopBtn.style.opacity = opacity.toFixed(2);
+            } else {
+                backToTopBtn.style.opacity = 1;
+            }
+        } else {
+            backToTopBtn.classList.remove('visible');
+            backToTopBtn.style.opacity = '';
+        }
+
+        lastScrollY = window.scrollY;
+        lastTimestamp = now;
     });
-    colorText.addEventListener('input', (e) => {
-        colorPicker.value = e.target.value;
-        updateJson();
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        });
     });
 
-    const updateJson = () => {
-        const getCheck = (id) => document.getElementById(id).checked;
+    const eventDemos = [
+        {
+            title: "Hello 2027!",
+            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-1.avif",
+            url: "https://rainier-ps.github.io/Invitation-Template/Demo-1/invite-1.html"
+        },
+        {
+            title: "404: Sleep Not Found",
+            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-2.avif",
+            url: "https://rainier-ps.github.io/Invitation-Template/Demo-2/invite-2.html"
+        },
+        {
+            title: "Emma & Liam's Wedding",
+            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-3.avif",
+            url: "https://rainier-ps.github.io/Invitation-Template/Demo-3/invite-3.html"
+        },
+        {
+            title: "Alex's 18th Birthday Bash",
+            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-4.avif",
+            url: "https://rainier-ps.github.io/Invitation-Template/Demo-4/invite-4.html"
+        },
+        {
+            title: "Launch Day 2026",
+            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-5.avif",
+            url: "https://rainier-ps.github.io/Invitation-Template/Demo-5/invite-5.html"
+        },
+        {
+            title: "Ultimate eSports Showdown 2026",
+            thumbnail: "https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/refs/heads/main/media/images/Demo/Demo-6.avif",
+            url: "https://rainier-ps.github.io/Invitation-Template/Demo-6/invite-6.html"
+        }
+    ];
 
-        // Convert input date to ISO format YYYY-MM-DD
-        const formatDateISO = (dateStr) => {
-            if (!dateStr) return "";
-            const d = new Date(dateStr);
-            if (isNaN(d.getTime())) return dateStr; // fallback if invalid
-            const pad = n => String(n).padStart(2, '0');
-            return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-        };
+    const track = document.querySelector(".demo-track");
 
-        const schedule = [];
-        document.querySelectorAll('#schedule-list-builder .dynamic-list-item').forEach(item => {
-            const time = item.querySelector('.sched-time');
-            const label = item.querySelector('.sched-label');
-            if (time && label) {
-                schedule.push({
-                    time: sanitize(time.value),
-                    label: sanitize(label.value)
-                });
-            }
-        });
+    eventDemos.forEach(ev => {
+        const slide = document.createElement("a");
+        slide.className = "demo-slide";
+        slide.href = ev.url;
+        slide.target = "_blank";
+        slide.rel = "noopener";
+        slide.innerHTML = `
+            <img src="${ev.thumbnail}" alt="${ev.title} thumbnail">
+            <h3>${ev.title}</h3>
+            <a href="${ev.url}" class="primary-btn demo-btn" target="_blank" rel="noopener">View Demo</a>
+        `;
+        track.appendChild(slide);
+    });
 
-        const heroImages = [];
-        document.querySelectorAll('.hero-img-url').forEach(input => {
-            heroImages.push(input.value);
-        });
+    const slides = document.querySelectorAll(".demo-slide");
+    slides.forEach(slide => {
+        const clone = slide.cloneNode(true);
+        track.appendChild(clone);
+    });
 
-        const sectionBackgrounds = [];
-        document.querySelectorAll('.section-bg-url').forEach(input => {
-            sectionBackgrounds.push(input.value);
-        });
+    let maxHeight = 0;
+    slides.forEach(slide => {
+        const height = slide.offsetHeight;
+        if (height > maxHeight) maxHeight = height;
+    });
+    slides.forEach(slide => slide.style.height = `${maxHeight}px`);
+    document.querySelectorAll(".demo-slide").forEach(slide => slide.style.height = `${maxHeight}px`);
 
-        const json = {
-            "_meta_comment": "TEMPLATE CONFIGURATION",
-            "meta": {
-                "version": "1.1",
-                "private": false,
-                "simpleMode": getCheck('input-simpleMode'),
-                "showSimpleModeToggle": getCheck('input-showSimpleModeToggle'),
-                "countdown": true
-            },
-            "event": {
-                "title": getValue('input-title'),
-                "subtitle": getValue('input-subtitle'),
-                "description": getValue('input-description')
-            },
-            "datetime": {
-                "date": formatDateISO(getValue('input-date')),
-                "startTime": getValue('input-startTime'),
-                "endTime": getValue('input-endTime'),
-                "timezone": "local",
-                "allDay": false
-            },
-            "location": {
-                "name": getValue('input-venue-name'),
-                "address": getValue('input-venue-address'),
-                "mapsLink": getValue('input-mapsLink')
-            },
-            "schedule": schedule,
-            "rsvp": {
-                "enabled": getCheck('input-rsvp-enabled'),
-                "url": getValue('input-rsvp-url')
-            },
-            "calendar": {
-                "enabled": true,
-                "providers": {
-                    "google": true
-                }
-            },
-            "design": {
-                "theme": "light",
-                "accentColor": colorText.value,
-                "heroImages": heroImages,
-                "sectionBackgrounds": sectionBackgrounds
-            },
-            "music": {
-                "enabled": getCheck('input-music-enabled'),
-                "loop": getCheck('input-music-loop'),
-                "volume": parseFloat(getValue('input-music-volume')) || 0.3,
-                "audioUrl": getValue('input-music-audioUrl') || ""
-            },
-            "footer": {
-                "text": getValue('input-footerText'),
-                "branding": {
-                    "link": "#",
-                    "logoUrl": getValue('input-logoUrl'),
-                    "logoAlt": "Logo"
-                },
-                "credits": {
-                    "designByLabel": "Created & Designed by",
-                    "copyrightYear": new Date().getFullYear().toString(),
-                    "authorName": getValue('input-authorName'),
-                    "templateLabel": "Template by",
-                    "templateAuthor": "Rainier Pearson Saputra",
-                    "templateLink": "https://rainier-ps.github.io/Personal-Website/",
-                    "repoLabel": "Open Repository",
-                    "repoLink": "https://github.com/Rainier-PS/Invitation-Template"
-                }
-            }
-        };
+    let scrollSpeed = 0.25;
+    let position = 0;
 
-        preview.textContent = JSON.stringify(json, null, 4);
-    };
+    function animateLoop() {
+        position += scrollSpeed;
+        if (position >= track.scrollWidth / 2) {
+            position = 0;
+        }
+        track.style.transform = `translateX(-${position}px)`;
+        requestAnimationFrame(animateLoop);
+    }
 
-    form.addEventListener('input', updateJson);
+    animateLoop();
 
-    const listObserver = new MutationObserver(updateJson);
-    listObserver.observe(document.getElementById('schedule-list-builder'), { childList: true, subtree: true });
-    listObserver.observe(document.getElementById('hero-images-builder'), { childList: true, subtree: true });
-    listObserver.observe(document.getElementById('section-backgrounds-builder'), { childList: true, subtree: true });
-
-    updateJson();
 });
-
-window.copyJson = function () {
-    const text = document.getElementById('json-preview').textContent;
-    navigator.clipboard.writeText(text).then(() => {
-        const btn = document.querySelector('.primary-btn[onclick="copyJson()"]');
-        const originalText = btn.textContent;
-        btn.textContent = 'Copied!';
-        btn.style.background = '#10b981';
-        setTimeout(() => {
-            btn.textContent = originalText;
-            btn.style.background = '';
-        }, 2000);
-    });
-};
-
-window.downloadJson = function () {
-    const text = document.getElementById('json-preview').textContent;
-    const blob = new Blob([text], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'event.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-
-    const btn = document.querySelector('.secondary-btn[onclick="downloadJson()"]');
-    const originalText = btn.textContent;
-    btn.textContent = 'Downloaded!';
-    btn.style.background = '#10b981';
-    setTimeout(() => {
-        btn.textContent = originalText;
-        btn.style.background = '';
-    }, 2000);
-};
-

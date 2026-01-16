@@ -313,6 +313,30 @@ textarea:focus {
     margin-bottom: 1rem;
 }
 
+.rsvp-highlight {
+    text-align: center;
+}
+
+.rsvp-highlight h3 {
+    color: var(--primary);
+}
+
+.rsvp-description {
+    max-width: 520px;
+    margin: 0.75rem auto 0.5rem;
+    color: var(--muted);
+}
+
+.provider-text-list {
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+.provider-text-list strong {
+    color: var(--text);
+    font-weight: 500;
+}
+
 [data-tooltip] {
     position: relative;
 }

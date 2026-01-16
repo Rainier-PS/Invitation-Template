@@ -102,14 +102,12 @@ The website does **not** inspect or validate form responses.
 ### 2. Google Forms
 
 1. Open your form in **Google Forms**
-2. Go to **Send → Embed HTML**
-3. Copy the URL inside the `src=""` of the iframe (it usually contains `https://docs.google.com/forms/d/e/XXXXX/viewform`)
-4. Paste the URL directly into your `event.json` (no need to append `&embedded=true`):
+2. Go to **Share → Copy responder link**
+3. Paste the URL directly into your `event.json` (no need to append `&embedded=true`):
 
 ```json
 "rsvp": {
   "enabled": true,
-  "provider": "google",
   "url": "https://docs.google.com/forms/d/e/XXXXX/viewform"
 }
 ```
@@ -119,14 +117,12 @@ The website does **not** inspect or validate form responses.
 ### 3. Microsoft Forms
 
 1. Open your form in **Microsoft Forms**
-2. Go to **Share → Embed**
-3. Copy the iframe `src` URL
-4. Paste the URL into your `event.json`:
+2. Go to **Collect responses → Copy link**
+3. Paste the URL into your `event.json`:
 
 ```json
 "rsvp": {
   "enabled": true,
-  "provider": "microsoft",
   "url": "https://forms.office.com/Pages/ResponsePage.aspx?XXXXX"
 }
 ```
@@ -143,7 +139,6 @@ The website does **not** inspect or validate form responses.
 ```json
 "rsvp": {
   "enabled": true,
-  "provider": "typeform",
   "url": "https://form.typeform.com/to/XXXXX"
 }
 ```
@@ -160,7 +155,6 @@ The website does **not** inspect or validate form responses.
 ```json
 "rsvp": {
   "enabled": true,
-  "provider": "jotform",
   "url": "https://form.jotform.com/XXXXX"
 }
 ```

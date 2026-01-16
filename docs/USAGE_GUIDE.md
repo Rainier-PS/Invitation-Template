@@ -40,20 +40,42 @@ To simplify editing, use the **visual JSON builder**:
 
 ## 3. Creating Your RSVP Form
 
-1. Go to [https://tally.so](https://tally.so) and create a free account.  
-2. Build a form with recommended fields:  
-   - Full name (Short Answer, Required)
-   - Will you attend? (Multiple Choice: Yes/No, Required)
-   - Number of guests (Number, Conditional)
-   - Names of additional guests (Long Answer, Conditional)
-   - Contact email (Email, Conditional)
-   - Invite code (Short Answer, Conditional)
-   - Message to host (Long Answer, Optional)
-3. Configure conditional logic to show fields based on responses.  
-4. Click **Share → Embed → Standard** and copy the iframe URL.  
-5. Paste it into your `event.json` under the `rsvp.url` field.
+You may use any form service. The most common and beginner-friendly options are listed below.
 
-> For detailed setup, see [RSVP Form Structure](https://github.com/Rainier-PS/Invitation-Template/blob/main/docs/RSVP_FORM_STRUCTURE.md)
+For full question structure and conditional logic, see the full guide:
+[RSVP Form Guide](https://github.com/Rainier-PS/Invitation-Template/blob/main/docs/RSVP_FORM_STRUCTURE.md)
+
+---
+
+Option A: Google Forms
+
+1. Go to https://forms.google.com
+2. Create your RSVP form following the RSVP Form Guide
+3. Click Send and copy the responder link
+4. Paste the link into the RSVP URL field in your event.json
+
+---
+
+Option B: Microsoft Forms
+
+1. Go to https://forms.office.com
+2. Create your RSVP form
+3. Click Collect responses and copy the link
+4. Paste the link into the RSVP URL field in your event.json
+
+---
+
+Option C: Tally
+
+Tally is ideal if you want more advanced conditional logic or visual customization.
+
+1. Go to https://tally.so and create your form
+2. Open Share and choose Embed
+3. Copy the embed URL
+4. Paste the URL into the RSVP section of your event.json
+
+Reminder: The website does not enforce RSVP limits or validation.
+Make sure everything is configured correctly inside your chosen form provider.
 
 ---
 

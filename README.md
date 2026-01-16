@@ -45,7 +45,7 @@ Contributions are welcome and encouraged. If you want to fix a bug, improve acce
 
 For full guidelines, rules, and best practices, please read the contributing guide:
 
-**[CONTRIBUTING.md](https://github.com/Rainier-PS/Invitation-Template/blob/main/docs/CONTRIBUTING.md)**
+**[CONTRIBUTING.md](docs/CONTRIBUTING.md)**
 
 ## License & Attribution
 

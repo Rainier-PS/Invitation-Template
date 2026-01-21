@@ -10,6 +10,7 @@ Check out this site live at: [Live Site](https://rainier-ps.github.io/Invitation
 
 ## Features
 
+- **No Coding Required** Customize everything through a simple JSON file no programming knowledge needed
 - **Full-page Scrolling**: Smooth transitions between event sections.
 - **Dynamic Content**: All event details are managed in `event.json`.
 - **Integrated RSVP**: Easy integration with Tally.so or other form providers.

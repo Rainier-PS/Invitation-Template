@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Email Obfuscation for Bot Protection
     const contactContainer = document.getElementById('contact-container');
     if (contactContainer) {
         const u = "rainierps8";
@@ -118,17 +117,28 @@ document.addEventListener('DOMContentLoaded', () => {
             slides.forEach(slide => slide.style.height = `${maxHeight}px`);
             document.querySelectorAll(".demo-slide").forEach(slide => slide.style.height = `${maxHeight}px`);
 
-            let scrollSpeed = 0.25;
+            let scrollSpeed = prefersReducedMotion
+                ? 0
+                : (window.innerWidth <= 768 ? 0.4 : 0.25);
+
             let position = 0;
 
             function animateLoop() {
                 position += scrollSpeed;
+
                 if (position >= track.scrollWidth / 2) {
                     position = 0;
                 }
+
                 track.style.transform = `translateX(-${position}px)`;
                 requestAnimationFrame(animateLoop);
             }
+
+            window.addEventListener('resize', () => {
+                scrollSpeed = prefersReducedMotion
+                    ? 0
+                    : (window.innerWidth <= 768 ? 0.4 : 0.25);
+            });
 
             animateLoop();
         })
@@ -137,4 +147,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
 });
-

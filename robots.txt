@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rainier-ps.github.io/Invitation-Template/sitemap.xml

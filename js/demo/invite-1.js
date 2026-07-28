@@ -102,7 +102,7 @@ function startCountdown(data) {
     if (!container) return;
 
     const dt = data.datetime || {};
-    const target = dt.__start; // use only normalized start
+    const target = dt.__start;
 
     if (!target || target <= new Date()) {
         container.hidden = true;
@@ -338,6 +338,15 @@ fetch(EVENT_JSON_URL)
             }
         }
 
+        if (data.social?.instagram) {
+            var socialLinks = document.getElementById("social-links");
+            var igLink = document.getElementById("instagram-link");
+            var igLabel = document.getElementById("instagram-label");
+            if (socialLinks) socialLinks.hidden = false;
+            if (igLink) igLink.href = data.social.instagram;
+            if (igLabel) { var handle = data.social.instagram.replace(/https?:\/\/(www\.)?instagram\.com\//, '').replace(/\/$/, ''); igLabel.textContent = handle ? '@' + handle : 'Follow on Instagram'; }
+        }
+
         const rsvp = data.rsvp;
 
         const rsvpEnabled = rsvp?.enabled !== false;
@@ -376,6 +385,30 @@ fetch(EVENT_JSON_URL)
             if (section) section.hidden = false;
         }
 
+        if (data.quotes?.length) {
+            var qc = document.getElementById("quotes-container");
+            if (qc) {
+                data.quotes.forEach(function(q) {
+                    if (!q.text) return;
+                    var d = document.createElement("div");
+                    d.className = "quote-item";
+                    var pt = document.createElement("p");
+                    pt.className = "quote-text";
+                    pt.textContent = q.text;
+                    d.appendChild(pt);
+                    if (q.author) {
+                        var pa = document.createElement("p");
+                        pa.className = "quote-author";
+                        pa.textContent = q.author;
+                        d.appendChild(pa);
+                    }
+                    qc.appendChild(d);
+                });
+                var qs = document.getElementById("quotes-section");
+                if (qs) qs.hidden = false;
+            }
+        }
+
         if (data.design?.accentColor) {
             document.documentElement.style.setProperty('--primary', data.design.accentColor);
         }
@@ -408,7 +441,7 @@ fetch(EVENT_JSON_URL)
                         slides[currentSlide].classList.remove('active');
                         currentSlide = (currentSlide + 1) % slides.length;
                         slides[currentSlide].classList.add('active');
-                    }, 5000); // 5 seconds per slide
+                    }, 5000);
                 }
             }
         } else if (data.design?.backgrounds?.length && sections[0]) {
@@ -440,7 +473,7 @@ fetch(EVENT_JSON_URL)
         const simpleIcon = document.getElementById('simple-view-icon');
 
         if (simpleToggleBtn) {
-            // Only show toggle if enabled in JSON (defaults to false)
+
             const showToggle = data.meta?.showSimpleModeToggle === true;
             simpleToggleBtn.style.display = showToggle ? 'flex' : 'none';
             simpleToggleBtn.classList.add('scrolled-out');
@@ -491,7 +524,6 @@ fetch(EVENT_JSON_URL)
         if (subtitle) subtitle.textContent = "Please check back later.";
     });
 
-// Audio Player
 document.addEventListener('DOMContentLoaded', () => {
     const waitForData = () => {
         if (!window.__EVENT_DATA__?.music?.enabled) {
@@ -533,5 +565,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     waitForData();
 });
-
 

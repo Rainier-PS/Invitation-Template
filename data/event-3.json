@@ -1,5 +1,4 @@
 {
-    "_meta_comment": "TEMPLATE CONFIGURATION — WEDDING EDITION",
     "meta": {
         "version": "1.2",
         "private": false,
@@ -7,13 +6,33 @@
         "showSimpleModeToggle": false,
         "countdown": true
     },
+    "sections": {
+        "hero": true,
+        "eventDetails": true,
+        "schedule-section": true,
+        "quotes-section": true,
+        "location-section": true,
+        "design-section": true,
+        "music-section": true,
+        "rsvp": true,
+        "footer": true
+    },
+    "quotes": [
+        {
+            "text": "Two souls with but a single thought, two hearts that beat as one.",
+            "author": "John Keble"
+        }
+    ],
+    "social": {
+        "instagram": "https://www.instagram.com/rainier_ps/"
+    },
     "event": {
         "title": "Emma & Liam's Wedding",
         "subtitle": "A Celebration of Love & Laughter",
         "description": "Join us for a magical day filled with love, vows, dancing, and memories that will last a lifetime."
     },
     "datetime": {
-        "date": "2026-06-20",
+        "date": "2027-06-19",
         "startTime": "04:00 PM",
         "endTime": "11:00 PM",
         "timezone": "local",

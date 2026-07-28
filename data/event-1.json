@@ -1,5 +1,4 @@
 {
-    "_meta_comment": "TEMPLATE CONFIGURATION — NEW YEAR DEMO EDITION",
     "meta": {
         "version": "1.0",
         "private": false,
@@ -7,20 +6,40 @@
         "showSimpleModeToggle": false,
         "countdown": true
     },
+    "sections": {
+        "hero": true,
+        "eventDetails": true,
+        "schedule-section": true,
+        "quotes-section": true,
+        "location-section": true,
+        "design-section": true,
+        "music-section": true,
+        "rsvp": true,
+        "footer": true
+    },
+    "quotes": [
+        {
+            "text": "Cheers to a new year and another chance for us to get it right.",
+            "author": "Oprah Winfrey"
+        }
+    ],
+    "social": {
+        "instagram": "https://www.instagram.com/rainier_ps/"
+    },
     "event": {
         "title": "Hello 2027!",
         "subtitle": "A New Year Celebration Worth Staying Up For",
-        "description": "Join us as we say goodbye to 2026 and welcome 2027 with good vibes, great company, and absolutely zero expectations. Come for the countdown, stay for the memories."
+        "description": "Join us as we say goodbye to 2027 and welcome 2028 with good vibes, great company, and absolutely zero expectations. Come for the countdown, stay for the memories."
     },
     "datetime": {
-        "date": "2026-12-31",
+        "date": "2027-12-31",
         "startTime": "09:00 PM",
         "endTime": "02:00 AM",
         "timezone": "local",
         "allDay": false
     },
     "location": {
-        "name": "📍Somewhere Festive",
+        "name": "Somewhere Festive",
         "address": "Wherever the countdown feels right",
         "mapsLink": "https://www.google.com/maps"
     },
@@ -35,7 +54,7 @@
         },
         {
             "time": "11:59 PM",
-            "label": "Countdown to 2027 🎆"
+            "label": "Countdown to 2027"
         },
         {
             "time": "12:15 AM",

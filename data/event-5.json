@@ -1,5 +1,4 @@
 {
-    "_meta_comment": "TEMPLATE CONFIGURATION — CORPORATE LAUNCH EDITION",
     "meta": {
         "version": "1.4",
         "private": false,
@@ -7,13 +6,33 @@
         "showSimpleModeToggle": true,
         "countdown": true
     },
+    "sections": {
+        "hero": true,
+        "eventDetails": true,
+        "schedule-section": true,
+        "quotes-section": true,
+        "location-section": true,
+        "design-section": true,
+        "music-section": true,
+        "rsvp": true,
+        "footer": true
+    },
+    "quotes": [
+        {
+            "text": "The best way to predict the future is to create it.",
+            "author": "Peter Drucker"
+        }
+    ],
+    "social": {
+        "instagram": "https://www.instagram.com/"
+    },
     "event": {
         "title": "Launch Day 2026",
         "subtitle": "Innovation, Networking & Celebration",
         "description": "Celebrate the unveiling of our latest product! Expect demos, keynote talks, networking, and a few surprises along the way."
     },
     "datetime": {
-        "date": "2026-10-05",
+        "date": "2027-10-05",
         "startTime": "02:00 PM",
         "endTime": "08:00 PM",
         "timezone": "local",

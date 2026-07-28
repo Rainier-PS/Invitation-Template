@@ -1,5 +1,4 @@
 {
-    "_meta_comment": "TEMPLATE CONFIGURATION — ESPORTS EVENT EDITION",
     "meta": {
         "version": "1.5",
         "private": false,
@@ -7,13 +6,33 @@
         "showSimpleModeToggle": false,
         "countdown": true
     },
+    "sections": {
+        "hero": true,
+        "eventDetails": true,
+        "schedule-section": true,
+        "quotes-section": true,
+        "location-section": true,
+        "design-section": true,
+        "music-section": true,
+        "rsvp": true,
+        "footer": true
+    },
+    "quotes": [
+        {
+            "text": "GG WP - Good Game, Well Played.",
+            "author": "Gamers Everywhere"
+        }
+    ],
+    "social": {
+        "instagram": "https://www.instagram.com/"
+    },
     "event": {
         "title": "Ultimate eSports Showdown 2026",
         "subtitle": "Gaming, Tournaments & High Scores",
         "description": "Join top gamers for a day of intense competition, epic matches, and spectator fun. Whether you play or cheer, the thrill is real!"
     },
     "datetime": {
-        "date": "2026-11-14",
+        "date": "2027-11-13",
         "startTime": "11:00 AM",
         "endTime": "08:00 PM",
         "timezone": "local",

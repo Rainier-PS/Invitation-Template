@@ -1,5 +1,4 @@
 {
-    "_meta_comment": "TEMPLATE CONFIGURATION — FUN DEMO EDITION",
     "meta": {
         "version": "1.1",
         "private": false,
@@ -7,20 +6,40 @@
         "showSimpleModeToggle": true,
         "countdown": true
     },
+    "sections": {
+        "hero": true,
+        "eventDetails": true,
+        "schedule-section": true,
+        "quotes-section": false,
+        "location-section": true,
+        "design-section": true,
+        "music-section": true,
+        "rsvp": true,
+        "footer": true
+    },
+    "quotes": [
+        {
+            "text": "First, solve the problem. Then, write the code.",
+            "author": "John Johnson"
+        }
+    ],
+    "social": {
+        "instagram": "https://www.instagram.com/"
+    },
     "event": {
         "title": "404: Sleep Not Found",
         "subtitle": "An Extremely Serious Coding Party",
         "description": "A totally unofficial, highly chaotic coding hangout where bugs are features, coffee is a dependency, and Stack Overflow is the real MVP."
     },
     "datetime": {
-        "date": "2026-04-01",
+        "date": "2027-04-01",
         "startTime": "09:00 PM",
         "endTime": "03:00 AM",
         "timezone": "local",
         "allDay": false
     },
     "location": {
-        "name": "📍The Internet™",
+        "name": "The Internet",
         "address": "Somewhere between GitHub and Discord",
         "mapsLink": "https://www.google.com/maps"
     },

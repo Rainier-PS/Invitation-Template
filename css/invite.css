@@ -1,12 +1,8 @@
-/* CORE STYLES - Reusable Base Styles */
-
 :root {
     --bg-base: #000000;
     --text: #f8f9fa;
     --muted: #e5e7eb;
     --primary: #ffffff;
-    /* Overridden by JS */
-
     --font-heading: 'Cormorant Garamond', serif;
     --font-body: 'Outfit', sans-serif;
 
@@ -108,8 +104,6 @@ a:hover {
     }
 }
 
-
-/* TEMPLATE-SPECIFIC STYLES */
 
 #app {
     height: 100%;
@@ -250,6 +244,22 @@ footer>* {
 .location address {
     font-style: normal;
     margin-top: 1rem;
+}
+
+#venue-name::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+    vertical-align: middle;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E") center/contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+body.simple #venue-name::before {
+    background: #555;
 }
 
 #maps-link {
@@ -573,8 +583,6 @@ footer .footer-info {
     animation-delay: 0.4s;
 }
 
-/* SIMPLE MODE STYLES */
-
 body.simple {
     overflow-y: auto !important;
     background: #fbfbfb !important;
@@ -702,8 +710,6 @@ body.simple footer {
     align-items: center !important;
 }
 
-/* HERO COUNTDOWN */
-
 .countdown {
     margin-top: 0.6rem;
     padding: 1rem 1.25rem;
@@ -822,4 +828,142 @@ body.simple .section h2 + .event-datetime {
 
 body.simple .event-datetime {
     margin-bottom: 1rem !important;
+}
+
+#quotes-section {
+    justify-content: center;
+}
+
+.quotes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.quote-item {
+    position: relative;
+    padding: 2rem 2rem 1.5rem;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.quote-text {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    font-style: italic;
+    color: var(--text);
+    margin: 0 0 0.75rem;
+    font-weight: 300;
+}
+
+.quote-author {
+    font-size: 0.9rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.quote-author::before {
+    content: '\2014 ';
+}
+
+body.simple .quote-item {
+    background: #f8f8f8 !important;
+    border-color: rgba(0,0,0,0.06) !important;
+    padding: 2rem 1.5rem 1.5rem !important;
+}
+
+body.simple .quote-text {
+    color: #2c2c2c !important;
+    font-size: 1.4rem !important;
+}
+
+body.simple .quote-author {
+    color: #777 !important;
+}
+
+@media (max-width: 640px) {
+    .quote-item {
+        padding: 1.5rem 1.25rem 1.25rem;
+    }
+    .quote-text {
+        font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .quote-item {
+        padding: 1.25rem 1rem 1rem;
+    }
+    .quote-text {
+        font-size: 1rem;
+    }
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.social-link svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+body.simple .social-link {
+    background: rgba(0,0,0,0.04) !important;
+    border-color: rgba(0,0,0,0.08) !important;
+    color: #333 !important;
+}
+
+body.simple .social-link:hover {
+    background: rgba(0,0,0,0.08) !important;
+}
+
+@media (max-width: 480px) {
+    .social-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    .social-link svg {
+        width: 16px;
+        height: 16px;
+    }
 }

@@ -1,315 +1,129 @@
 # Contributing Guide
 
-Thank you for your interest in contributing!
-This project is an open-source, MIT-licensed **invitation website template** designed to be:
+Thanks for wanting to contribute. This is an open source invitation template. You can customize it through CSS and JSON without touching the HTML or JavaScript.
 
-* Easy to customize
-* Accessible by default
-* Data-driven via JSON
-* Framework-free
+## What this project is about
 
-This guide explains **how to contribute safely without breaking the template contract**.
+The template follows a simple structure:
 
----
+- HTML holds the page structure. It rarely changes.
+- JavaScript reads the JSON and renders content. Change it carefully.
+- JSON holds your event data. This is what you edit most of the time.
+- CSS changes the look of the page. This is where most contributions happen.
 
-## Project Philosophy
+If you want to add a new theme or improve the design, start with CSS. If you find a bug, open an issue first before making big changes.
 
-This project follows a strict separation of concerns:
+## What you can work on
 
-| Layer      | Purpose                       | Expected to Change |
-| ---------- | ----------------------------- | ------------------ |
-| HTML       | Structure & accessibility     | ❌ Rarely           |
-| JavaScript | Data rendering & behavior     | ❌ Carefully        |
-| JSON       | Event content & configuration | Always             |
-| CSS        | Visual design & theming       | Primary            |
+### Good for first time contributors
 
-> Most customization should be possible using only CSS and JSON.
+- New CSS themes or color variations
+- Typography and spacing fixes
+- Accessibility improvements (better contrast, keyboard support)
+- Bug fixes
+- Better documentation
+- Performance improvements
 
----
+### Open an issue first if
 
-## What You Can Contribute
+- You want to change the HTML structure
+- You want to change the JSON schema
+- You plan to remove accessibility features
+- You want to refactor the JavaScript heavily
 
-### Highly Encouraged
-
-* New CSS themes
-* 🖋️ Typography & spacing improvements
-* Accessibility improvements
-* 🌍 Localization / i18n
-* Bug fixes
-* Documentation improvements
-* ⚡ Performance optimizations
-
-### Please Open an Issue First
-
-* HTML structure changes
-* Breaking JSON schema changes
-* Removal of accessibility features
-* Major JavaScript refactors
-
----
-
-## Repository Structure (General)
+## How the files are organized
 
 ```
 /
-├─ index.html        # Accessible semantic markup
-├─ invite.js         # Core logic (shared by all themes)
-├─ invite.css        # Default theme
-├─ event.json        # Event configuration
-├─ CONTRIBUTING.md
-└─ README.md
+  index.html         - the invitation page
+  css/invite.css       - default theme
+  data/event.json      - your event data
+  js/builder.js        - the online JSON builder
+  js/index.js          - homepage scripts
+  js/demo/             - demo page scripts
+  demo/                - demo HTML pages
+  docs/                - documentation
 ```
 
----
+## Styling tips
 
-## Styling & Theme Contributions
+Most themes can be built by changing CSS variables in `:root`:
 
-### Styling Philosophy
-
-* The HTML structure is stable
-* The JavaScript logic is shared
-* CSS defines the personality
-
-CSS should be the primary tool for visual customization. Changes to HTML or JavaScript should be made only when required for structural or functional reasons.
-
----
-
-### CSS Design Tokens (Recommended Entry Point)
-
-Most themes can be created by overriding variables in `:root`:
-
-```
+```css
 :root {
   --bg-base: #000000;
   --text: #f8f9fa;
-  --muted: #e5e7eb;
   --primary: #ffffff;
-
   --font-heading: 'Cormorant Garamond', serif;
   --font-body: 'Outfit', sans-serif;
-
   --radius: 20px;
 }
 ```
 
-Good uses:
+Try to avoid hardcoding colors inside components. If you change a variable, make sure nothing breaks.
 
-* Colors
-* Fonts
-* Border radius
-* Glass / blur strength
-* Shadows
+## Simple Mode
 
-Avoid:
-
-* Hard-coding colors inside components
-* Removing variables used by JavaScript (for example `--primary`)
-
----
-
-### Layout & Structure Rules
-
-The core structure exists to guarantee accessibility, navigation, and compatibility.
-
-Do not:
-
-* Rename IDs used by JavaScript
-* Remove `section`, `footer`, `address`, or `time` elements
-* Break keyboard navigation or focus order
-
-You may:
-
-* Adjust spacing, alignment, and layout flow
-* Use parallax scrolling, layered layouts, or scroll-driven effects
-* Change background images, gradients, or video backgrounds
-* Modify animation timing and easing
-* Add theme-specific utility classes or wrappers
-
-If you introduce advanced layout techniques:
-
-* Content must remain readable and reachable
-* Effects must degrade gracefully in Simple Mode or reduced-motion mode
-
----
-
-## Simple Mode (Required)
-
-Simple Mode is mandatory for all themes, but it is intentionally flexible.
-
-It exists as a **graceful fallback**, not a visual downgrade. Its purpose is to ensure the site remains usable and readable for users who prefer clarity over effects.
-
-Guidelines:
-
-* `body.simple` overrides must remain functional
-* Content must stay readable without background images
-* Contrast must remain accessible
-* Larger font sizes must be supported
-
-If you add advanced visual elements:
-
-* They may be simplified, disabled, or flattened in Simple Mode
-* Exact visual parity is not required
-* Functional parity is required (all content must remain accessible)
-
-You are **not required to redesign Simple Mode**.
-
-If you prefer to focus entirely on the primary visual experience, it is perfectly acceptable to:
-
-* Keep Simple Mode identical to the default implementation
-* Apply only minimal readability and contrast fixes
-* Treat Simple Mode as a basic, no-frills fallback
-
-Simple Mode is intentionally plain by design. As long as the essential non-negotiables are respected (readability, accessibility, and content completeness), contributors are encouraged to prioritize creativity and experimentation in the main theme.
-
----
-
-## Motion & Reduced Motion
-
-Creative motion is allowed and encouraged when it enhances the experience.
-
-Examples of acceptable effects:
-
-* Parallax scrolling
-* Scroll-linked animations
-* Hero transitions
-* Background motion or subtle video
-
-All motion must be responsibly handled.
+All themes must support Simple Mode. This is a fallback for users who prefer a plain, readable layout with no background images or effects. It does not need to look fancy. It just needs to work and stay readable.
 
 Requirements:
 
-* Respect user preferences using:
+- Content must be readable without background images
+- Contrast must be accessible
+- Font sizes must be large enough
 
-```
+## Reduced motion
+
+If you add animations, respect user preferences:
+
+```css
 @media (prefers-reduced-motion: reduce) {
-  /* disable, simplify, or remove motion */
+  /* turn off or simplify animations */
 }
 ```
 
-* Motion must not be required to understand content
-* Effects must not trap focus or interfere with navigation
-* Motion should degrade gracefully when reduced motion is enabled
-  must respect user preferences:
+Do not add flashing content, auto-playing motion, or parallax scrolling that can not be disabled.
 
-```
-@media (prefers-reduced-motion: reduce) {
-  /* disable or simplify animations */
-}
-```
+## Responsive design
 
-Do not add:
+Test your changes on:
 
-* Parallax scrolling
-* Uncontrollable auto-motion
-* Flashing or rapid animations
+- Small phones (360px width)
+- Tablets
+- Large desktop screens
 
----
+Pay attention to the countdown layout, RSVP form, and floating buttons.
 
-## Responsive Design
+## JSON rules
 
-Your changes must work on:
+If you add new fields to the JSON:
 
-* Small phones (≤ 360px)
-* Tablets
-* Large desktops
+- They must be optional
+- If a field is missing, the page should still work normally
+- Big changes to the schema need a discussion first
 
-Test especially:
+## Before submitting
 
-* Countdown layout
-* RSVP embeds
-* Floating buttons
-* Long text wrapping
+Check that:
 
-Avoid:
+- The existing HTML and JS still work with your changes
+- JSON loads without errors
+- Simple Mode still works
+- Keyboard navigation still works
+- Mobile layout looks okay
+- Reduced motion preference is respected
 
-* Fixed font sizes
-* Fixed container heights
-* `overflow: hidden` on scrolling regions
+## How to submit
 
----
-
-## Event JSON Configuration
-
-The template is powered entirely by a single JSON file.
-
-General rules:
-
-* New fields must be optional
-* Missing fields must fail gracefully
-* Breaking changes require discussion
-
----
-
-### JSON Structure Overview
-
-```
-{
-  "meta": {},
-  "event": {},
-  "datetime": {},
-  "location": {},
-  "schedule": [],
-  "rsvp": {},
-  "calendar": {},
-  "design": {},
-  "music": {},
-  "footer": {}
-}
-```
-
----
-
-## Template Attribution & Forking
-
-This project is MIT licensed.
-
-If you fork the template, publish your own version, or create a derived template, you may change:
-
-* The footer credit text
-* The template author name
-* Repository links
-
-Example:
-
-Template by Your Name Here
-
-Please do not remove attribution entirely unless required by your own licensing.
-
----
-
-## Testing Checklist
-
-Before submitting:
-
-* Works with existing HTML and JS unchanged
-* JSON loads without errors
-* Simple Mode works
-* Keyboard navigation works
-* Mobile tested
-* Reduced motion respected
-
----
-
-## Submitting a Pull Request
-
-1. Fork the repo
-2. Create a new branch
-3. Make focused changes
-4. Open a PR describing what changed, why it matters, and include screenshots if visual
-
----
+1. Fork the repository.
+2. Create a branch for your changes.
+3. Make focused commits.
+4. Open a pull request. Describe what you changed and why. If it changes how things look, add a screenshot.
 
 ## Code of Conduct
 
-Be respectful and inclusive.
+Be respectful. This is a small open source project. Everyone is here to learn and help.
 
----
+## Thank you
 
-## Thank You
-
-This template exists so anyone can edit a JSON file, swap a CSS file, and get a polished, accessible invitation site.
-
-Your contributions help keep that promise.
-
-Happy building
-
+Contributions help make this template better for everyone. Thanks for taking the time.

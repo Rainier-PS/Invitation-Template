@@ -1,91 +1,60 @@
 # RSVP Form Guide
 
-This template embeds an external RSVP form and does **not** process or validate responses in JavaScript.
-All logic, limits, and validation must be handled **inside the form provider**.
+This template embeds an external RSVP form. The website does not process or validate responses. All logic and limits must be handled inside the form provider.
 
----
+## Recommended Questions
 
-## Recommended RSVP Questions
+When you build your RSVP form, include these questions:
 
-When building your RSVP form, include the following questions:
+| Question | Type | Required | Notes |
+| -------- | ---- | -------- | ----- |
+| Full name | Short Answer | Yes | Guest name |
+| Will you attend? | Multiple Choice | Yes | Options: Yes, I will be there / Sorry, I cannot make it |
+| Number of guests | Number | Yes (conditional) | Minimum 1. Set a max if needed |
+| Names of additional guests | Long Answer | Yes (conditional) | Only if guest count is more than 1 |
+| Contact email | Email | Yes (conditional) | For confirmation and updates |
+| Invite code | Short Answer | Yes (conditional) | Optional. Validate in the form provider |
+| Message to host | Long Answer | Optional | For notes or well wishes |
 
-| Question                                               | Type            | Required               | Notes                                                        |
-| ------------------------------------------------------ | --------------- | ---------------------- | ------------------------------------------------------------ |
-| **Full name**                                          | Short Answer    | Yes                    | Primary guest’s name                                         |
-| **Will you be attending the event?**                   | Multiple Choice | Yes                    | Options:<br>• Yes, I’ll be there<br>• Sorry, I can’t make it |
-| **How many people will be attending (including you)?** | Number          | Yes (conditional)      | Minimum value: **1**<br>Maximum: set in the form if needed   |
-| **Names of additional guests**                         | Long Answer     | Required (conditional) | Required **only if guest count > 1**                         |
-| **Contact email**                                      | Email           | Yes (conditional)      | Used for confirmation & updates                              |
-| **Invite code**                                        | Short Answer    | Yes (conditional)      | Validation must be handled in the form                       |
-| **Message to host**                                    | Long Answer     | Optional               | Optional note or well wishes                                 |
+## Conditional Logic
 
----
+Set up these rules inside your form provider. The website does not check form responses.
 
-## Conditional Logic (Required)
+### If guest is attending
 
-All logic below **must be configured in your form provider**.
-The website does **not** inspect or validate form responses.
+Show and require:
 
-### 1. Attendance logic
+- Number of guests
+- Contact email
+- Invite code (if used)
 
-**If**
+Show as optional:
 
-> “Will you be attending the event?” = **Yes, I’ll be there**
+- Message to host
 
-**Then show & require:**
+### If extra guests are coming
 
-* How many people will be attending
-* Contact email
-* Invite code
+If attending is Yes and guest count is more than 1, show and require:
 
-**Then show (optional):**
+- Names of additional guests
 
-* Message to host
+### If guest declines
 
----
+If attending is No, hide all follow up questions.
 
-### 2. Guest names logic
+## Important Notes
 
-**If**
-
-* Attending = **Yes**
-* AND number of attendees **> 1**
-
-**Then:**
-
-* Show **Names of additional guests**
-* Make it **Required**
-
----
-
-### 3. Decline logic
-
-**If**
-
-> “Will you be attending the event?” = **Sorry, I can’t make it**
-
-**Then:**
-
-* Keep all follow-up questions hidden
-
----
-
-## Enforcement & Limits (Important)
-
-* Guest limits, invite validation, and RSVP deadlines are **not enforced by the website**
-* These must be configured directly in your form provider
-* The website only embeds the form
-
----
+- Guest limits, invite codes, and RSVP deadlines are not enforced by the website. Configure them in your form provider.
+- The website only embeds the form. It does not inspect or validate it.
 
 ## Embedding the Form
 
-### 1. Tally.so
+### Tally.so
 
-1. Open your form in **Tally**
-2. Go to **Share → Embed → Standard**
-3. Copy the iframe `src` URL
-4. Paste the URL into your `event.json`:
+1. Open your form in Tally.
+2. Go to Share > Embed > Standard.
+3. Copy the iframe src URL.
+4. Paste it into your event.json:
 
 ```json
 "rsvp": {
@@ -95,15 +64,11 @@ The website does **not** inspect or validate form responses.
 }
 ```
 
-> Note: Ensure your form handles all limits, validation, and deadlines.
+### Google Forms
 
----
-
-### 2. Google Forms
-
-1. Open your form in **Google Forms**
-2. Go to **Share → Copy responder link**
-3. Paste the URL directly into your `event.json` (no need to append `&embedded=true`):
+1. Open your form in Google Forms.
+2. Go to Share > Copy responder link.
+3. Paste the URL into your event.json:
 
 ```json
 "rsvp": {
@@ -112,13 +77,11 @@ The website does **not** inspect or validate form responses.
 }
 ```
 
----
+### Microsoft Forms
 
-### 3. Microsoft Forms
-
-1. Open your form in **Microsoft Forms**
-2. Go to **Collect responses → Copy link**
-3. Paste the URL into your `event.json`:
+1. Open your form in Microsoft Forms.
+2. Go to Collect responses > Copy link.
+3. Paste the URL into your event.json:
 
 ```json
 "rsvp": {
@@ -127,14 +90,12 @@ The website does **not** inspect or validate form responses.
 }
 ```
 
----
+### Typeform
 
-### 4. Typeform
-
-1. Open your form in **Typeform**
-2. Go to **Share → Embed**
-3. Copy the iframe URL or direct link
-4. Paste into your `event.json`:
+1. Open your form in Typeform.
+2. Go to Share > Embed.
+3. Copy the iframe or direct link.
+4. Paste into your event.json:
 
 ```json
 "rsvp": {
@@ -143,14 +104,12 @@ The website does **not** inspect or validate form responses.
 }
 ```
 
----
+### Jotform
 
-### 5. Jotform
-
-1. Open your form in **Jotform**
-2. Go to **Publish → Embed**
-3. Copy the iframe URL
-4. Paste into your `event.json`:
+1. Open your form in Jotform.
+2. Go to Publish > Embed.
+3. Copy the iframe URL.
+4. Paste into your event.json:
 
 ```json
 "rsvp": {
@@ -159,27 +118,14 @@ The website does **not** inspect or validate form responses.
 }
 ```
 
----
+## Optional Improvements
 
-## Optional Next Steps
-
-These are optional but can improve the RSVP experience:
-
-* Disable RSVP section after deadline (UI-only)
-* Show a “RSVP Closed” message after deadline
-* Use webhooks to collect responses in Google Sheets / Airtable / Supabase
-* Invite-code verification through a backend service
-
----
+- Disable the RSVP section after the event deadline (UI only).
+- Show an RSVP Closed message after the deadline.
+- Use webhooks to collect responses in Google Sheets or Airtable.
 
 ## Easier JSON Editing
 
-For a simpler experience editing `event.json`, use the dedicated JSON builder:
+For a simpler way to edit event.json, use the [JSON Builder](https://rainier-ps.github.io/Invitation-Template/builder.html). It works like a visual form and generates valid JSON automatically.
 
-[JSON Builder Form](https://rainier-ps.github.io/Invitation-Template/builder.html)
-
-> It works like a visual form and generates valid JSON automatically.
-
----
-
-*Note: You are free to use Rainier's original form as a reference, but please ensure you use your own form to collect your guests' data.*
+Note: You can use the example form as a reference, but make sure to use your own form to collect your guest data.

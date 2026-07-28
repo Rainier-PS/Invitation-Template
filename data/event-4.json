@@ -1,5 +1,4 @@
 {
-    "_meta_comment": "TEMPLATE CONFIGURATION — BIRTHDAY PARTY EDITION",
     "meta": {
         "version": "1.3",
         "private": false,
@@ -7,13 +6,33 @@
         "showSimpleModeToggle": false,
         "countdown": true
     },
+    "sections": {
+        "hero": true,
+        "eventDetails": true,
+        "schedule-section": true,
+        "quotes-section": true,
+        "location-section": true,
+        "design-section": true,
+        "music-section": true,
+        "rsvp": true,
+        "footer": true
+    },
+    "quotes": [
+        {
+            "text": "Count your life by smiles, not tears. Count your age by friends, not years.",
+            "author": "John Lennon"
+        }
+    ],
+    "social": {
+        "instagram": "https://www.instagram.com/"
+    },
     "event": {
         "title": "Alex's 18th Birthday Bash",
         "subtitle": "Cake, Games & Epic Fun!",
         "description": "Come celebrate Alex leveling up! Expect music, games, snacks, and lots of laughs."
     },
     "datetime": {
-        "date": "2026-07-10",
+        "date": "2027-07-10",
         "startTime": "05:00 PM",
         "endTime": "10:00 PM",
         "timezone": "local",

@@ -1,13 +1,39 @@
-// Main site logic
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Main site loaded');
+
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    }
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navLinks.classList.toggle('open');
+      });
+      document.addEventListener('click', function(e) {
+        if (!navLinks.contains(e.target) && e.target !== hamburger) {
+          navLinks.classList.remove('open');
+        }
+      });
+    }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+              target.scrollIntoView({
+                  behavior: 'smooth'
+              });
+            }
         });
     });
 
@@ -119,25 +145,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let scrollSpeed = prefersReducedMotion
                 ? 0
-                : (window.innerWidth <= 768 ? 0.4 : 0.25);
+                : (window.innerWidth <= 768 ? 0.8 : 0.55);
 
             let position = 0;
+            let paused = false;
+
+            const carouselEl = document.querySelector('.demo-carousel');
+            if (carouselEl) {
+                carouselEl.addEventListener('mouseenter', () => { paused = true; });
+                carouselEl.addEventListener('mouseleave', () => { paused = false; });
+                carouselEl.addEventListener('touchstart', () => { paused = true; }, { passive: true });
+                carouselEl.addEventListener('touchend', () => { paused = false; }, { passive: true });
+            }
 
             function animateLoop() {
-                position += scrollSpeed;
+                if (!paused) {
+                    position += scrollSpeed;
 
-                if (position >= track.scrollWidth / 2) {
-                    position = 0;
+                    if (position >= track.scrollWidth / 2) {
+                        position = 0;
+                    }
+
+                    track.style.transform = `translateX(-${position}px)`;
                 }
-
-                track.style.transform = `translateX(-${position}px)`;
                 requestAnimationFrame(animateLoop);
             }
 
             window.addEventListener('resize', () => {
                 scrollSpeed = prefersReducedMotion
                     ? 0
-                    : (window.innerWidth <= 768 ? 0.4 : 0.25);
+                    : (window.innerWidth <= 768 ? 0.8 : 0.55);
             });
 
             animateLoop();

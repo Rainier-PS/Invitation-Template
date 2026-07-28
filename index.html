@@ -1,217 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitation Template | Premium Glassmorphic Digital Invitations</title>
-    <meta name="description"
-        content="A free, premium digital invitation template with a stunning glassmorphic design. Easy to customize, responsive, and accessible. Create yours in minutes!">
-    <meta name="keywords"
-        content="digital invitation, wedding template, glassmorphism, free invitation template, open source invitation template, responsive invitation, accessible web design, event configuration, event.json">
-
+    <title>Invitation Template | Premium Digital Invitations</title>
+    <meta name="description" content="A free, premium digital invitation template with an elegant design. Easy to customize, responsive, and accessible. Create yours in minutes!">
+    <meta name="keywords" content="digital invitation, wedding template, invitation template, free invitation template, open source invitation template, responsive invitation, accessible web design, event configuration, event.json">
     <meta name="google-site-verification" content="KclOAJlsOojPDo-nzZw4U5gCyo-2dL3ZP09HrbI7NYk" />
-
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Invitation Template | Premium Glassmorphic Design">
-    <meta property="og:description"
-        content="Create stunning digital invitations for free. High-end design meets effortless customization.">
-    <meta property="og:image"
-        content="https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/preview.jpg">
-
+    <meta property="og:title" content="Invitation Template | Premium Digital Invitations">
+    <meta property="og:description" content="Create stunning digital invitations for free. Elegant design meets effortless customization.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/preview.jpg">
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Invitation Template | Premium Glassmorphic Design">
-    <meta property="twitter:description"
-        content="Create stunning digital invitations for free. High-end design meets effortless customization.">
-
+    <meta property="twitter:title" content="Invitation Template | Premium Digital Invitations">
+    <meta property="twitter:description" content="Create stunning digital invitations for free. Elegant design meets effortless customization.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
+    <script>
+    (function() {
+      var theme = localStorage.getItem('theme');
+      if (!theme) {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+    </script>
     <script defer src="js/index.js"></script>
 </head>
-
 <body>
-    <nav aria-label="Main Navigation">
+    <nav>
         <a href="index.html" class="logo">Invitation Template</a>
-        <div class="nav-links">
-            <a href="#demo-section">Live Demo</a>
+        <div class="nav-links" id="nav-links">
+            <a href="#showcase">Showcase</a>
             <a href="builder.html">Create Yours</a>
             <a href="https://github.com/Rainier-PS/Invitation-Template" target="_blank" rel="noopener">GitHub</a>
         </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" aria-label="Toggle theme">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+            <button id="hamburger" aria-label="Toggle menu">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+        </div>
     </nav>
 
-    <main class="container">
-        <header class="hero-header">
-            <div class="badge-container">
-                <span class="badge-dot"></span>
-                <span class="badge-text">Free
-                    & Open Source • MIT License</span>
-            </div>
-            <h1>Stunning Digital Invitations</h1>
-            <p class="hero-description">
-                A sophisticated, glassmorphic invitation template designed for elegance and ease of use.
-                Perfect for weddings, parties, and corporate events.
-            </p>
-            <div class="button-container">
-                <a href="builder.html" class="primary-btn">Start Configuring</a>
-                <a href="#demo-section" class="secondary-btn">View Demo</a>
-            </div>
-        </header>
-
-        <section class="features-grid">
-            <div class="feature-card">
-                <div class="icon-wrapper">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2" />
-                        <path d="M7 8h10" />
-                        <path d="M7 12h10" />
-                        <path d="M7 16h10" />
-                    </svg>
+    <main>
+        <section class="hero">
+            <div class="hero-glow"></div>
+            <div class="hero-glow-2"></div>
+            <div class="container">
+                <span class="pill">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Free &amp; Open Source
+                </span>
+                <h1>
+                    <span class="gradient-text">Beautiful</span> invitations,<br>crafted for any occasion
+                </h1>
+                <p class="hero-description">Design elegant digital invitations for weddings, parties, and events. Customize everything with no coding required.</p>
+                <div class="hero-actions">
+                    <a href="builder.html" class="primary-btn">Start Designing</a>
+                    <a href="#showcase" class="secondary-btn">See Examples</a>
                 </div>
-                <h3>Glassmorphism Design</h3>
-                <p>Sophisticated frosted glass aesthetic that adapts beautifully to any background image.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-wrapper" style="margin-bottom: 1.5rem; color: var(--primary);">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="3 6 5 6 21 6" />
-                        <polyline points="3 12 5 12 21 12" />
-                        <polyline points="3 18 5 18 21 18" />
-                    </svg>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">6</span>
+                        <span class="hero-stat-label">Demo Templates</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">100%</span>
+                        <span class="hero-stat-label">Open Source</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">MIT</span>
+                        <span class="hero-stat-label">License</span>
+                    </div>
                 </div>
-                <h3>No-Code Editing</h3>
-                <p>Create and customize your invitation using a visual form, with optional backend-free RSVP forms.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-wrapper" style="margin-bottom: 1.5rem; color: var(--primary);">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
-                        <path d="M12 18h.01" />
-                    </svg>
+                <div class="hero-image">
+                    <img src="media/images/invite-preview.avif" alt="Digital invitation preview" width="1060" height="596" loading="lazy">
                 </div>
-                <h3>Mobile & Accessible</h3>
-                <p>Optimized for all devices with built-in Simple Mode and full screen-reader support.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-wrapper" style="margin-bottom: 1.5rem; color: var(--primary);">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                        <line x1="16" y1="2" x2="16" y2="6" />
-                        <line x1="8" y1="2" x2="8" y2="6" />
-                        <line x1="3" y1="10" x2="21" y2="10" />
-                    </svg>
-                </div>
-                <h3>Smart Calendar Sync</h3>
-                <p>One-click Add to Google Calendar so guests never miss your event.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-wrapper" style="margin-bottom: 1.5rem; color: var(--primary);">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 18V5l12-2v13" />
-                        <circle cx="6" cy="18" r="3" />
-                        <circle cx="18" cy="16" r="3" />
-                    </svg>
-                </div>
-                <h3>Background Music</h3>
-                <p>Optional ambient audio with smooth controls and respectful autoplay handling.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-wrapper" style="margin-bottom: 1.5rem; color: var(--primary);">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 12l18-9-4 18-4-7-6-2z" />
-                    </svg>
-                </div>
-                <h3>Free Hosting Ready</h3>
-                <p>Deploy instantly on GitHub Pages, Vercel, or Netlify with no backend required.</p>
             </div>
         </section>
 
-        <section class="rsvp-highlight glass-panel">
-            <h3>No-Code RSVP, Your Way</h3>
-
-            <p class="rsvp-description">
-                Collect responses using the tools you already trust. Just paste a link. No backend, no lock-in.
-            </p>
-
-            <div class="provider-text-list">
-                <span>Works with:</span>
-                <strong>Google Forms</strong>,
-                <strong>Microsoft Forms</strong>,
-                <strong>Tally</strong>, and more.
+        <section class="section section-inspiration" id="showcase">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Inspiration</h2>
+                    <p>Real invitations created with the template.</p>
+                </div>
+                <div class="demo-carousel"><div class="demo-track"></div></div>
             </div>
         </section>
 
-        <section class="glass-panel">
-            <h2>How to Use</h2>
-            <ol class="how-to-list">
-                <li><strong>Remix:</strong> Use our <a href="builder.html">Form
-                        Builder</a>
-                    to generate your custom <code>event.json</code>.</li>
-                <li><strong>Download:</strong> Fork or clone the repository from <a
-                        href="https://github.com/Rainier-PS/Invitation-Template">GitHub</a>.</li>
-                <li><strong>Replace:</strong> Overwrite the existing
-                    <code>event.json</code> with your generated code.
-                </li>
-                <li><strong>Deploy:</strong> Host it for free on GitHub Pages, Vercel, or
-                    Netlify.</li>
-            </ol>
-
-            <div class="full-guide-cta">
-                <a href="https://github.com/Rainier-PS/Invitation-Template/blob/main/docs/USAGE_GUIDE.md" class="primary-btn" aria-label="Open the full setup guide">
-                    Open Full Guide
-                </a>
-                <p class="guide-note">
-                    Step-by-step documentation with deployment tips.
-                </p>
-            </div>
-        </section>
-
-        <section class="demo-section" id="demo-section">
-            <h2>Event Demos</h2>
-            <div class="demo-track-wrapper">
-                <div class="demo-track">
-                    <!-- Slides will be populated by JS -->
+        <section class="oss">
+            <div class="container">
+                <h2>Open source, forever free</h2>
+                <p>Licensed under MIT. Use it, modify it, share it. No strings attached.</p>
+                <div class="oss-actions">
+                    <a href="builder.html" class="primary-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+                        Create Your Invitation
+                    </a>
+                    <a href="https://github.com/Rainier-PS/Invitation-Template" target="_blank" rel="noopener" class="secondary-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                            <path d="M9 18c-4.51 2-5-2-7-2"/>
+                        </svg>
+                        View on GitHub
+                    </a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <div class="footer-support">
-            <h3>Support & Contributions</h3>
-
-            <p>Found a bug or have a suggestion? Help us improve by reporting issues, contributing on <a href="https://github.com/Rainier-PS/Invitation-Template/blob/main/docs/CONTRIBUTING.md" target="_blank"
-                    rel="noopener">GitHub</a>, or sharing custom invitation templates.</p>
-            <div id="contact-container">
-                <!-- Email protected by JS -->
-            </div>
+        <div class="footer-links">
+            <a href="builder.html">Create Invitation</a>
+            <a href="#showcase">Showcase</a>
+            <a href="https://github.com/Rainier-PS/Invitation-Template" target="_blank" rel="noopener">GitHub</a>
         </div>
-
-        <p>&copy; 2026 Invitation Template Builder</p>
-        <p class="low-profile">Designed by <a href="https://rainier-ps.github.io/">Rainier Pearson
-                Saputra</a></p>
+        <p class="footer-copy">&copy; 2026 Invitation Template Builder</p>
+        <p class="footer-credit">Designed by <a href="https://rainier-ps.github.io/">Rainier Pearson Saputra</a></p>
     </footer>
 
     <button id="back-to-top" aria-label="Back to top">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 19V5" />
-            <polyline points="5 12 12 5 19 12" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19V5"/>
+            <polyline points="5 12 12 5 19 12"/>
         </svg>
     </button>
 </body>
-
 </html>

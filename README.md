@@ -2,7 +2,7 @@
 
 A free invitation website template for events. Built with HTML, CSS, and JavaScript. You customize it by editing a single JSON file.
 
-![Thumbnail](https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/images/Thumbnail.avif)
+![Thumbnail](https://raw.githubusercontent.com/Rainier-PS/Invitation-Template/main/media/images/invite-preview.avif)
 
 ## Demo
 

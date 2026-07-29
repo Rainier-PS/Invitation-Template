@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const next = current === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
+        themeToggle.style.transition = 'transform 0.3s ease';
+        themeToggle.style.transform = 'rotate(360deg)';
+        setTimeout(() => { themeToggle.style.transform = ''; }, 300);
       });
     }
 
@@ -16,13 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hamburger && navLinks) {
       hamburger.addEventListener('click', function(e) {
         e.stopPropagation();
-        navLinks.classList.toggle('open');
+        const open = navLinks.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', open);
       });
       document.addEventListener('click', function(e) {
         if (!navLinks.contains(e.target) && e.target !== hamburger) {
           navLinks.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
         }
       });
+      hamburger.setAttribute('aria-expanded', 'false');
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

@@ -143,6 +143,25 @@ body.tour-active .panel {
   overflow: hidden !important;
 }
 
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 10000;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 8px 0;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: none;
+}
+
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
@@ -507,81 +526,6 @@ nav {
   background: var(--separator-strong);
 }
 
-.master-sections {
-  padding: 20px;
-  margin-bottom: 4px;
-  background: var(--bg);
-  border: 1.5px solid var(--accent-mid);
-  border-radius: 12px;
-}
-
-.master-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.master-header h3 {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin: 0 0 2px;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.master-header p {
-  font-size: 12px;
-  color: var(--text-tertiary);
-  margin: 0;
-  line-height: 1.5;
-}
-
-.master-chevron {
-  flex-shrink: 0;
-  margin-top: 2px;
-  color: var(--text-tertiary);
-  transition: transform 0.25s ease;
-}
-
-.master-sections .check-grid .check-field {
-  min-width: 120px;
-  margin-bottom: 0;
-}
-
-@media (max-width: 768px) {
-  .master-header {
-    cursor: pointer;
-  }
-  .master-header:hover .master-chevron {
-    color: var(--accent);
-  }
-  #master-check-grid {
-    display: none;
-  }
-  #master-check-grid.open {
-    display: flex;
-    margin-top: 12px;
-  }
-  .master-chevron {
-    display: block;
-  }
-}
-
-@media (min-width: 769px) {
-  .master-chevron {
-    display: none;
-  }
-  .master-header {
-    cursor: default;
-  }
-}
-
 .panel-section {
   scroll-margin-top: 24px;
 }
@@ -704,6 +648,8 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
   cursor: pointer;
   border-radius: 8px;
   transition: background 0.15s;
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
 }
 
 .check-field:hover {
@@ -1710,6 +1656,13 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
   .json-output {
     padding: 16px;
     overflow: visible;
+  }
+
+  #json-textarea {
+    min-height: 250px;
+    height: auto;
+    font-size: 14px;
+    padding: 12px;
   }
   .json-actions {
     display: none;

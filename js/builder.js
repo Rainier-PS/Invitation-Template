@@ -5,14 +5,23 @@ document.addEventListener('DOMContentLoaded', function() {
   if (hamburger && navLinks) {
     hamburger.addEventListener('click', function(e) {
       e.stopPropagation();
-      navLinks.classList.toggle('open');
+      var open = navLinks.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('a, button').forEach(function(el) {
+      el.addEventListener('click', function() {
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
     });
     document.addEventListener('click', function(e) {
       if (!navLinks.contains(e.target) && e.target !== hamburger) {
         navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
       }
     });
   }
+  if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
 
   var themeToggle = document.getElementById('theme-toggle');
   var html = document.documentElement;
@@ -27,12 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
       var current = html.getAttribute('data-theme');
       var next = current === 'dark' ? 'light' : 'dark';
       setTheme(next);
-      var icon = themeToggle.querySelector('svg:not([style*="display: none"])');
-      if (icon) {
-        icon.style.transition = 'transform 0.3s ease';
-        icon.style.transform = 'rotate(360deg)';
-        setTimeout(function() { icon.style.transform = ''; }, 300);
-      }
+      themeToggle.style.transition = 'transform 0.3s ease';
+      themeToggle.style.transform = 'rotate(360deg)';
+      setTimeout(function() { themeToggle.style.transform = ''; }, 300);
     });
   }
 
@@ -42,6 +48,22 @@ document.addEventListener('DOMContentLoaded', function() {
   var form = document.getElementById('event-form');
   var helpBtn = document.getElementById('help-btn');
   var infoModal = document.getElementById('info-modal');
+  var focusEl = null;
+
+  function trapFocus(modal) {
+    var focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    modal.addEventListener('keydown', function(e) {
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+  }
 
   function sanitize(str) {
     if (typeof str !== 'string') return str;
@@ -196,14 +218,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var sections = {};
     sections.hero = true;
-    sections.eventDetails = getCheck('input-section-eventDetails');
-    sections['schedule-section'] = getCheck('input-section-schedule');
-    sections['quotes-section'] = getCheck('input-section-quotes');
-    sections['location-section'] = getCheck('input-section-location');
-    sections['design-section'] = getCheck('input-section-design');
-    sections['music-section'] = getCheck('input-section-music');
-    sections.rsvp = getCheck('input-section-rsvp');
-    sections.footer = getCheck('input-section-footer');
+    sections.eventDetails = true;
+    sections['schedule-section'] = true;
+    sections['quotes-section'] = true;
+    sections['location-section'] = getCheck('input-location-enabled');
+    sections['design-section'] = getCheck('input-design-enabled');
+    sections['music-section'] = getCheck('input-music-enabled');
+    sections.rsvp = getCheck('input-rsvp-enabled');
+    sections.footer = getCheck('input-footer-enabled');
 
     var colorText = document.getElementById('input-accentColor-text');
     var colorEl = document.getElementById('input-accentColor');
@@ -315,9 +337,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var tourSteps = [
     {
-      target: '#hamburger',
+      target: '.sidebar-btn[data-target="panel-event"]',
+      mobileFallback: '#hamburger',
       title: 'Navigate Sections',
-      desc: 'Tap the menu to jump between different sections of your invitation.'
+      desc: 'Jump between different sections of your invitation.'
     },
     {
       target: '[data-tour="event-name"]',
@@ -426,8 +449,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var rect = targetEl.getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0 || targetEl.offsetParent === null) {
       if (step.mobileFallback && isMobile()) {
-        return document.querySelector(step.mobileFallback);
+        var fb = document.querySelector(step.mobileFallback);
+        if (fb) return fb;
       }
+      return null;
     }
     return targetEl;
   }
@@ -539,6 +564,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function showInfoModal() {
     if (!infoModal) return;
+    focusEl = document.activeElement;
     infoModal.style.display = 'flex';
     infoModal.innerHTML = '<div class="info-modal-card">' +
       '<h2>How to create your invitation</h2>' +
@@ -555,44 +581,32 @@ document.addEventListener('DOMContentLoaded', function() {
       '</div><button class="info-close" id="info-close">Got it</button></div>';
     document.getElementById('info-close').addEventListener('click', function() {
       infoModal.style.display = 'none';
+      if (focusEl) focusEl.focus();
     });
     infoModal.addEventListener('click', function(e) {
-      if (e.target === infoModal) infoModal.style.display = 'none';
+      if (e.target === infoModal) { infoModal.style.display = 'none'; if (focusEl) focusEl.focus(); }
     });
-  }
-
-  var masterToggle = document.getElementById('master-toggle-btn');
-  var masterGrid = document.getElementById('master-check-grid');
-  var masterChevron = document.getElementById('master-chevron');
-  if (masterToggle && masterGrid) {
-    masterToggle.setAttribute('aria-expanded', 'false');
-    function toggleMasterGrid() {
-      var isOpen = masterGrid.classList.toggle('open');
-      if (masterChevron) masterChevron.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
-      masterToggle.setAttribute('aria-expanded', isOpen);
-    }
-    masterToggle.addEventListener('click', toggleMasterGrid);
-    masterToggle.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleMasterGrid();
-      }
-    });
+    trapFocus(infoModal);
+    var firstFocusable = infoModal.querySelector('button, [href], input, select, textarea');
+    if (firstFocusable) setTimeout(function() { firstFocusable.focus(); }, 100);
   }
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       if (infoModal && infoModal.style.display === 'flex') {
         infoModal.style.display = 'none';
+        if (focusEl) focusEl.focus();
       }
       var settingsModal = document.getElementById('settings-modal');
       if (settingsModal && settingsModal.style.display === 'flex') {
         settingsModal.style.display = 'none';
+        if (focusEl) focusEl.focus();
       }
       endTour();
     }
   });
 
+  var toggleFns = {};
   function createSectionToggle(masterId, panelId) {
     var check = document.getElementById(masterId);
     if (!check) return;
@@ -608,6 +622,7 @@ document.addEventListener('DOMContentLoaded', function() {
       updateJson();
     }
     check.addEventListener('change', toggle);
+    toggleFns[masterId] = toggle;
   }
 
   createSectionToggle('input-datetime-enabled', 'panel-datetime');
@@ -631,14 +646,22 @@ document.addEventListener('DOMContentLoaded', function() {
     if (musicEnabledCheck) updateJson();
   }
   if (musicEnabledCheck) {
-    musicEnabledCheck.addEventListener('change', toggleMusicInputs);
+    musicEnabledCheck.addEventListener('change', function() {
+      toggleMusicInputs();
+    });
   }
 
   var settingsBtn = document.getElementById('settings-btn');
   var settingsModal = document.getElementById('settings-modal');
 
   function openSettingsModal() {
-    if (settingsModal) settingsModal.style.display = 'flex';
+    if (settingsModal) {
+      settingsModal.style.display = 'flex';
+      focusEl = document.activeElement;
+      trapFocus(settingsModal);
+      var firstFocusable = settingsModal.querySelector('button, [href], input, select, textarea');
+      if (firstFocusable) setTimeout(function() { firstFocusable.focus(); }, 100);
+    }
   }
 
   if (settingsBtn) {
@@ -656,28 +679,94 @@ document.addEventListener('DOMContentLoaded', function() {
   if (settingsModal) {
     document.getElementById('settings-close').addEventListener('click', function() {
       settingsModal.style.display = 'none';
+      if (focusEl) focusEl.focus();
     });
 
     settingsModal.addEventListener('click', function(e) {
-      if (e.target === settingsModal) settingsModal.style.display = 'none';
+      if (e.target === settingsModal) { settingsModal.style.display = 'none'; if (focusEl) focusEl.focus(); }
     });
 
     var jsonEditableCheck = document.getElementById('input-json-editable');
     var jsonPreview = document.getElementById('json-preview');
     var jsonTextarea = document.getElementById('json-textarea');
 
-    if (jsonEditableCheck && jsonPreview && jsonTextarea) {
-      jsonEditableCheck.addEventListener('change', function() {
-        if (this.checked) {
-          jsonTextarea.value = jsonPreview.textContent;
-          jsonPreview.style.display = 'none';
-          jsonTextarea.style.display = 'block';
-        } else {
-          jsonPreview.textContent = jsonTextarea.value;
-          jsonPreview.style.display = '';
-          jsonTextarea.style.display = 'none';
+    function applyJsonEdit() {
+      if (jsonEditableCheck.checked) {
+        jsonTextarea.value = jsonPreview.textContent;
+        jsonPreview.style.display = 'none';
+        jsonTextarea.style.display = 'block';
+      } else {
+        var edited = jsonTextarea.value;
+        try {
+          var parsed = JSON.parse(edited);
+          var sv = function(id, val) { var el = document.getElementById(id); if (el && val !== undefined) el.value = val; };
+          var sc = function(id, val) { var el = document.getElementById(id); if (el && val !== undefined) el.checked = val; };
+          jsonPreview.textContent = JSON.stringify(parsed, null, 4);
+          if (parsed.design && parsed.design.accentColor) {
+            var cp = document.getElementById('input-accentColor');
+            var ct = document.getElementById('input-accentColor-text');
+            if (cp && ct) { cp.value = parsed.design.accentColor; ct.value = parsed.design.accentColor; }
+          }
+          if (parsed.event) {
+            sv('input-title', parsed.event.title);
+            sv('input-subtitle', parsed.event.subtitle);
+            sv('input-description', parsed.event.description);
+          }
+          if (parsed.datetime) {
+            sv('input-date', parsed.datetime.date);
+            sv('input-startTime', parsed.datetime.startTime);
+            sv('input-endTime', parsed.datetime.endTime);
+          }
+          if (parsed.location) {
+            sv('input-venue-name', parsed.location.name);
+            sv('input-venue-address', parsed.location.address);
+            sv('input-mapsLink', parsed.location.mapsLink);
+          }
+          if (parsed.rsvp) {
+            sc('input-rsvp-enabled', parsed.rsvp.enabled);
+            sv('input-rsvp-url', parsed.rsvp.url);
+          }
+          if (parsed.music) {
+            sc('input-music-enabled', parsed.music.enabled);
+            sc('input-music-loop', parsed.music.loop);
+            sv('input-music-volume', parsed.music.volume);
+            sv('input-music-audioUrl', parsed.music.audioUrl);
+          }
+          if (parsed.sections) {
+            sc('input-rsvp-enabled', parsed.sections.rsvp);
+            sc('input-location-enabled', parsed.sections['location-section']);
+            sc('input-design-enabled', parsed.sections['design-section']);
+            sc('input-music-enabled', parsed.sections['music-section']);
+            sc('input-footer-enabled', parsed.sections.footer);
+          }
+          if (parsed.footer) {
+            sv('input-footerText', parsed.footer.text);
+            sv('input-authorName', parsed.footer.credits && parsed.footer.credits.authorName);
+          }
+          if (parsed.social) {
+            sv('input-instagram', parsed.social.instagram);
+          }
+          updateJson();
+        } catch (e) {
+          jsonPreview.textContent = edited;
         }
-      });
+        jsonPreview.style.display = '';
+        jsonTextarea.style.display = 'none';
+      }
+    }
+
+    if (jsonEditableCheck && jsonPreview && jsonTextarea) {
+      jsonEditableCheck.addEventListener('change', applyJsonEdit);
+      var toggleSwitch = document.querySelector('.toggle-switch');
+      if (toggleSwitch) {
+        toggleSwitch.addEventListener('click', function(e) {
+          if (e.target.tagName !== 'INPUT') {
+            e.preventDefault();
+            jsonEditableCheck.checked = !jsonEditableCheck.checked;
+            applyJsonEdit();
+          }
+        });
+      }
     }
 
     var restartTourBtn = document.getElementById('restart-tour-btn');
@@ -710,11 +799,23 @@ window.addScheduleItem = function(time, label) {
   var container = document.getElementById('schedule-list-builder');
   var div = document.createElement('div');
   div.className = 'dynamic-item';
-  div.innerHTML =
-    '<div><label>Activity</label><input type="text" class="sched-label" value="' + label + '"></div>' +
-    '<button type="button" class="remove-btn" title="Remove" onclick="this.parentElement.remove()">' +
-    '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-    '<path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg></button>';
+  var labelInput = document.createElement('input');
+  labelInput.type = 'text';
+  labelInput.className = 'sched-label';
+  labelInput.value = label;
+  var fieldDiv = document.createElement('div');
+  var fieldLabel = document.createElement('label');
+  fieldLabel.textContent = 'Activity';
+  fieldDiv.appendChild(fieldLabel);
+  fieldDiv.appendChild(labelInput);
+  div.appendChild(fieldDiv);
+  var rmBtn = document.createElement('button');
+  rmBtn.type = 'button';
+  rmBtn.className = 'remove-btn';
+  rmBtn.title = 'Remove';
+  rmBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>';
+  rmBtn.addEventListener('click', function() { div.remove(); });
+  div.appendChild(rmBtn);
   container.appendChild(div);
 };
 
@@ -723,11 +824,21 @@ window.addHeroImage = function(url) {
   var container = document.getElementById('hero-images-builder');
   var div = document.createElement('div');
   div.className = 'dynamic-item';
-  div.innerHTML =
-    '<div><input type="url" class="hero-img-url" value="' + url + '" placeholder="https://example.com/photo.jpg"></div>' +
-    '<button type="button" class="remove-btn" title="Remove" onclick="this.parentElement.remove()">' +
-    '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-    '<path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg></button>';
+  var inputDiv = document.createElement('div');
+  var imgInput = document.createElement('input');
+  imgInput.type = 'url';
+  imgInput.className = 'hero-img-url';
+  imgInput.value = url;
+  imgInput.placeholder = 'https://example.com/photo.jpg';
+  inputDiv.appendChild(imgInput);
+  div.appendChild(inputDiv);
+  var rmBtn = document.createElement('button');
+  rmBtn.type = 'button';
+  rmBtn.className = 'remove-btn';
+  rmBtn.title = 'Remove';
+  rmBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>';
+  rmBtn.addEventListener('click', function() { div.remove(); });
+  div.appendChild(rmBtn);
   container.appendChild(div);
 };
 
@@ -736,11 +847,21 @@ window.addSectionBackground = function(url) {
   var container = document.getElementById('section-backgrounds-builder');
   var div = document.createElement('div');
   div.className = 'dynamic-item';
-  div.innerHTML =
-    '<div><input type="url" class="section-bg-url" value="' + url + '" placeholder="https://example.com/bg.jpg"></div>' +
-    '<button type="button" class="remove-btn" title="Remove" onclick="this.parentElement.remove()">' +
-    '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-    '<path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg></button>';
+  var inputDiv = document.createElement('div');
+  var bgInput = document.createElement('input');
+  bgInput.type = 'url';
+  bgInput.className = 'section-bg-url';
+  bgInput.value = url;
+  bgInput.placeholder = 'https://example.com/bg.jpg';
+  inputDiv.appendChild(bgInput);
+  div.appendChild(inputDiv);
+  var rmBtn = document.createElement('button');
+  rmBtn.type = 'button';
+  rmBtn.className = 'remove-btn';
+  rmBtn.title = 'Remove';
+  rmBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>';
+  rmBtn.addEventListener('click', function() { div.remove(); });
+  div.appendChild(rmBtn);
   container.appendChild(div);
 };
 
@@ -751,12 +872,35 @@ window.addQuoteItem = function(text, author) {
   if (!container) return;
   var div = document.createElement('div');
   div.className = 'dynamic-item quote-item';
-  div.innerHTML =
-    '<div><label>Quote</label><input type="text" class="quote-text-input" value="' + text + '" placeholder="The quote or verse..."></div>' +
-    '<div><label>Author</label><input type="text" class="quote-author-input" value="' + author + '" placeholder="Author name (optional)"></div>' +
-    '<button type="button" class="remove-btn" title="Remove" onclick="this.parentElement.remove()">' +
-    '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-    '<path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg></button>';
+  var textDiv = document.createElement('div');
+  var textLabel = document.createElement('label');
+  textLabel.textContent = 'Quote';
+  var textInput = document.createElement('input');
+  textInput.type = 'text';
+  textInput.className = 'quote-text-input';
+  textInput.value = text;
+  textInput.placeholder = 'The quote or verse...';
+  textDiv.appendChild(textLabel);
+  textDiv.appendChild(textInput);
+  div.appendChild(textDiv);
+  var authorDiv = document.createElement('div');
+  var authorLabel = document.createElement('label');
+  authorLabel.textContent = 'Author';
+  var authorInput = document.createElement('input');
+  authorInput.type = 'text';
+  authorInput.className = 'quote-author-input';
+  authorInput.value = author;
+  authorInput.placeholder = 'Author name (optional)';
+  authorDiv.appendChild(authorLabel);
+  authorDiv.appendChild(authorInput);
+  div.appendChild(authorDiv);
+  var rmBtn = document.createElement('button');
+  rmBtn.type = 'button';
+  rmBtn.className = 'remove-btn';
+  rmBtn.title = 'Remove';
+  rmBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>';
+  rmBtn.addEventListener('click', function() { div.remove(); });
+  div.appendChild(rmBtn);
   container.appendChild(div);
 };
 
@@ -940,7 +1084,7 @@ window.downloadBundle = function() {
     '  if (images.length) { var hero = document.querySelector(".hero"); if (hero) { var sw = document.createElement("div"); sw.className = "hero-slideshow"; images.forEach(function(url, i) { var slide = document.createElement("div"); slide.className = "hero-slide" + (i === 0 ? " active" : ""); slide.style.backgroundImage = "url(" + url + ")"; sw.appendChild(slide); }); hero.insertBefore(sw, hero.firstChild); if (images.length > 1) { var idx = 0; setInterval(function() { var slides = sw.querySelectorAll(".hero-slide"); slides[idx].classList.remove("active"); idx = (idx + 1) % slides.length; slides[idx].classList.add("active"); }, 5000); } } }\n' +
     '})();\n';
 
-  var inviteCss = ':root{--bg-base:#000;--text:#f8f9fa;--muted:#e5e7eb;--primary:#fff;--font-heading:"Cormorant Garamond",serif;--font-body:"Outfit",sans-serif;--radius:20px;--glass-bg:rgba(0,0,0,0.4);--glass-border:rgba(255,255,255,0.1)}*,*::before,*::after{box-sizing:border-box}html,body{margin:0;height:100%;overflow-x:hidden;background:var(--bg-base);color:var(--text);font-family:var(--font-body)}h1,h2,h3{font-family:var(--font-heading);font-weight:600;margin-top:0}h1{font-size:clamp(3rem,8vw,5rem);line-height:1;margin-bottom:.5rem;text-shadow:0 4px 12px rgba(0,0,0,0.3)}h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:1.5rem}p{line-height:1.8;font-size:1.1rem;color:rgba(255,255,255,0.9)}a{color:inherit;transition:opacity .2s}a:hover{opacity:.8}.low-profile-link{text-decoration:none;color:inherit}.hidden-icon{display:none}#app{height:100%;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;max-width:none;padding:0;margin:0}section,footer{height:100vh;min-height:600px;scroll-snap-align:start;position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2rem;text-align:center;background-size:cover;background-position:center;background-repeat:no-repeat}section::before,footer::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.6));z-index:1}section>*,footer>*{position:relative;z-index:2;max-width:600px;width:100%}.hero-slideshow{position:absolute;inset:0;z-index:0;overflow:hidden}.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.5s ease-in-out}.hero-slide.active{opacity:1}.subtitle{font-size:1.25rem;color:var(--muted);font-weight:300;margin-bottom:2rem;letter-spacing:1px;text-transform:uppercase}.primary-btn{display:inline-block;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:1rem 2.5rem;border-radius:50px;text-decoration:none;font-weight:600;text-transform:uppercase;letter-spacing:1px;transition:all .3s ease}.primary-btn:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.5);transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,0.2)}.countdown{margin-top:.6rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:24px;border:1px solid rgba(255,255,255,0.15);display:flex;flex-direction:column;align-items:center;gap:1rem}.countdown-grid{display:grid;grid-template-columns:repeat(4,minmax(60px,1fr));gap:1rem;text-align:center}.countdown-unit strong{display:block;font-size:1.6rem;font-weight:600;color:var(--text);line-height:1}.countdown-unit span{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;opacity:.7}#schedule-list{list-style:none;padding:0;text-align:left}#schedule-list li{padding:1rem 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between}.form-embed{background:#fff;border-radius:12px;overflow-y:auto;max-height:75vh;width:100%}.form-embed iframe{display:block;width:100%;border:none}.footer-branding{display:flex;flex-direction:column;align-items:center;gap:1.5rem;margin-bottom:2rem}.footer-logo{width:80px;height:80px;border-radius:50%;object-fit:cover;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.2);padding:5px}.audio-fab,.accessibility-fab{position:fixed;bottom:2rem;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px) brightness(0.8);-webkit-backdrop-filter:blur(12px) brightness(0.8);border:1px solid rgba(255,255,255,0.2);color:#fff;cursor:pointer;z-index:1000;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(0.4,0,0.2,1);padding:0;box-shadow:0 8px 32px rgba(0,0,0,0.2)}.audio-fab{right:2rem}.accessibility-fab{left:2rem}@media(max-width:768px){.audio-fab,.accessibility-fab{width:44px;height:44px;bottom:max(1.25rem,env(safe-area-inset-bottom))}.audio-fab{right:1.25rem}.accessibility-fab{left:1.25rem}}.event-datetime{display:flex;flex-direction:column;gap:.2rem;margin-bottom:1rem}#maps-link{text-decoration:underline;text-underline-offset:4px}.location address{font-style:normal;margin-top:1rem}#venue-name::before{content:"";display:inline-block;width:18px;height:18px;margin-right:6px;vertical-align:middle;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E") center/contain no-repeat}body.simple #venue-name::before{background:#555}#rsvp{justify-content:flex-start;padding-top:clamp(2rem,8vh,5rem)}#rsvp>*{max-width:800px}body.simple{overflow-y:auto!important;background:#fbfbfb!important;color:#1a1a1a!important}body.simple #app{scroll-snap-type:none!important;height:auto!important;overflow-y:visible!important;max-width:800px;margin:0 auto!important;padding:2rem 1rem!important}body.simple section,body.simple footer{height:auto!important;min-height:auto!important;padding:3rem 2rem!important;margin-bottom:2rem!important;background:#fff!important;color:#1a1a1a!important;border-radius:24px!important;box-shadow:0 4px 20px rgba(0,0,0,0.05)!important;border:1px solid rgba(0,0,0,0.05)!important;text-align:left!important;align-items:flex-start!important}body.simple section::before,body.simple footer::before{display:none!important}body.simple h1{font-size:clamp(3rem,10vw,4rem)!important;color:#000!important;text-shadow:none!important}body.simple .hero-slideshow{display:none!important}';
+  var inviteCss = ':root{--bg-base:#000;--text:#f8f9fa;--muted:#e5e7eb;--primary:#fff;--font-heading:"Cormorant Garamond",serif;--font-body:"Outfit",sans-serif;--radius:20px;--glass-bg:rgba(0,0,0,0.4);--glass-border:rgba(255,255,255,0.1)}*,*::before,*::after{box-sizing:border-box}html,body{margin:0;height:100%;overflow-x:hidden;background:var(--bg-base);color:var(--text);font-family:var(--font-body)}h1,h2,h3{font-family:var(--font-heading);font-weight:600;margin-top:0}h1{font-size:clamp(3rem,8vw,5rem);line-height:1;margin-bottom:.5rem;text-shadow:0 4px 12px rgba(0,0,0,0.3)}h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:1.5rem}p{line-height:1.8;font-size:1.1rem;color:rgba(255,255,255,0.9)}a{color:inherit;transition:opacity .2s}a:hover{opacity:.8}.low-profile-link{text-decoration:none;color:inherit}.hidden-icon{display:none}#app{height:100%;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;max-width:none;padding:0;margin:0}section,footer{height:100vh;min-height:600px;scroll-snap-align:start;position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2rem;text-align:center;background-size:cover;background-position:center;background-repeat:no-repeat}section::before,footer::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.6));z-index:1}section>*,footer>*{position:relative;z-index:2;max-width:600px;width:100%}.hero-slideshow{position:absolute;inset:0;z-index:0;overflow:hidden}.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.5s ease-in-out}.hero-slide.active{opacity:1}.subtitle{font-size:1.25rem;color:var(--muted);font-weight:300;margin-bottom:2rem;letter-spacing:1px;text-transform:uppercase}.primary-btn{display:inline-block;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:1rem 2.5rem;border-radius:50px;text-decoration:none;font-weight:600;text-transform:uppercase;letter-spacing:1px;transition:all .3s ease}.primary-btn:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.5);transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,0.2)}.countdown{margin-top:.6rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:24px;border:1px solid rgba(255,255,255,0.15);display:flex;flex-direction:column;align-items:center;gap:1rem}.countdown-grid{display:grid;grid-template-columns:repeat(4,minmax(60px,1fr));gap:1rem;text-align:center}.countdown-unit strong{display:block;font-size:1.6rem;font-weight:600;color:var(--text);line-height:1}.countdown-unit span{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;opacity:.7}#schedule-list{list-style:none;padding:0;text-align:left}#schedule-list li{padding:1rem 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between}.form-embed{background:#fff;border-radius:12px;overflow-y:auto;max-height:75vh;width:100%}.form-embed iframe{display:block;width:100%;border:none}.footer-branding{display:flex;flex-direction:column;align-items:center;gap:1.5rem;margin-bottom:2rem}.footer-logo{width:80px;height:80px;border-radius:50%;object-fit:cover;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.2);padding:5px}.audio-fab,.accessibility-fab{position:fixed;bottom:2rem;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px) brightness(0.8);-webkit-backdrop-filter:blur(12px) brightness(0.8);border:1px solid rgba(255,255,255,0.2);color:#fff;cursor:pointer;z-index:1000;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(0.4,0,0.2,1);padding:0;box-shadow:0 8px 32px rgba(0,0,0,0.2)}.audio-fab{right:2rem}.accessibility-fab{left:2rem}@media(max-width:768px){.audio-fab,.accessibility-fab{width:44px;height:44px;bottom:max(1.25rem,env(safe-area-inset-bottom))}.audio-fab{right:1.25rem}.accessibility-fab{left:1.25rem}}.event-datetime{display:flex;flex-direction:column;gap:.2rem;margin-bottom:1rem}#maps-link{text-decoration:underline;text-underline-offset:4px}.location address{font-style:normal;margin-top:1rem}#venue-name::before{content:"";display:inline-block;width:18px;height:18px;margin-right:6px;vertical-align:middle;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Cpath d=\'M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z\'/%3E%3Ccircle cx=\'12\' cy=\'10\' r=\'3\'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Cpath d=\'M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z\'/%3E%3Ccircle cx=\'12\' cy=\'10\' r=\'3\'/%3E%3C/svg%3E") center/contain no-repeat}body.simple #venue-name::before{background:#555}#rsvp{justify-content:flex-start;padding-top:clamp(2rem,8vh,5rem)}#rsvp>*{max-width:800px}body.simple{overflow-y:auto!important;background:#fbfbfb!important;color:#1a1a1a!important}body.simple #app{scroll-snap-type:none!important;height:auto!important;overflow-y:visible!important;max-width:800px;margin:0 auto!important;padding:2rem 1rem!important}body.simple section,body.simple footer{height:auto!important;min-height:auto!important;padding:3rem 2rem!important;margin-bottom:2rem!important;background:#fff!important;color:#1a1a1a!important;border-radius:24px!important;box-shadow:0 4px 20px rgba(0,0,0,0.05)!important;border:1px solid rgba(0,0,0,0.05)!important;text-align:left!important;align-items:flex-start!important}body.simple section::before,body.simple footer::before{display:none!important}body.simple h1{font-size:clamp(3rem,10vw,4rem)!important;color:#000!important;text-shadow:none!important}body.simple .hero-slideshow{display:none!important}';
 
   if (typeof JSZip === 'undefined') {
     alert('JSZip library not loaded. Please check your internet connection and reload.');

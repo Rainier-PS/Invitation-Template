@@ -22,6 +22,7 @@
     <script defer src="js/builder.js"></script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <nav>
         <a href="index.html" class="logo">Invitation Template</a>
         <div class="nav-links" id="nav-links">
@@ -66,7 +67,7 @@
         </div>
     </nav>
 
-    <div class="editor">
+    <div class="editor" id="main-content">
         <aside class="sidebar" role="tablist">
             <button class="sidebar-btn active" data-target="panel-event" data-tooltip="Event" role="tab" aria-label="Event details">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -101,50 +102,6 @@
         <div class="workspace">
             <aside class="panel" role="form" aria-label="Event editor">
                 <form id="event-form">
-                    <div class="master-sections" id="master-sections">
-                        <div class="master-header" id="master-toggle-btn" role="button" tabindex="0">
-                            <div>
-                                <h3>Section visibility</h3>
-                                <p>Toggle which sections appear on your invitation.</p>
-                            </div>
-                            <svg class="master-chevron" id="master-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                        </div>
-                        <div class="check-grid" id="master-check-grid">
-                            <label class="check-field">
-                                <input type="checkbox" id="input-section-eventDetails" checked>
-                                <span>Event Details</span>
-                            </label>
-                            <label class="check-field">
-                                <input type="checkbox" id="input-section-schedule" checked>
-                                <span>Schedule</span>
-                            </label>
-                            <label class="check-field">
-                                <input type="checkbox" id="input-section-quotes" checked>
-                                <span>Quotes</span>
-                            </label>
-                            <label class="check-field">
-                                <input type="checkbox" id="input-section-rsvp" checked>
-                                <span>RSVP</span>
-                            </label>
-                            <label class="check-field">
-                                <input type="checkbox" id="input-section-location" checked>
-                                <span>Location</span>
-                            </label>
-                            <label class="check-field">
-                                <input type="checkbox" id="input-section-design" checked>
-                                <span>Design</span>
-                            </label>
-                            <label class="check-field">
-                                <input type="checkbox" id="input-section-music" checked>
-                                <span>Music</span>
-                            </label>
-                            <label class="check-field">
-                                <input type="checkbox" id="input-section-footer" checked>
-                                <span>Footer</span>
-                            </label>
-                        </div>
-                    </div>
-                    <hr class="panel-divider">
 
                     <div class="panel-section" id="panel-event">
                         <div class="panel-header">

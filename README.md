@@ -11,12 +11,16 @@ See it live: [Live Site](https://rainier-ps.github.io/Invitation-Template/)
 ## Features
 
 - Edit through a JSON file, no coding needed
+- Resizable editor and output panels in the JSON builder
 - Full page scroll with smooth transitions between sections
 - RSVP form integration with Tally.so or other providers
 - Google Maps link for venue location
 - One-click Add to Google Calendar
 - Clean typography and responsive layout
-- Works on mobile and desktop
+- Works on mobile and desktop, with full keyboard support
+- Light and dark theme with a synced settings panel on the homepage (Ctrl + ,)
+- Motion toggle to pause the carousel and animations for accessibility
+- Privacy policy page included, with no analytics or trackers
 - Open source under MIT License
 
 ## Quick Start
@@ -33,6 +37,7 @@ For step by step instructions, see the [Usage Guide](docs/USAGE_GUIDE.md).
 - [Usage Guide](docs/USAGE_GUIDE.md) - How to customize the template for your event.
 - [RSVP Form Guide](docs/RSVP_FORM_STRUCTURE.md) - How to set up your RSVP form.
 - [Contributing Guide](docs/CONTRIBUTING.md) - How to contribute to this project.
+- [Privacy Policy](privacy.html) - What the live site does and does not collect.
 
 ## Contributing
 

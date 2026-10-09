@@ -291,10 +291,11 @@
                 </form>
             </aside>
 
+            <div class="workspace-divider" id="workspace-divider" role="separator" aria-orientation="vertical" aria-label="Resize editor and output panels" aria-valuemin="280" aria-valuenow="0" aria-valuemax="0" tabindex="0"></div>
+
             <div class="json-area" role="region" aria-label="JSON output" data-tour="json-output">
                 <div class="json-header">
                     <h3>Output</h3>
-                    <span class="json-status">Live</span>
                 </div>
                 <div class="json-output">
                     <pre id="json-preview">{ }</pre>
@@ -331,6 +332,16 @@
             <div class="settings-content">
                 <div class="settings-row">
                     <div class="settings-row-info">
+                        <strong>Theme</strong>
+                        <span>Switch between light and dark. Syncs with the navbar toggle.</span>
+                    </div>
+                    <div class="theme-segmented" role="group" aria-label="Theme">
+                        <button type="button" id="theme-light" aria-pressed="true">Light</button>
+                        <button type="button" id="theme-dark" aria-pressed="false">Dark</button>
+                    </div>
+                </div>
+                <div class="settings-row">
+                    <div class="settings-row-info">
                         <strong>Edit JSON directly</strong>
                         <span>Switch between visual form and raw JSON editing.</span>
                     </div>
@@ -347,6 +358,7 @@
                     </svg>
                     Restart Onboarding Tour
                 </button>
+                <p class="settings-hint">Shortcut: press Ctrl + , to open or close this panel.</p>
             </div>
         </div>
     </div>

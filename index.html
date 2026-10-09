@@ -20,11 +20,18 @@
     <link rel="stylesheet" href="css/index.css">
     <script>
     (function() {
-      var theme = localStorage.getItem('theme');
-      if (!theme) {
-        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      try {
+        var theme = localStorage.getItem('theme');
+        if (!theme) {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+        var motion = localStorage.getItem('motion');
+        document.documentElement.setAttribute('data-motion', motion === 'off' ? 'off' : 'on');
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.documentElement.setAttribute('data-motion', 'on');
       }
-      document.documentElement.setAttribute('data-theme', theme);
     })();
     </script>
     <script defer src="js/index.js"></script>
@@ -39,6 +46,9 @@
             <a href="https://github.com/Rainier-PS/Invitation-Template" target="_blank" rel="noopener">GitHub</a>
         </div>
         <div class="nav-actions">
+            <button id="settings-open" aria-label="Open settings" aria-haspopup="dialog">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </button>
             <button id="theme-toggle" aria-label="Toggle theme">
                 <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="5"/>
@@ -65,7 +75,7 @@
         </div>
     </nav>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <section class="hero">
             <div class="hero-glow"></div>
             <div class="hero-glow-2"></div>
@@ -137,11 +147,47 @@
         <div class="footer-links">
             <a href="builder.html">Create Invitation</a>
             <a href="#showcase">Showcase</a>
+            <a href="privacy.html">Privacy Policy</a>
             <a href="https://github.com/Rainier-PS/Invitation-Template" target="_blank" rel="noopener">GitHub</a>
         </div>
         <p class="footer-copy">&copy; 2026 Invitation Template Builder</p>
         <p class="footer-credit">Designed by <a href="https://rainier-ps.github.io/">Rainier Pearson Saputra</a></p>
     </footer>
+
+    <div id="settings-overlay" class="settings-overlay" hidden>
+        <div class="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+            <div class="settings-panel-header">
+                <h2 id="settings-title">Settings</h2>
+                <button id="settings-close" class="settings-close" aria-label="Close settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="settings-row">
+                <div class="settings-row-info">
+                    <strong>Animations and motion</strong>
+                    <span>Controls the showcase carousel and page animations.</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="motion-toggle" role="switch">
+                    <span class="toggle-track"></span>
+                </label>
+            </div>
+            <div class="settings-row">
+                <div class="settings-row-info">
+                    <strong>Theme</strong>
+                    <span>Switch between light and dark. Syncs with the navbar toggle.</span>
+                </div>
+                <div class="theme-segmented" role="group" aria-label="Theme">
+                    <button type="button" id="theme-light" aria-pressed="true">Light</button>
+                    <button type="button" id="theme-dark" aria-pressed="false">Dark</button>
+                </div>
+            </div>
+            <p class="settings-hint">Shortcut: press Ctrl + , to open or close this panel.</p>
+        </div>
+    </div>
 
     <button id="back-to-top" aria-label="Back to top">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

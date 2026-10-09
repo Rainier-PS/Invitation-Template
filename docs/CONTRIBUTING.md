@@ -35,14 +35,18 @@ If you want to add a new theme or improve the design, start with CSS. If you fin
 
 ```
 /
-  index.html         - the invitation page
-  css/invite.css       - default theme
-  data/event.json      - your event data
-  js/builder.js        - the online JSON builder
-  js/index.js          - homepage scripts
+  index.html           - the project homepage with the demo carousel
+  builder.html         - the online JSON builder
+  privacy.html         - privacy policy page
+  css/                 - styles for the homepage, builder, and invitations
+  data/                - demo and sample event data
+  js/                  - homepage and builder scripts
   js/demo/             - demo page scripts
   demo/                - demo HTML pages
+  media/               - images and audio
   docs/                - documentation
+  sitemap.xml          - sitemap for search engines
+  robots.txt           - crawler rules
 ```
 
 ## Styling tips
@@ -71,6 +75,15 @@ Requirements:
 - Content must be readable without background images
 - Contrast must be accessible
 - Font sizes must be large enough
+
+## Code style
+
+These rules apply to every file in this repository:
+
+- Do not write comments in the code.
+- Do not use em dashes in any user-facing text, such as documentation, the privacy policy, or page content. Use commas, hyphens, or separate sentences instead.
+- The homepage settings panel (Ctrl + ,) is the single control for motion and theme. The motion toggle and the navbar theme toggle must stay in sync with it.
+- Overlays, modals, and dialogs must be closable with the Escape key, by clicking outside the panel, and with a visible close button.
 
 ## Reduced motion
 

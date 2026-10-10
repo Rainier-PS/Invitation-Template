@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/builder.css">
+    <link rel="stylesheet" href="css/builder.css?v=5">
     <script>
     (function() {
       var theme = localStorage.getItem('theme');
@@ -18,8 +18,7 @@
       document.documentElement.setAttribute('data-theme', theme);
     })();
     </script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script defer src="js/builder.js"></script>
+    <script defer src="js/builder.js?v=4"></script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -67,27 +66,28 @@
         </div>
     </nav>
 
-    <div class="editor" id="main-content">
-        <aside class="sidebar" role="tablist">
-            <button class="sidebar-btn active" data-target="panel-event" data-tooltip="Event" role="tab" aria-label="Event details">
+    <main class="editor" id="main-content">
+        <h1 class="visually-hidden">Invitation builder</h1>
+        <aside class="sidebar" aria-label="Builder sections">
+            <button class="sidebar-btn active" data-target="panel-event" data-tooltip="Event" aria-label="Event details">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             </button>
-            <button class="sidebar-btn" data-target="panel-datetime" data-tooltip="Date & Time" role="tab" aria-label="Date and time">
+            <button class="sidebar-btn" data-target="panel-datetime" data-tooltip="Date & Time" aria-label="Date and time">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </button>
-            <button class="sidebar-btn" data-target="panel-location" data-tooltip="Location" role="tab" aria-label="Location">
+            <button class="sidebar-btn" data-target="panel-location" data-tooltip="Location" aria-label="Location">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
             </button>
-            <button class="sidebar-btn" data-target="panel-rsvp" data-tooltip="RSVP" role="tab" aria-label="RSVP">
+            <button class="sidebar-btn" data-target="panel-rsvp" data-tooltip="RSVP" aria-label="RSVP">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </button>
-            <button class="sidebar-btn" data-target="panel-design" data-tooltip="Design" role="tab" aria-label="Design">
+            <button class="sidebar-btn" data-target="panel-design" data-tooltip="Design" aria-label="Design">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
             </button>
-            <button class="sidebar-btn" data-target="panel-music" data-tooltip="Music" role="tab" aria-label="Music">
+            <button class="sidebar-btn" data-target="panel-music" data-tooltip="Music" aria-label="Music">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
             </button>
-            <button class="sidebar-btn" data-target="panel-footer" data-tooltip="Footer" role="tab" aria-label="Footer">
+            <button class="sidebar-btn" data-target="panel-footer" data-tooltip="Footer" aria-label="Footer">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18"/><path d="M5 3v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3"/><path d="M9 9h6"/><path d="M9 13h6"/></svg>
             </button>
             <div class="sidebar-spacer"></div>
@@ -100,12 +100,12 @@
         </aside>
 
         <div class="workspace">
-            <aside class="panel" role="form" aria-label="Event editor">
+            <aside class="panel" aria-label="Event editor">
                 <form id="event-form">
 
                     <div class="panel-section" id="panel-event">
                         <div class="panel-header">
-                            <h3>Event</h3>
+                            <h2>Event</h2>
                             <p>What guests will see first.</p>
                         </div>
                         <div class="field" data-tour="event-name">
@@ -121,7 +121,7 @@
                             <textarea id="input-description" rows="3" placeholder="Share the vibe, dress code, or anything special about the day..."></textarea>
                         </div>
                         <hr class="panel-divider">
-                        <h4>Quotes / Verses</h4>
+                        <h3>Quotes / Verses</h3>
                         <p class="field-hint">Add meaningful quotes, scripture, or poetry.</p>
                         <div id="quotes-builder"></div>
                         <button type="button" class="add-btn" onclick="addQuoteItem()">Add quote</button>
@@ -129,7 +129,7 @@
 
                     <div class="panel-section" id="panel-datetime">
                         <div class="panel-header">
-                            <h3>Date &amp; Time</h3>
+                            <h2>Date &amp; Time</h2>
                             <p>When the celebration happens.</p>
                         </div>
                         <label class="check-field">
@@ -150,14 +150,14 @@
                             <input type="text" id="input-endTime" placeholder="09:00 PM">
                         </div>
                         <hr class="panel-divider">
-                        <h4>Schedule</h4>
+                        <h3>Schedule</h3>
                         <div id="schedule-list-builder"></div>
                         <button type="button" class="add-btn" onclick="addScheduleItem()">Add activity</button>
                     </div>
 
                     <div class="panel-section" id="panel-location">
                         <div class="panel-header">
-                            <h3>Location</h3>
+                            <h2>Location</h2>
                             <p>Where everyone will gather.</p>
                         </div>
                         <label class="check-field">
@@ -180,7 +180,7 @@
 
                     <div class="panel-section" id="panel-rsvp">
                         <div class="panel-header">
-                            <h3>RSVP</h3>
+                            <h2>RSVP</h2>
                             <p>How guests will respond.</p>
                         </div>
                         <label class="check-field">
@@ -203,7 +203,7 @@
 
                     <div class="panel-section" id="panel-design">
                         <div class="panel-header">
-                            <h3>Design</h3>
+                            <h2>Design</h2>
                             <p>Colors and visuals for your invitation.</p>
                         </div>
                         <label class="check-field">
@@ -214,11 +214,11 @@
                             <label for="input-accentColor">Accent color</label>
                             <div class="color-group">
                                 <input type="color" id="input-accentColor" value="#6366f1">
-                                <input type="text" id="input-accentColor-text" value="#6366f1">
+                                <input type="text" id="input-accentColor-text" value="#6366f1" aria-label="Accent color hex value">
                             </div>
                         </div>
                         <hr class="panel-divider">
-                        <h4>Hero photos</h4>
+                        <h3>Hero photos</h3>
                         <div id="hero-images-builder"></div>
                         <button type="button" class="add-btn" onclick="addHeroImage()">Add photo</button>
                         <hr class="panel-divider">
@@ -231,14 +231,14 @@
                             <span>Show view toggle</span>
                         </label>
                         <hr class="panel-divider">
-                        <h4>Section backgrounds</h4>
+                        <h3>Section backgrounds</h3>
                         <div id="section-backgrounds-builder"></div>
                         <button type="button" class="add-btn" onclick="addSectionBackground()">Add background</button>
                     </div>
 
                     <div class="panel-section" id="panel-music">
                         <div class="panel-header">
-                            <h3>Music</h3>
+                            <h2>Music</h2>
                             <p>Background audio for the invitation.</p>
                         </div>
                         <label class="check-field">
@@ -261,7 +261,7 @@
 
                     <div class="panel-section" id="panel-footer">
                         <div class="panel-header">
-                            <h3>Footer</h3>
+                            <h2>Footer</h2>
                             <p>Your personal touch.</p>
                         </div>
                         <label class="check-field">
@@ -281,7 +281,7 @@
                             <input type="text" id="input-footerText" placeholder="Hope to see you there!">
                         </div>
                         <hr class="panel-divider">
-                        <h4>Social Links</h4>
+                        <h3>Social Links</h3>
                         <p class="field-hint">Connect guests with your social media.</p>
                         <div class="field">
                             <label for="input-instagram">Instagram URL</label>
@@ -295,11 +295,11 @@
 
             <div class="json-area" role="region" aria-label="JSON output" data-tour="json-output">
                 <div class="json-header">
-                    <h3>Output</h3>
+                    <h2>Output</h2>
                 </div>
-                <div class="json-output">
+                <div class="json-output" tabindex="0">
                     <pre id="json-preview">{ }</pre>
-                    <textarea id="json-textarea" spellcheck="false"></textarea>
+                    <textarea id="json-textarea" spellcheck="false" aria-label="Raw JSON editor"></textarea>
                 </div>
                 <div class="json-actions" data-tour="json-actions">
                     <button onclick="copyJson()" class="primary-btn">
@@ -313,7 +313,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <div id="tour-overlay" class="tour-overlay" style="display:none"></div>
     <div id="tour-highlight" class="tour-highlight" style="display:none"><div class="tour-highlight-inner"></div></div>
@@ -350,6 +350,23 @@
                         <span class="toggle-track"></span>
                     </label>
                 </div>
+                <div class="settings-row">
+                    <div class="settings-row-info">
+                        <strong>Autosave</strong>
+                        <span>Keep saving your progress in this browser while you type, so an accidental close never loses your work.</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="input-autosave-enabled" checked>
+                        <span class="toggle-track"></span>
+                    </label>
+                </div>
+                <div class="settings-row">
+                    <div class="settings-row-info">
+                        <strong>Clear all progress</strong>
+                        <span>Reset every filled-in field and delete the autosaved copy from this browser.</span>
+                    </div>
+                    <button type="button" id="clear-progress-btn" class="settings-danger-btn">Clear&hellip;</button>
+                </div>
                 <hr class="panel-divider">
                 <button id="restart-tour-btn" class="tour-restart-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -362,6 +379,15 @@
             </div>
         </div>
     </div>
+    <div id="confirm-modal" class="info-modal" style="display:none" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title" aria-describedby="confirm-message">
+        <div class="info-modal-card confirm-card">
+            <h2 id="confirm-title"></h2>
+            <p id="confirm-message"></p>
+            <div id="confirm-extra" class="confirm-extra" style="display:none"></div>
+            <div id="confirm-actions" class="confirm-actions"></div>
+        </div>
+    </div>
+    <div class="toast" id="builder-toast" role="status" aria-live="polite"></div>
     <div class="mobile-actions" id="mobile-actions">
         <button onclick="copyJson()" class="primary-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>

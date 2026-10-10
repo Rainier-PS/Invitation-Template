@@ -33,6 +33,16 @@ The JSON builder is a form that generates your event data for you. You do not ne
 
 This is the recommended way for beginners.
 
+### Autosave and the settings panel
+
+The builder keeps a local copy of your work in your browser as you type, so an accidental close does not lose your progress.
+
+1. Press `Ctrl` + `,` or use the Settings button in the sidebar to open the settings panel.
+2. Use the Autosave switch to turn automatic saving on or off. It is on by default.
+3. Use Clear all progress to reset every field and delete the saved copy. You will be asked to confirm before anything is removed.
+4. If autosave is off when you leave the page or close the tab, you are warned and can save or discard your changes first.
+5. Drag the divider between the form and the output to resize both panels. With the divider focused, press `Home` to reset its width.
+
 ## 3. Creating an RSVP Form
 
 You can use any form service. The most common options are listed below.

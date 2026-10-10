@@ -12,6 +12,7 @@ See it live: [Live Site](https://rainier-ps.github.io/Invitation-Template/)
 
 - Edit through a JSON file, no coding needed
 - Resizable editor and output panels in the JSON builder
+- Autosave in the JSON builder, with a confirm step to clear all progress
 - Full page scroll with smooth transitions between sections
 - RSVP form integration with Tally.so or other providers
 - Google Maps link for venue location

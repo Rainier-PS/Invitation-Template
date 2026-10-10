@@ -17,8 +17,10 @@
   --accent-soft: rgba(99, 102, 241, 0.08);
   --accent-mid: rgba(99, 102, 241, 0.15);
   --accent-glow: rgba(99, 102, 241, 0.25);
-  --accent-gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-  --danger: #ef4444;
+  --accent-solid: #4f46e5;
+  --accent-gradient: linear-gradient(135deg, #4f46e5, #7c3aed);
+  --danger: #dc2626;
+  --danger-solid: #dc2626;
   --success: #10b981;
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --sidebar-w: 56px;
@@ -68,8 +70,10 @@
   --accent-soft: rgba(129, 140, 248, 0.1);
   --accent-mid: rgba(129, 140, 248, 0.18);
   --accent-glow: rgba(129, 140, 248, 0.3);
+  --accent-solid: #4f46e5;
   --accent-gradient: linear-gradient(135deg, #818cf8, #a78bfa);
   --danger: #f87171;
+  --danger-solid: #dc2626;
   --success: #34d399;
   --nav-bg: rgba(13,13,16,0.85);
   --nav-border: var(--separator);
@@ -155,7 +159,7 @@ body.tour-active .panel {
   left: 0;
   z-index: 10000;
   padding: 8px 16px;
-  background: var(--accent);
+  background: var(--accent-solid);
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -166,6 +170,18 @@ body.tour-active .panel {
 .skip-link:focus {
   top: 0;
   outline: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 :focus-visible {
@@ -506,7 +522,7 @@ nav {
 }
 
 .panel {
-  flex: 1.2;
+  flex: 1.5 1 0%;
   overflow-y: auto;
   padding: 24px 24px 48px;
   scrollbar-width: thin;
@@ -546,7 +562,7 @@ nav {
   border-bottom: 2px solid var(--accent-mid);
 }
 
-.panel-header h3 {
+.panel-header h2 {
   font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -793,20 +809,15 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
   font-size: 13px;
   line-height: 1.6;
   resize: none;
-  outline: none;
   padding: 0;
   white-space: pre-wrap;
   word-break: break-word;
   tab-size: 2;
 }
 
-#json-textarea:focus {
-  outline: none;
-}
 
 
-
-.panel-section h4 {
+.panel-section h3 {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -978,7 +989,7 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
 }
 
 .json-area {
-  flex: 0.8;
+  flex: 1 1 0%;
   display: flex;
   flex-direction: column;
   background: var(--json-bg);
@@ -995,7 +1006,7 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
   flex-shrink: 0;
 }
 
-.json-header h3 {
+.json-header h2 {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -1068,7 +1079,7 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
 }
 
 .json-actions .primary-btn {
-  background: var(--accent);
+  background: var(--accent-solid);
   color: #fff;
 }
 
@@ -1093,7 +1104,7 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
 
 .json-actions .download-bundle-btn {
   flex: 1.5;
-  background: var(--accent);
+  background: var(--accent-solid);
   color: #fff;
   position: relative;
   overflow: hidden;
@@ -1250,7 +1261,7 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
 }
 
 .tour-next {
-  background: var(--accent);
+  background: var(--accent-solid);
   color: #fff;
 }
 
@@ -1326,7 +1337,7 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
   flex-shrink: 0;
 }
 
-.info-step-text h4 {
+.info-step-text h3 {
   font-size: 14px;
   font-weight: 600;
   margin: 0 0 2px;
@@ -1539,7 +1550,7 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
 .info-close {
   height: 40px;
   padding: 0 24px;
-  background: var(--accent);
+  background: var(--accent-solid);
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -1563,9 +1574,6 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
 }
 
 @media (max-width: 1024px) {
-  .json-area {
-    flex: 0.6;
-  }
   .panel {
     padding: 20px 20px 40px;
   }
@@ -1769,7 +1777,7 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
   }
 
   .mobile-actions .primary-btn {
-    background: var(--accent);
+    background: var(--accent-solid);
     color: #fff;
   }
 
@@ -1794,7 +1802,7 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
 
   .mobile-actions .download-bundle-btn {
     flex: 100%;
-    background: var(--accent);
+    background: var(--accent-solid);
     color: #fff;
   }
 
@@ -1804,5 +1812,137 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
 
   body {
     padding-bottom: 140px;
+  }
+}
+
+.confirm-card {
+  position: relative;
+}
+
+.confirm-extra .settings-row {
+  padding-top: 0;
+}
+
+.confirm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.confirm-btn {
+  border: 1px solid var(--separator);
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, filter 0.15s ease, color 0.15s ease;
+}
+
+.confirm-btn:hover {
+  background: var(--bg-active);
+  border-color: var(--separator-strong);
+}
+
+.confirm-btn.primary {
+  background: var(--accent-solid);
+  border-color: var(--accent-solid);
+  color: #fff;
+}
+
+.confirm-btn.primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.confirm-btn.danger {
+  background: var(--danger-solid);
+  border-color: var(--danger-solid);
+  color: #fff;
+}
+
+.confirm-btn.danger:hover {
+  filter: brightness(1.08);
+}
+
+.confirm-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.settings-danger-btn {
+  flex-shrink: 0;
+  padding: 9px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--danger);
+  background: transparent;
+  color: var(--danger);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.settings-danger-btn:hover {
+  background: var(--danger-solid);
+  color: #fff;
+}
+
+.settings-danger-btn:focus-visible {
+  outline: 2px solid var(--danger);
+  outline-offset: 2px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 16px);
+  z-index: 100002;
+  max-width: min(92vw, 460px);
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: var(--text-primary);
+  color: var(--bg);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  text-align: center;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+}
+
+.toast.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 768px) {
+  .confirm-actions .confirm-btn {
+    flex: 1;
+  }
+
+  .toast {
+    bottom: 96px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

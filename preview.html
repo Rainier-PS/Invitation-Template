@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Invitation preview</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Outfit:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/invite.css?v=3">
+    <script defer src="js/preview.js?v=1"></script>
+
+    <style>
+        .preview-empty {
+            position: fixed;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: center;
+            gap: 2px 6px;
+            max-width: min(88%, 340px);
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #f8f9fa;
+            font-family: 'Outfit', sans-serif;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .preview-empty strong {
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .preview-empty span {
+            font-size: 0.72rem;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .rsvp-placeholder {
+            margin: 0;
+            padding: 28px 24px;
+            color: #1a1a1a;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="simple-mode-toggle" class="accessibility-fab" aria-label="Toggle Simple Mode" hidden>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" id="standard-view-icon" />
+            <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"
+                id="simple-view-icon" class="hidden-icon" />
+        </svg>
+    </button>
+
+    <button id="audio-control" class="audio-fab" aria-label="Play Music" hidden>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M8 5v14l11-7z" id="play-icon" />
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" id="pause-icon" class="hidden-icon" />
+        </svg>
+    </button>
+
+    <main id="app" aria-live="polite">
+        <section class="hero">
+            <h1 id="event-title">Alex &amp; Sam</h1>
+            <p class="subtitle" id="event-subtitle">Are getting married</p>
+
+            <div class="hero-meta">
+                <div id="countdown" class="countdown" hidden>
+                    <span class="countdown-label">Event starts in</span>
+
+                    <div class="countdown-grid">
+                        <div class="countdown-unit">
+                            <strong id="cd-days">0</strong>
+                            <span>Days</span>
+                        </div>
+                        <div class="countdown-unit">
+                            <strong id="cd-hours">00</strong>
+                            <span>Hours</span>
+                        </div>
+                        <div class="countdown-unit">
+                            <strong id="cd-minutes">00</strong>
+                            <span>Minutes</span>
+                        </div>
+                        <div class="countdown-unit">
+                            <strong id="cd-seconds">00</strong>
+                            <span>Seconds</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="calendar-actions" hidden>
+                    <a id="google-calendar-link" target="_blank" rel="noopener">Add to Google Calendar</a>
+                </div>
+            </div>
+
+            <a href="#rsvp" class="primary-btn" id="hero-rsvp">RSVP</a>
+        </section>
+
+        <section class="section event-details">
+            <h2>Event Details</h2>
+
+            <div class="event-datetime">
+                <div><strong>Date:</strong> <time id="event-date" datetime="2026-12-25">Friday, December 25, 2026</time></div>
+                <div><strong>Time:</strong> <span id="event-time">6:00 PM &ndash; 9:00 PM</span></div>
+            </div>
+
+            <p id="event-description">Join us for dinner, dancing, and a night to remember. Cocktail attire, please.</p>
+
+            <address class="location">
+                <p id="venue-name">The Grand Ballroom</p>
+                <p id="venue-address">123 Party Lane, Celebration City</p>
+                <a id="maps-link" href="https://maps.google.com" target="_blank" rel="noopener">Open in Google Maps</a>
+            </address>
+        </section>
+
+                <section class="section" id="schedule-section">
+            <h2>Schedule</h2>
+            <ul id="schedule-list">
+                <li><span>4:00 PM</span><span>Guests arrive</span></li>
+                <li><span>5:00 PM</span><span>Ceremony</span></li>
+                <li><span>7:00 PM</span><span>Dinner &amp; dancing</span></li>
+            </ul>
+        </section>
+
+                <section class="section" id="quotes-section">
+            <h2>Words of Inspiration</h2>
+            <div class="quotes-container" id="quotes-container">
+                <div class="quote-item">
+                    <p class="quote-text">Whatever souls are made of, his and mine are the same.</p>
+                    <p class="quote-author">Emily Bront&euml;</p>
+                </div>
+                <div class="quote-item">
+                    <p class="quote-text">Love is friendship that has caught fire.</p>
+                    <p class="quote-author">Ann Landers</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="rsvp">
+            <h2>RSVP</h2>
+            <p>Please confirm your attendance</p>
+            <div class="form-embed"><p class="rsvp-placeholder">Your RSVP form appears here</p></div>
+        </section>
+
+        <footer>
+            <div class="footer-branding">
+                <a id="footer-branding-link" href="#" class="low-profile-link" target="_blank" rel="noopener">
+                    <img id="footer-logo" src="" alt="" class="footer-logo" hidden>
+                </a>
+                <div class="footer-info">
+                    <p class="hosted-by" id="footer-credits-label">Hosted invitation</p>
+                    <p class="copyright">
+                        <span id="footer-copyright">&copy; 2026 Alex &amp; Sam</span>
+                        <span id="footer-template-container">
+                            | <span id="footer-template-label">Template</span>
+                            <a id="footer-template-link" href="#" class="low-profile-link" target="_blank"
+                                rel="noopener">Celebration</a>
+                        </span>
+                    </p>
+                    <p id="footer-repo-container" class="repo-info" hidden>
+                        <a id="footer-repo-link" href="#" class="low-profile-link" target="_blank" rel="noopener"></a>
+                    </p>
+                    <div class="social-links" id="social-links" hidden>
+                        <a id="instagram-link" class="social-link" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                            </svg>
+                            <span id="instagram-label">Follow on Instagram</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <p id="footer-text">Made with love</p>
+        </footer>
+    </main>
+
+        <div id="preview-empty" class="preview-empty">
+        <strong>Live preview</strong>
+        <span>&middot; sample text fills empty fields</span>
+    </div>
+</body>
+
+</html>

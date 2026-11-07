@@ -108,7 +108,6 @@ a:hover {
     }
 }
 
-
 #app {
     height: 100%;
     overflow-y: scroll;
@@ -117,6 +116,30 @@ a:hover {
     max-width: none;
     padding: 0;
     margin: 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.26) transparent;
+}
+
+#app::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+#app::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#app::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.26);
+    border-radius: 999px;
+}
+
+#app::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.45);
+}
+
+#app::-webkit-scrollbar-corner {
+    background: transparent;
 }
 
 section,
@@ -427,7 +450,7 @@ body.simple #venue-name::before {
 .accessibility-fab {
     position: fixed;
     bottom: 2rem;
-   
+
     width: 52px;
     height: 52px;
 

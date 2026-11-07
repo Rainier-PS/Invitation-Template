@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/builder.css?v=5">
+    <link rel="stylesheet" href="css/builder.css?v=16">
     <script>
     (function() {
       var theme = localStorage.getItem('theme');
@@ -18,7 +18,7 @@
       document.documentElement.setAttribute('data-theme', theme);
     })();
     </script>
-    <script defer src="js/builder.js?v=4"></script>
+    <script defer src="js/builder.js?v=13"></script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -72,6 +72,9 @@
             <button class="sidebar-btn active" data-target="panel-event" data-tooltip="Event" aria-label="Event details">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             </button>
+            <button class="sidebar-btn" data-target="panel-quotes" data-tooltip="Quotes" aria-label="Quotes">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>
+            </button>
             <button class="sidebar-btn" data-target="panel-datetime" data-tooltip="Date & Time" aria-label="Date and time">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </button>
@@ -119,9 +122,23 @@
                         <div class="field">
                             <label for="input-description">Description</label>
                             <textarea id="input-description" rows="3" placeholder="Share the vibe, dress code, or anything special about the day..."></textarea>
+                            <span class="hint">Enter adds a line &middot; Ctrl + Enter jumps to the next field</span>
                         </div>
-                        <hr class="panel-divider">
-                        <h3>Quotes / Verses</h3>
+                    </div>
+
+                    <div class="panel-section" id="panel-quotes">
+                        <div class="panel-header">
+                            <h2>Quotes</h2>
+                            <p>Words and verses guests will remember.</p>
+                        </div>
+                        <label class="check-field">
+                            <input type="checkbox" id="input-quotes-enabled" checked>
+                            <span>Enable this section</span>
+                        </label>
+                        <div class="field">
+                            <label for="input-quote-title">Section title</label>
+                            <input type="text" id="input-quote-title" placeholder="Words of Inspiration">
+                        </div>
                         <p class="field-hint">Add meaningful quotes, scripture, or poetry.</p>
                         <div id="quotes-builder"></div>
                         <button type="button" class="add-btn" onclick="addQuoteItem()">Add quote</button>
@@ -225,13 +242,8 @@
                         <label class="check-field">
                             <input type="checkbox" id="input-simpleMode">
                             <span>Simple layout</span>
-                        </label>
-                        <label class="check-field">
-                            <input type="checkbox" id="input-showSimpleModeToggle" checked>
-                            <span>Show view toggle</span>
-                        </label>
-                        <hr class="panel-divider">
-                        <h3>Section backgrounds</h3>
+                        </label><label class="check-field">
+                            <input type="checkbox" id="input-showSimpleModeToggle" checked>                            <span>Show view toggle</span>                        </label>                        <hr class="panel-divider">                        <h3>Section backgrounds</h3>
                         <div id="section-backgrounds-builder"></div>
                         <button type="button" class="add-btn" onclick="addSectionBackground()">Add background</button>
                     </div>
@@ -291,25 +303,73 @@
                 </form>
             </aside>
 
-            <div class="workspace-divider" id="workspace-divider" role="separator" aria-orientation="vertical" aria-label="Resize editor and output panels" aria-valuemin="280" aria-valuenow="0" aria-valuemax="0" tabindex="0"></div>
+            <div class="workspace-divider" id="workspace-divider" role="separator" aria-orientation="vertical" aria-label="Resize editor and preview panels" aria-valuemin="280" aria-valuenow="0" aria-valuemax="0" tabindex="0"></div>
 
-            <div class="json-area" role="region" aria-label="JSON output" data-tour="json-output">
+            <div class="json-area" role="region" aria-label="Output" data-active-view="preview">
                 <div class="json-header">
-                    <h2>Output</h2>
-                </div>
-                <div class="json-output" tabindex="0">
-                    <pre id="json-preview">{ }</pre>
-                    <textarea id="json-textarea" spellcheck="false" aria-label="Raw JSON editor"></textarea>
-                </div>
-                <div class="json-actions" data-tour="json-actions">
-                    <button onclick="copyJson()" class="primary-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                        Copy JSON
+                    <div class="output-tabs" role="tablist" aria-label="Output view">
+                        <button type="button" class="output-tab active" id="tab-preview" role="tab" aria-selected="true" aria-controls="preview-view" data-view="preview">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            Live Preview
+                        </button>
+                        <button type="button" class="output-tab" id="tab-json" role="tab" aria-selected="false" aria-controls="json-view" data-view="json" tabindex="-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            JSON
+                        </button>
+                    </div>
+                    <div class="preview-size-picker" id="preview-size-picker" data-size="fit">
+                        <button type="button" class="preview-size-toggle" id="preview-size-toggle" aria-haspopup="menu" aria-expanded="false" aria-controls="preview-size-menu" aria-label="Preview size: Fit" title="Preview size">
+                            <svg class="preview-size-icon preview-size-icon-fit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+                            <svg class="preview-size-icon preview-size-icon-mobile" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+                            <svg class="preview-size-icon preview-size-icon-desktop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+                            <span class="preview-size-toggle-label" id="preview-size-toggle-label">Fit</span>
+                            <svg class="preview-size-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="preview-size-menu" id="preview-size-menu" role="menu" aria-label="Preview size" hidden>
+                            <button type="button" class="preview-size-btn active" role="menuitemradio" aria-checked="true" data-preview-size="fit" title="Fit to panel">
+                                <span class="preview-size-btn-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg></span>
+                                <span class="preview-size-btn-text"><span>Fit to panel</span><small>Match available width</small></span>
+                                <svg class="preview-size-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                            </button>
+                            <button type="button" class="preview-size-btn" role="menuitemradio" aria-checked="false" data-preview-size="mobile" title="Mobile width">
+                                <span class="preview-size-btn-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
+                                <span class="preview-size-btn-text"><span>Mobile</span><small>390 px wide</small></span>
+                                <svg class="preview-size-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                            </button>
+                            <button type="button" class="preview-size-btn" role="menuitemradio" aria-checked="false" data-preview-size="desktop" title="Desktop width">
+                                <span class="preview-size-btn-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></span>
+                                <span class="preview-size-btn-text"><span>Desktop</span><small>1280 px wide</small></span>
+                                <svg class="preview-size-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" class="preview-size-toggle" id="preview-fullscreen-btn" aria-label="Fullscreen preview" title="Fullscreen preview" aria-pressed="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
                     </button>
-                    <button onclick="downloadBundle()" class="download-bundle-btn" title="Download complete invitation folder ready to deploy">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Download Bundle
+                </div>
+                <div class="output-view preview-view" id="preview-view" role="tabpanel" aria-labelledby="tab-preview" data-view="preview" data-size="fit" data-tour="preview-output">
+                    <button type="button" class="preview-exit-fullscreen" id="preview-exit-fullscreen" aria-label="Exit fullscreen preview" title="Exit fullscreen">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
                     </button>
+                    <div class="preview-scroll" id="preview-scroll">
+                        <iframe id="preview-frame" src="preview.html?v=5" title="Live invitation preview"></iframe>
+                    </div>
+                </div>
+                <div class="output-view json-view" id="json-view" role="tabpanel" aria-labelledby="tab-json" data-view="json" hidden>
+                    <div class="json-output" tabindex="0" data-tour="json-output">
+                        <pre id="json-preview">{ }</pre>
+                        <textarea id="json-textarea" spellcheck="false" aria-label="Raw JSON editor"></textarea>
+                    </div>
+                    <div class="json-actions" data-tour="json-actions">
+                        <button onclick="copyJson()" class="primary-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            Copy JSON
+                        </button>
+                        <button onclick="downloadBundle()" class="download-bundle-btn" title="Download complete invitation folder ready to deploy">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Download Bundle
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -365,7 +425,7 @@
                         <strong>Clear all progress</strong>
                         <span>Reset every filled-in field and delete the autosaved copy from this browser.</span>
                     </div>
-                    <button type="button" id="clear-progress-btn" class="settings-danger-btn">Clear&hellip;</button>
+                    <button type="button" id="clear-progress-btn" class="settings-danger-btn">Clear</button>
                 </div>
                 <hr class="panel-divider">
                 <button id="restart-tour-btn" class="tour-restart-btn">
@@ -397,6 +457,20 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download Bundle
         </button>
+        <div class="mobile-size-controls" role="group" aria-label="Preview size">
+            <button type="button" class="mobile-size-btn mobile-size-fit" role="menuitemradio" aria-checked="true" data-preview-size="fit" title="Fit to panel" aria-label="Fit">
+                <svg class="mobile-size-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            </button>
+            <button type="button" class="mobile-size-btn mobile-size-mobile" role="menuitemradio" aria-checked="false" data-preview-size="mobile" title="Mobile width" aria-label="Mobile">
+                <svg class="mobile-size-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+            </button>
+            <button type="button" class="mobile-size-btn mobile-size-desktop" role="menuitemradio" aria-checked="false" data-preview-size="desktop" title="Desktop width" aria-label="Desktop">
+                <svg class="mobile-size-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+            </button>
+            <button type="button" class="mobile-size-btn mobile-size-fullscreen" id="mobile-fullscreen-btn" title="Fullscreen preview" aria-label="Fullscreen preview" aria-pressed="false">
+                <svg class="mobile-size-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            </button>
+        </div>
     </div>
 </body>
 </html>

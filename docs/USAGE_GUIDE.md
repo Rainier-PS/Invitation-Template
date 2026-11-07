@@ -27,11 +27,34 @@ The folder contains everything you need: `index.html`, `css/invite.css`, `data/e
 The JSON builder is a form that generates your event data for you. You do not need to edit JSON manually.
 
 1. Open the [JSON Builder](https://rainier-ps.github.io/Invitation-Template/builder.html).
-2. Fill in your event name, date, location, images, schedule, and RSVP link.
-3. Click Copy or Download to save your configuration.
+2. Fill in your event name, date, location, images, schedule, quotes, and RSVP link. Live Preview and the JSON tab both update as you type.
+3. Open the JSON tab on the right, then click Copy JSON or Download Bundle to save your configuration.
 4. Replace the `data/event.json` in your template folder with the new file.
 
 This is the recommended way for beginners.
+
+### Live preview and JSON tabs
+
+The right side of the builder has two tabs. Live Preview is open by default and updates as you type. Fields you have not filled in yet keep sample text, so every section stays readable from the start, and your own details replace the sample as you go. Clear a field and the sample text comes back.
+
+1. Use Live Preview to see how the invitation reads on desktop and mobile. Sections you switch off in the form disappear here too.
+2. Use the size menu above the preview to choose Fit, Mobile, or Desktop width. Desktop uses a full desktop width, so the preview scrolls sideways when the panel is narrower.
+3. Use the fullscreen button next to the size menu to open the preview on its own full screen. Press Escape, or use the close button inside the preview, to leave it.
+4. Switch to the JSON tab to see the generated configuration in code form.
+5. Use Copy JSON or Download Bundle from the JSON tab when you are ready to save your work. On mobile, these buttons stay at the bottom of the screen while the JSON tab is open.
+6. Use the tabs at any time. Your work stays in place while you switch views.
+
+### Hiding sections
+
+Use the Enable this section checkbox at the top of Quotes, Date and Time, Location, RSVP, Design, Music, or Footer to hide that section without deleting its content. Turning one off hides the section from the invitation and disables its fields, so Enter skips them. Turn the checkbox back on to show the section again.
+
+### Filling the form with the keyboard
+
+Press `Enter` in any field to move straight to the next one, in the same order the fields appear on the page. Fields whose section is switched off are skipped, and Enter never lands on a remove button, so the whole form can be filled without the mouse.
+
+1. The Description box keeps Enter for new lines. Use `Ctrl` + `Enter`, or `Cmd` + `Enter` on macOS, to jump to the next field instead.
+2. Switches such as Enable this section and Repeat are part of the same order. Press `Space` to change one.
+3. The Add quote, Add activity, Add photo, and Add background buttons are not part of the Enter order. Use `Tab` to reach them.
 
 ### Autosave and the settings panel
 
@@ -41,7 +64,7 @@ The builder keeps a local copy of your work in your browser as you type, so an a
 2. Use the Autosave switch to turn automatic saving on or off. It is on by default.
 3. Use Clear all progress to reset every field and delete the saved copy. You will be asked to confirm before anything is removed.
 4. If autosave is off when you leave the page or close the tab, you are warned and can save or discard your changes first.
-5. Drag the divider between the form and the output to resize both panels. With the divider focused, press `Home` to reset its width.
+5. Drag the divider between the form and the preview to resize both panels. With the divider focused, press `Home` to reset its width.
 
 ## 3. Creating an RSVP Form
 
@@ -106,6 +129,25 @@ Add items to the `schedule` array. Each item has a `time` and a `label`.
   "label": "Dinner"
 }
 ```
+
+### Quotes
+
+- `quoteTitle` - Heading shown above the quote list. When it is missing, the heading falls back to "Words of Inspiration".
+- `quotes` - Array of quotes. Each item has a `text` and an optional `author`.
+
+```json
+{
+  "quoteTitle": "Words of Inspiration",
+  "quotes": [
+    {
+      "text": "Love is friendship that has caught fire.",
+      "author": "Ann Landers"
+    }
+  ]
+}
+```
+
+The Quotes section is also a button in the builder sidebar, and it can be switched off with its own Enable this section checkbox.
 
 ### RSVP
 

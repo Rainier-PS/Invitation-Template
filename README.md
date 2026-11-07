@@ -11,7 +11,12 @@ See it live: [Live Site](https://rainier-ps.github.io/Invitation-Template/)
 ## Features
 
 - Edit through a JSON file, no coding needed
-- Resizable editor and output panels in the JSON builder
+- Live preview in the builder, with a JSON tab for the raw code
+- Mobile, desktop, and fit-to-panel preview sizes in the invitation builder
+- Fullscreen preview from the size menu, on desktop and mobile
+- Enter moves to the next field, so the whole form can be filled without the mouse
+- Empty fields keep sample text in the preview, so the layout is never blank
+- Resizable editor and preview panels in the invitation builder
 - Autosave in the JSON builder, with a confirm step to clear all progress
 - Full page scroll with smooth transitions between sections
 - RSVP form integration with Tally.so or other providers

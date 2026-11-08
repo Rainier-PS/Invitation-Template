@@ -122,7 +122,94 @@
     }
   }
 
-  function renderFooter(footer, credits) {
+  function resolveImageSource(value, assets) {
+    if (!value) return '';
+    var raw = String(value).trim();
+    if (!raw) return '';
+    if (assets && Object.prototype.hasOwnProperty.call(assets, raw) && assets[raw]) return assets[raw];
+    if (/^images\//i.test(raw)) return '';
+    if (/^(https?:|data:|blob:|\/)/i.test(raw)) return raw;
+    if (/^[a-z][a-z0-9+.-]*:/i.test(raw)) return '';
+    return raw;
+  }
+
+  function cssUrl(value) {
+    var text = String(value).replace(/[\r\n]+/g, '');
+    text = text.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+    return 'url("' + text + '")';
+  }
+
+  var slideshowKey = null;
+  var slideshowTimer = null;
+
+  function prefersReducedMotion() {
+    return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+
+  function renderHeroImages(images, assets) {
+    var resolved = [];
+    (Array.isArray(images) ? images : []).forEach(function (value) {
+      var url = resolveImageSource(value, assets);
+      if (url) resolved.push(url);
+    });
+
+    var key = resolved.join('\n');
+    if (key === slideshowKey) return;
+    slideshowKey = key;
+
+    if (slideshowTimer) {
+      window.clearInterval(slideshowTimer);
+      slideshowTimer = null;
+    }
+
+    var hero = document.querySelector('.hero');
+    if (!hero) return;
+    var existing = hero.querySelector('.hero-slideshow');
+    if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+    if (!resolved.length) return;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'hero-slideshow';
+    resolved.forEach(function (url, index) {
+      var slide = document.createElement('div');
+      slide.className = 'hero-slide' + (index === 0 ? ' active' : '');
+      slide.setAttribute('aria-hidden', 'true');
+      slide.style.backgroundImage = cssUrl(url);
+      wrap.appendChild(slide);
+    });
+    hero.insertBefore(wrap, hero.firstChild);
+
+    if (resolved.length > 1) {
+      if (prefersReducedMotion()) wrap.classList.add('reduce-motion');
+      var current = 0;
+      var slides = wrap.querySelectorAll('.hero-slide');
+      slideshowTimer = window.setInterval(function () {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }, 5000);
+    }
+  }
+
+  var backgroundTargets = [];
+
+  function renderSectionBackgrounds(backgrounds, assets) {
+    backgroundTargets.forEach(function (el) { el.style.backgroundImage = ''; });
+    backgroundTargets = [];
+
+    var sections = document.querySelectorAll('#app > section, #app > footer');
+    if (!sections.length) sections = document.querySelectorAll('section, footer');
+
+    (Array.isArray(backgrounds) ? backgrounds : []).forEach(function (value, index) {
+      var url = resolveImageSource(value, assets);
+      var target = sections[index + 1];
+      if (!url || !target) return;
+      target.style.backgroundImage = cssUrl(url);
+      backgroundTargets.push(target);
+    });
+  }
+
+  function renderFooter(footer, credits, assets) {
     var author = filled(credits.authorName, SAMPLE.author);
     setText('footer-text', filled(footer.text, 'Made with love'));
     setText('footer-credits-label', author);
@@ -136,12 +223,14 @@
     var branding = footer.branding || {};
     var logo = byId('footer-logo');
     if (logo) {
-      if (branding.logoUrl) {
-        logo.src = branding.logoUrl;
+      var logoSrc = resolveImageSource(branding.logoUrl, assets);
+      if (logoSrc) {
+        logo.src = logoSrc;
         logo.alt = branding.logoAlt || 'Logo';
         logo.hidden = false;
       } else {
         logo.hidden = true;
+        logo.removeAttribute('src');
       }
     }
   }
@@ -160,7 +249,7 @@
     setText('instagram-label', handle ? '@' + handle : 'Follow on Instagram');
   }
 
-  function render(config) {
+  function render(config, assets) {
     if (!config) return;
     var ev = config.event || {};
     var dt = config.datetime || {};
@@ -196,8 +285,10 @@
       renderQuotes(quotes, filled(config.quoteTitle, SAMPLE.quoteTitle));
     }
     renderRsvp(rsvp, sections);
-    renderFooter(footer, footer.credits || {});
+    renderFooter(footer, footer.credits || {}, assets);
     renderSocial(social);
+    renderHeroImages((config.design || {}).heroImages, assets);
+    renderSectionBackgrounds((config.design || {}).sectionBackgrounds, assets);
 
     document.body.classList.toggle('simple', !!meta.simpleMode);
 
@@ -215,6 +306,6 @@
     if (event.source !== window.parent) return;
     var data = event.data;
     if (!data || data.type !== 'invitation-preview' || !data.config) return;
-    render(data.config);
+    render(data.config, data.assets);
   });
 })();

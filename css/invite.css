@@ -209,6 +209,10 @@ footer>* {
     opacity: 1;
 }
 
+.hero-slideshow.reduce-motion .hero-slide {
+    transition: none;
+}
+
 .subtitle {
     font-size: 1.25rem;
     color: var(--muted);

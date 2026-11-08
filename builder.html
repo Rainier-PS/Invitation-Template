@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/builder.css?v=16">
+    <link rel="stylesheet" href="css/builder.css?v=20">
     <script>
     (function() {
       var theme = localStorage.getItem('theme');
@@ -18,7 +18,8 @@
       document.documentElement.setAttribute('data-theme', theme);
     })();
     </script>
-    <script defer src="js/builder.js?v=13"></script>
+    <script defer src="js/image-assets.js?v=1"></script>
+    <script defer src="js/builder.js?v=17"></script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -30,7 +31,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
                     <span>Guide</span>
                 </button>
-                <button class="mobile-nav-btn" id="mobile-settings-btn">
+                <button class="mobile-nav-btn" id="mobile-settings-btn" aria-haspopup="dialog" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                     <span>Settings</span>
                 </button>
@@ -40,6 +41,9 @@
             <a href="https://github.com/Rainier-PS/Invitation-Template" target="_blank" rel="noopener">GitHub</a>
         </div>
         <div class="nav-actions">
+            <button id="nav-settings-btn" aria-label="Open settings" aria-haspopup="dialog" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </button>
             <button id="theme-toggle" aria-label="Toggle theme">
                 <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="5"/>
@@ -97,7 +101,7 @@
             <button class="help-btn" id="help-btn" aria-label="Help guide" data-tooltip="Guide">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
             </button>
-            <button class="settings-btn" id="settings-btn" aria-label="Settings" data-tooltip="Settings">
+            <button class="settings-btn" id="settings-btn" aria-label="Settings" data-tooltip="Settings" aria-haspopup="dialog" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
             </button>
         </aside>
@@ -236,6 +240,7 @@
                         </div>
                         <hr class="panel-divider">
                         <h3>Hero photos</h3>
+                        <p class="field-hint">Upload, drag a photo onto a row, or paste a link. Drag the grip handle to reorder. Uploads are saved into an <code>images/</code> folder inside your bundle.</p>
                         <div id="hero-images-builder"></div>
                         <button type="button" class="add-btn" onclick="addHeroImage()">Add photo</button>
                         <hr class="panel-divider">
@@ -243,7 +248,10 @@
                             <input type="checkbox" id="input-simpleMode">
                             <span>Simple layout</span>
                         </label><label class="check-field">
-                            <input type="checkbox" id="input-showSimpleModeToggle" checked>                            <span>Show view toggle</span>                        </label>                        <hr class="panel-divider">                        <h3>Section backgrounds</h3>
+                            <input type="checkbox" id="input-showSimpleModeToggle" checked>                            <span>Show view toggle</span>                        </label>
+                        <hr class="panel-divider">
+                        <h3>Section backgrounds</h3>
+                        <p class="field-hint">Backgrounds fill the sections in order, after the hero. Upload, drag a file onto a row, or paste a link. Drag the grip handle to reorder.</p>
                         <div id="section-backgrounds-builder"></div>
                         <button type="button" class="add-btn" onclick="addSectionBackground()">Add background</button>
                     </div>
@@ -285,8 +293,16 @@
                             <input type="text" id="input-authorName" placeholder="Your Name">
                         </div>
                         <div class="field">
-                            <label for="input-logoUrl">Logo URL</label>
-                            <input type="url" id="input-logoUrl" placeholder="https://example.com/logo.svg" value="https://raw.githubusercontent.com/Rainier-PS/rainier-ps.github.io/main/images/site/Rainier%20Logo-Primary.svg">
+                            <label for="input-logoUrl">Logo</label>
+                            <div class="image-source">
+                                <input type="text" id="input-logoUrl" class="image-source-input" inputmode="url" placeholder="https://example.com/logo.svg" value="https://raw.githubusercontent.com/Rainier-PS/rainier-ps.github.io/main/images/site/Rainier%20Logo-Primary.svg">
+                                <button type="button" class="image-source-upload">Upload</button>
+                                <input type="file" class="image-source-file" hidden>
+                            </div>
+                            <p class="image-field-status" hidden>
+                                <img class="image-field-thumb" alt="" hidden>
+                                <span class="image-field-text"></span>
+                            </p>
                         </div>
                         <div class="field">
                             <label for="input-footerText">Closing message</label>
@@ -344,7 +360,7 @@
                         </div>
                     </div>
                     <button type="button" class="preview-size-toggle" id="preview-fullscreen-btn" aria-label="Fullscreen preview" title="Fullscreen preview" aria-pressed="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
                     </button>
                 </div>
                 <div class="output-view preview-view" id="preview-view" role="tabpanel" aria-labelledby="tab-preview" data-view="preview" data-size="fit" data-tour="preview-output">
@@ -352,7 +368,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
                     </button>
                     <div class="preview-scroll" id="preview-scroll">
-                        <iframe id="preview-frame" src="preview.html?v=5" title="Live invitation preview"></iframe>
+                        <iframe id="preview-frame" src="preview.html?v=7" title="Live invitation preview"></iframe>
                     </div>
                 </div>
                 <div class="output-view json-view" id="json-view" role="tabpanel" aria-labelledby="tab-json" data-view="json" hidden>
@@ -379,7 +395,7 @@
     <div id="tour-highlight" class="tour-highlight" style="display:none"><div class="tour-highlight-inner"></div></div>
     <div id="tour-card" class="tour-card" style="display:none"><div class="tour-card-content"></div></div>
     <div id="info-modal" class="info-modal" style="display:none"></div>
-    <div id="settings-modal" class="info-modal" style="display:none">
+    <div id="settings-modal" class="info-modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="settings-title">
         <div class="info-modal-card settings-modal-card">
             <button class="modal-close-btn" id="settings-close" aria-label="Close settings">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -387,7 +403,7 @@
                     <line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
             </button>
-            <h2>Settings</h2>
+            <h2 id="settings-title">Settings</h2>
             <p>Customize your editing experience.</p>
             <div class="settings-content">
                 <div class="settings-row">
@@ -468,7 +484,7 @@
                 <svg class="mobile-size-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
             </button>
             <button type="button" class="mobile-size-btn mobile-size-fullscreen" id="mobile-fullscreen-btn" title="Fullscreen preview" aria-label="Fullscreen preview" aria-pressed="false">
-                <svg class="mobile-size-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+                <svg class="mobile-size-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
             </button>
         </div>
     </div>

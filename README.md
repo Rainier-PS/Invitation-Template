@@ -11,6 +11,8 @@ See it live: [Live Site](https://rainier-ps.github.io/Invitation-Template/)
 ## Features
 
 - Edit through a JSON file, no coding needed
+- Add photos by link, file picker, or drag-and-drop, bundled into an `images/` folder
+- Reorder photos, section backgrounds, schedule activities, and quotes by dragging their grip handles
 - Live preview in the builder, with a JSON tab for the raw code
 - Mobile, desktop, and fit-to-panel preview sizes in the invitation builder
 - Fullscreen preview from the size menu, on desktop and mobile

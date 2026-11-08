@@ -42,6 +42,7 @@ If you want to add a new theme or improve the design, start with CSS. If you fin
   css/                 - styles for the homepage, builder, and invitations
   data/                - demo and sample event data
   js/                  - homepage, builder, and preview scripts
+  js/image-assets.js   - stores photos uploaded in the builder
   js/demo/             - demo page scripts
   demo/                - demo HTML pages
   media/               - images and audio

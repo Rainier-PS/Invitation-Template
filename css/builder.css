@@ -24,6 +24,7 @@
   --danger: #dc2626;
   --danger-solid: #dc2626;
   --success: #10b981;
+  --warning: #b45309;
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --sidebar-w: 56px;
   --vh: 100svh;
@@ -79,6 +80,7 @@
   --danger: #f87171;
   --danger-solid: #dc2626;
   --success: #34d399;
+  --warning: #fbbf24;
   --nav-bg: rgba(13,13,16,0.85);
   --nav-border: var(--separator);
   --workspace-bg: radial-gradient(ellipse at 30% 0%, #16161a 0%, #0d0d10 60%);
@@ -308,7 +310,8 @@ nav {
   color: var(--text-primary);
 }
 
-#theme-toggle {
+#theme-toggle,
+#nav-settings-btn {
   width: 36px;
   height: 36px;
   border-radius: 10px;
@@ -324,18 +327,21 @@ nav {
   flex-shrink: 0;
 }
 
-#theme-toggle:hover {
+#theme-toggle:hover,
+#nav-settings-btn:hover {
   background: var(--accent-soft);
   border-color: var(--accent);
   color: var(--accent);
   transform: scale(1.05);
 }
 
-#theme-toggle:active {
+#theme-toggle:active,
+#nav-settings-btn:active {
   transform: scale(0.92);
 }
 
-#theme-toggle svg {
+#theme-toggle svg,
+#nav-settings-btn svg {
   width: 18px;
   height: 18px;
   transition: transform 0.3s ease;
@@ -885,6 +891,112 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
   letter-spacing: 0.04em;
 }
 
+.image-source {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.image-source-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.image-source-upload {
+  flex-shrink: 0;
+  height: 40px;
+  padding: 0 14px;
+  border: 1.5px solid var(--separator-strong);
+  border-radius: 8px;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.image-source-upload:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.image-source-upload:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.image-source-upload:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.image-item {
+  align-items: flex-start;
+}
+
+.image-item > div {
+  min-width: 0;
+}
+
+.image-item .image-source {
+  gap: 6px;
+}
+
+.image-item .image-source-input {
+  height: 36px;
+}
+
+.image-item .image-source-upload {
+  height: 36px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.image-field-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-tertiary);
+}
+
+.image-field-status[data-state="warning"] {
+  color: var(--warning);
+}
+
+.image-field-status[data-state="error"] {
+  color: var(--danger);
+}
+
+.image-field-thumb {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--separator);
+  background: var(--bg-input);
+}
+
+.image-field-status[hidden],
+.image-field-thumb[hidden] {
+  display: none;
+}
+
+.field-hint code {
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: var(--bg-active);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.92em;
+}
+
 .remove-btn {
   width: 36px;
   height: 36px;
@@ -914,6 +1026,91 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
 
 .remove-btn:hover svg {
   transform: rotate(90deg);
+}
+
+.drag-handle {
+  flex: 0 0 auto;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  min-height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: grab;
+  touch-action: none;
+  transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+.drag-handle:hover:not(:disabled) {
+  background: var(--bg-active);
+  color: var(--text-secondary);
+}
+
+.drag-handle:active:not(:disabled) {
+  cursor: grabbing;
+}
+
+.drag-handle:focus-visible {
+  outline: none;
+  color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.drag-handle:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.dynamic-item.dragging {
+  border-color: var(--accent);
+  border-style: dashed;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0.85;
+}
+
+.dynamic-item.dragging,
+.dynamic-item.dragging * {
+  cursor: grabbing;
+}
+
+body.reordering {
+  user-select: none;
+}
+
+.image-drop-target {
+  outline: 2px dashed var(--accent);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+.image-drop-target .image-source-upload {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.dynamic-item > .schedule-item-fields {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.schedule-item-fields > div {
+  min-width: 0;
+}
+
+.schedule-time-field {
+  flex: 0 1 96px;
+  min-width: 72px;
+}
+
+.schedule-label-field {
+  flex: 1;
 }
 
 .add-btn {

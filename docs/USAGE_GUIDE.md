@@ -54,7 +54,25 @@ Press `Enter` in any field to move straight to the next one, in the same order t
 
 1. The Description box keeps Enter for new lines. Use `Ctrl` + `Enter`, or `Cmd` + `Enter` on macOS, to jump to the next field instead.
 2. Switches such as Enable this section and Repeat are part of the same order. Press `Space` to change one.
-3. The Add quote, Add activity, Add photo, and Add background buttons are not part of the Enter order. Use `Tab` to reach them.
+3. The Add quote, Add activity, Add photo, and Add background buttons are not part of the Enter order. Use `Tab` to reach them, and to reach the drag handle that reorders a row.
+
+### Photos: upload or link
+
+Every photo field accepts either an image link or a file from your computer. This applies to Hero photos, Section backgrounds, and the Footer logo.
+
+1. Paste a full `https://` link, click Upload and choose a file, or drag an image file onto the row.
+2. On Hero photos and Section backgrounds you can drop several files at once: the first goes into the row you dropped on and the rest are added as new rows in the same order.
+3. Uploaded files are saved in this browser while you work. When you download the bundle, they are copied into an `images/` folder next to `index.html`.
+4. The generated JSON points at them with a short path such as `images/sunset.webp`, so keep the images folder with the rest of the bundle when you deploy.
+5. Supported formats are JPG, PNG, WebP, AVIF, GIF, and SVG, up to 20 MB per image and 80 MB in total. Very large photos are rejected so the bundle stays easy to host.
+6. Uploads are not sent to any server. They live in this browser, so download the bundle to keep them. If you clear your browser data, upload the photos again before downloading.
+7. If a field says a file is not stored in this browser, the browser data was cleared. Upload the file again or switch that field to a link.
+
+### Reordering items
+
+Every hero photo, section background, schedule activity, and quote has a grip handle on its left. Drag the handle to move the row; the list rearranges as you drag and the new order is saved with your work. Photos play in that order, backgrounds fill the page sections in that order, and schedule and quote rows appear in the order shown.
+
+The grip can also be used without a mouse: `Tab` to it and press the up or down arrow key to move that row one step.
 
 ### Autosave and the settings panel
 
@@ -158,9 +176,14 @@ The Quotes section is also a button in the builder sidebar, and it can be switch
 
 ### Images
 
-Place your images in the `media/` folder. Then update the URLs in the `design.heroImages` and `design.sectionBackgrounds` fields in your event.json.
+The builder accepts both links and uploaded files for `design.heroImages`, `design.sectionBackgrounds`, and `footer.branding.logoUrl`.
 
-If you upload to GitHub, you can use the raw URL from your repository.
+- A link is stored exactly as you pasted it, for example `https://example.com/hero.webp`.
+- An uploaded file is copied into the `images/` folder of the downloaded bundle and stored as a relative path, for example `images/hero.webp`. Relative paths keep working when the bundle is hosted in a subfolder.
+
+Uploads stay in your browser (IndexedDB) so autosave can restore them between visits. They are not uploaded anywhere, and the builder only includes the images your configuration still references. Clearing site data removes them, so download the bundle to keep a permanent copy.
+
+If you edit an event.json by hand instead of using the builder, place your images in the `media/` folder and use a path relative to the page, for example `media/images/hero.webp`. If you upload to GitHub, you can also use the raw URL from your repository.
 
 Recommended format: compressed landscape images in WebP or AVIF.
 

@@ -310,8 +310,7 @@ nav {
   color: var(--text-primary);
 }
 
-#theme-toggle,
-#nav-settings-btn {
+#theme-toggle {
   width: 36px;
   height: 36px;
   border-radius: 10px;
@@ -327,21 +326,18 @@ nav {
   flex-shrink: 0;
 }
 
-#theme-toggle:hover,
-#nav-settings-btn:hover {
+#theme-toggle:hover {
   background: var(--accent-soft);
   border-color: var(--accent);
   color: var(--accent);
   transform: scale(1.05);
 }
 
-#theme-toggle:active,
-#nav-settings-btn:active {
+#theme-toggle:active {
   transform: scale(0.92);
 }
 
-#theme-toggle svg,
-#nav-settings-btn svg {
+#theme-toggle svg {
   width: 18px;
   height: 18px;
   transition: transform 0.3s ease;

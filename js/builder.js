@@ -817,10 +817,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   var settingsBtn = document.getElementById('settings-btn');
-  var navSettingsBtn = document.getElementById('nav-settings-btn');
   var mobileSettingsBtn = document.getElementById('mobile-settings-btn');
   var settingsModal = document.getElementById('settings-modal');
-  var settingsOpeners = [settingsBtn, navSettingsBtn, mobileSettingsBtn].filter(Boolean);
+  var settingsOpeners = [settingsBtn, mobileSettingsBtn].filter(Boolean);
 
   function setSettingsExpanded(expanded) {
     settingsOpeners.forEach(function(btn) { btn.setAttribute('aria-expanded', String(expanded)); });
@@ -846,7 +845,7 @@ document.addEventListener('DOMContentLoaded', function() {
     focusEl = null;
   }
 
-  [settingsBtn, navSettingsBtn].forEach(function(btn) {
+  [settingsBtn].forEach(function(btn) {
     if (btn) btn.addEventListener('click', openSettingsModal);
   });
 

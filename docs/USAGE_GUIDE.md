@@ -41,19 +41,19 @@ The right side of the builder has two tabs. Live Preview is open by default and 
 2. Use the size menu above the preview to choose Fit, Mobile, or Desktop width. Desktop uses a full desktop width, so the preview scrolls sideways when the panel is narrower.
 3. Use the fullscreen button next to the size menu to open the preview on its own full screen. Press Escape, or use the close button inside the preview, to leave it.
 4. Switch to the JSON tab to see the generated configuration in code form.
-5. Use Copy JSON or Download Bundle from the JSON tab when you are ready to save your work. On mobile, these buttons stay at the bottom of the screen while the JSON tab is open.
+5. Use Copy JSON or Download Bundle from the JSON tab, or press Done below the last section of the form, when you are ready to save your work. Done first jumps to any required field in a section that is switched on and still empty, and downloads the bundle once those are filled in. On mobile, the JSON tab buttons stay at the bottom of the screen while that tab is open.
 6. Use the tabs at any time. Your work stays in place while you switch views.
 
 ### Hiding sections
 
-Use the Enable this section checkbox at the top of Quotes, Date and Time, Location, RSVP, Design, Music, or Footer to hide that section without deleting its content. Turning one off hides the section from the invitation and disables its fields, so Enter skips them. Turn the checkbox back on to show the section again.
+Use the switch in the header of the Quotes, Date and Time, Location, RSVP, Design, Music, or Footer card to hide that section without deleting its content. Turning one off dims the card, hides the section from the invitation, and disables its fields, so Enter skips them. Turn the switch back on to show the section again.
 
 ### Filling the form with the keyboard
 
 Press `Enter` in any field to move straight to the next one, in the same order the fields appear on the page. Fields whose section is switched off are skipped, and Enter never lands on a remove button, so the whole form can be filled without the mouse.
 
 1. The Description box keeps Enter for new lines. Use `Ctrl` + `Enter`, or `Cmd` + `Enter` on macOS, to jump to the next field instead.
-2. Switches such as Enable this section and Repeat are part of the same order. Press `Space` to change one.
+2. Switches such as the section switch and Repeat are part of the same order. Press `Space` to change one.
 3. The Add quote, Add activity, Add photo, and Add background buttons are not part of the Enter order. Use `Tab` to reach them, and to reach the drag handle that reorders a row.
 
 ### Photos: upload or link
@@ -165,7 +165,7 @@ Add items to the `schedule` array. Each item has a `time` and a `label`.
 }
 ```
 
-The Quotes section is also a button in the builder sidebar, and it can be switched off with its own Enable this section checkbox.
+The Quotes section is also a button in the builder sidebar, and it can be switched off with its own switch in the card header.
 
 ### RSVP
 

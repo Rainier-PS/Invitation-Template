@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/builder.css?v=20">
+    <link rel="stylesheet" href="css/builder.css?v=22">
     <script>
     (function() {
       var theme = localStorage.getItem('theme');
@@ -19,7 +19,7 @@
     })();
     </script>
     <script defer src="js/image-assets.js?v=1"></script>
-    <script defer src="js/builder.js?v=17"></script>
+    <script defer src="js/builder.js?v=19"></script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -109,15 +109,20 @@
 
                     <div class="panel-section" id="panel-event">
                         <div class="panel-header">
-                            <h2>Event</h2>
-                            <p>What guests will see first.</p>
+                            <div class="panel-heading">
+                                <span class="panel-step" aria-hidden="true">01</span>
+                                <div class="panel-heading-text">
+                                    <h2>Event</h2>
+                                    <p>What guests will see first.</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="field" data-tour="event-name">
-                            <label for="input-title">Event name</label>
+                            <label for="input-title">Event name<span class="field-tag required">Required</span></label>
                             <input type="text" id="input-title" placeholder="Our Wedding, Alex's Birthday" aria-required="true">
                         </div>
                         <div class="field">
-                            <label for="input-subtitle">Tagline</label>
+                            <label for="input-subtitle">Tagline<span class="field-tag optional">Optional</span></label>
                             <input type="text" id="input-subtitle" placeholder="Join us for a celebration">
                         </div>
                         <div class="field">
@@ -129,13 +134,19 @@
 
                     <div class="panel-section" id="panel-quotes">
                         <div class="panel-header">
-                            <h2>Quotes</h2>
-                            <p>Words and verses guests will remember.</p>
+                            <div class="panel-heading">
+                                <span class="panel-step" aria-hidden="true">02</span>
+                                <div class="panel-heading-text">
+                                    <h2>Quotes</h2>
+                                    <p>Words and verses guests will remember.</p>
+                                </div>
+                            </div>
+                            <label class="section-switch">
+                                <input type="checkbox" id="input-quotes-enabled" checked aria-label="Show the Quotes section">
+                                <span class="section-switch-track" aria-hidden="true"></span>
+                                <span class="section-state" aria-hidden="true">On</span>
+                            </label>
                         </div>
-                        <label class="check-field">
-                            <input type="checkbox" id="input-quotes-enabled" checked>
-                            <span>Enable this section</span>
-                        </label>
                         <div class="field">
                             <label for="input-quote-title">Section title</label>
                             <input type="text" id="input-quote-title" placeholder="Words of Inspiration">
@@ -147,24 +158,30 @@
 
                     <div class="panel-section" id="panel-datetime">
                         <div class="panel-header">
-                            <h2>Date &amp; Time</h2>
-                            <p>When the celebration happens.</p>
+                            <div class="panel-heading">
+                                <span class="panel-step" aria-hidden="true">03</span>
+                                <div class="panel-heading-text">
+                                    <h2>Date &amp; Time</h2>
+                                    <p>When the celebration happens.</p>
+                                </div>
+                            </div>
+                            <label class="section-switch">
+                                <input type="checkbox" id="input-datetime-enabled" checked aria-label="Show the Date and Time section">
+                                <span class="section-switch-track" aria-hidden="true"></span>
+                                <span class="section-state" aria-hidden="true">On</span>
+                            </label>
                         </div>
-                        <label class="check-field">
-                            <input type="checkbox" id="input-datetime-enabled" checked>
-                            <span>Enable this section</span>
-                        </label>
                         <div class="field">
-                            <label for="input-date">Date</label>
+                            <label for="input-date">Date<span class="field-tag required">Required</span></label>
                             <input type="text" id="input-date" placeholder="2026-12-25" value="" pattern="\d{4}-\d{2}-\d{2}" title="Format: YYYY-MM-DD" aria-required="true">
                             <span class="hint">YYYY-MM-DD format</span>
                         </div>
                         <div class="field">
                             <label for="input-startTime">Start time</label>
-                            <input type="text" id="input-startTime" placeholder="06:00 PM" value="00:00 PM">
+                            <input type="text" id="input-startTime" placeholder="06:00 PM">
                         </div>
                         <div class="field">
-                            <label for="input-endTime">End time <span style="color:var(--text-tertiary);font-weight:400">(optional)</span></label>
+                            <label for="input-endTime">End time<span class="field-tag optional">Optional</span></label>
                             <input type="text" id="input-endTime" placeholder="09:00 PM">
                         </div>
                         <hr class="panel-divider">
@@ -175,20 +192,26 @@
 
                     <div class="panel-section" id="panel-location">
                         <div class="panel-header">
-                            <h2>Location</h2>
-                            <p>Where everyone will gather.</p>
+                            <div class="panel-heading">
+                                <span class="panel-step" aria-hidden="true">04</span>
+                                <div class="panel-heading-text">
+                                    <h2>Location</h2>
+                                    <p>Where everyone will gather.</p>
+                                </div>
+                            </div>
+                            <label class="section-switch">
+                                <input type="checkbox" id="input-location-enabled" checked aria-label="Show the Location section">
+                                <span class="section-switch-track" aria-hidden="true"></span>
+                                <span class="section-state" aria-hidden="true">On</span>
+                            </label>
                         </div>
-                        <label class="check-field">
-                            <input type="checkbox" id="input-location-enabled" checked>
-                            <span>Enable this section</span>
-                        </label>
                         <div class="field">
                             <label for="input-venue-name">Venue name</label>
-                            <input type="text" id="input-venue-name" placeholder="Grand Ballroom, Beachside Resort" value="Venue Name">
+                            <input type="text" id="input-venue-name" placeholder="Grand Ballroom, Beachside Resort">
                         </div>
                         <div class="field">
                             <label for="input-venue-address">Address</label>
-                            <input type="text" id="input-venue-address" placeholder="123 Party Lane, Celebration City" value="Address">
+                            <input type="text" id="input-venue-address" placeholder="123 Party Lane, Celebration City">
                         </div>
                         <div class="field">
                             <label for="input-mapsLink">Google Maps link</label>
@@ -198,13 +221,19 @@
 
                     <div class="panel-section" id="panel-rsvp">
                         <div class="panel-header">
-                            <h2>RSVP</h2>
-                            <p>How guests will respond.</p>
+                            <div class="panel-heading">
+                                <span class="panel-step" aria-hidden="true">05</span>
+                                <div class="panel-heading-text">
+                                    <h2>RSVP</h2>
+                                    <p>How guests will respond.</p>
+                                </div>
+                            </div>
+                            <label class="section-switch">
+                                <input type="checkbox" id="input-rsvp-enabled" checked aria-label="Show the RSVP section">
+                                <span class="section-switch-track" aria-hidden="true"></span>
+                                <span class="section-state" aria-hidden="true">On</span>
+                            </label>
                         </div>
-                        <label class="check-field">
-                            <input type="checkbox" id="input-rsvp-enabled" checked>
-                            <span>Collect RSVPs</span>
-                        </label>
                         <div class="field">
                             <label for="input-rsvp-provider">Service</label>
                             <select id="input-rsvp-provider">
@@ -221,13 +250,19 @@
 
                     <div class="panel-section" id="panel-design">
                         <div class="panel-header">
-                            <h2>Design</h2>
-                            <p>Colors and visuals for your invitation.</p>
+                            <div class="panel-heading">
+                                <span class="panel-step" aria-hidden="true">06</span>
+                                <div class="panel-heading-text">
+                                    <h2>Design</h2>
+                                    <p>Colors and visuals for your invitation.</p>
+                                </div>
+                            </div>
+                            <label class="section-switch">
+                                <input type="checkbox" id="input-design-enabled" checked aria-label="Apply the design settings">
+                                <span class="section-switch-track" aria-hidden="true"></span>
+                                <span class="section-state" aria-hidden="true">On</span>
+                            </label>
                         </div>
-                        <label class="check-field">
-                            <input type="checkbox" id="input-design-enabled" checked>
-                            <span>Enable this section</span>
-                        </label>
                         <div class="field">
                             <label for="input-accentColor">Accent color</label>
                             <div class="color-group">
@@ -258,13 +293,19 @@
 
                     <div class="panel-section" id="panel-music">
                         <div class="panel-header">
-                            <h2>Music</h2>
-                            <p>Background audio for the invitation.</p>
+                            <div class="panel-heading">
+                                <span class="panel-step" aria-hidden="true">07</span>
+                                <div class="panel-heading-text">
+                                    <h2>Music</h2>
+                                    <p>Background audio for the invitation.</p>
+                                </div>
+                            </div>
+                            <label class="section-switch">
+                                <input type="checkbox" id="input-music-enabled" checked aria-label="Play music on the invitation">
+                                <span class="section-switch-track" aria-hidden="true"></span>
+                                <span class="section-state" aria-hidden="true">On</span>
+                            </label>
                         </div>
-                        <label class="check-field">
-                            <input type="checkbox" id="input-music-enabled" checked>
-                            <span>Enable music</span>
-                        </label>
                         <label class="check-field">
                             <input type="checkbox" id="input-music-loop" checked>
                             <span>Repeat</span>
@@ -281,13 +322,19 @@
 
                     <div class="panel-section" id="panel-footer">
                         <div class="panel-header">
-                            <h2>Footer</h2>
-                            <p>Your personal touch.</p>
+                            <div class="panel-heading">
+                                <span class="panel-step" aria-hidden="true">08</span>
+                                <div class="panel-heading-text">
+                                    <h2>Footer</h2>
+                                    <p>Your personal touch.</p>
+                                </div>
+                            </div>
+                            <label class="section-switch">
+                                <input type="checkbox" id="input-footer-enabled" checked aria-label="Show the Footer section">
+                                <span class="section-switch-track" aria-hidden="true"></span>
+                                <span class="section-state" aria-hidden="true">On</span>
+                            </label>
                         </div>
-                        <label class="check-field">
-                            <input type="checkbox" id="input-footer-enabled" checked>
-                            <span>Enable this section</span>
-                        </label>
                         <div class="field">
                             <label for="input-authorName">Author</label>
                             <input type="text" id="input-authorName" placeholder="Your Name">
@@ -316,6 +363,11 @@
                             <input type="url" id="input-instagram" placeholder="https://www.instagram.com/yourhandle">
                         </div>
                     </div>
+
+                    <button type="button" class="editor-done-btn" id="editor-done-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        Done
+                    </button>
                 </form>
             </aside>
 

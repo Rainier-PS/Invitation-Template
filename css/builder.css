@@ -554,34 +554,169 @@ nav {
 
 .panel-section {
   scroll-margin-top: 24px;
+  background: var(--bg-panel);
+  border: 1px solid var(--separator);
+  border-radius: 16px;
+  padding: 18px 18px 20px;
+  box-shadow: 0 1px 2px rgba(17, 17, 24, 0.04), 0 14px 30px -24px rgba(17, 17, 24, 0.4);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .panel-section + .panel-section {
-  margin-top: 28px;
+  margin-top: 16px;
+}
+
+.panel-section > * {
+  transition: opacity 0.2s ease;
+}
+
+.panel-section.is-off {
+  background: var(--bg-hover);
+  border-color: var(--separator-strong);
+  border-style: dashed;
+  box-shadow: none;
+}
+
+.panel-section.is-off > :not(.panel-header) {
+  opacity: 0.5;
+}
+
+.panel-section.is-off input:disabled,
+.panel-section.is-off textarea:disabled,
+.panel-section.is-off select:disabled,
+.panel-section.is-off button:disabled {
+  opacity: 1;
 }
 
 .panel-header {
-  margin-bottom: 16px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--accent-mid);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding: 0 0 14px;
+  border-bottom: 1px solid var(--separator);
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex: 1;
+  min-width: 0;
+}
+
+.panel-step {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-mid);
+  color: var(--accent);
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.panel-heading-text {
+  min-width: 0;
 }
 
 .panel-header h2 {
   font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  margin: 0 0 4px;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  margin: 0 0 3px;
+  color: var(--text-primary);
 }
 
 .panel-header p {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-secondary);
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.45;
+}
+
+.section-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  padding: 2px 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.section-switch input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.section-switch-track {
+  position: relative;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--separator-strong);
+  transition: background 0.2s ease;
+}
+
+.section-switch-track::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+}
+
+.section-switch input:checked + .section-switch-track {
+  background: var(--accent);
+}
+
+.section-switch input:checked + .section-switch-track::after {
+  transform: translateX(14px);
+}
+
+.section-switch input:focus-visible + .section-switch-track {
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.section-state {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+.section-switch input:checked ~ .section-state {
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .panel-section {
+    padding: 16px 14px 18px;
+    border-radius: 14px;
+  }
+
+  .section-state {
+    display: none;
+  }
 }
 
 .field {
@@ -590,12 +725,73 @@ nav {
 
 .field label {
   display: block;
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--text-secondary);
   margin-bottom: 6px;
-  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.field-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: 1px;
+}
+
+.field-tag.required {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.field-tag.optional {
+  background: var(--bg-hover);
+  color: var(--text-tertiary);
+}
+
+.editor-done-btn {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  padding: 9px 16px;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent-solid);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.editor-done-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.editor-done-btn:active {
+  transform: scale(0.99);
+}
+
+.editor-done-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.editor-done-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 input:disabled, textarea:disabled, select:disabled, button:disabled {
@@ -640,9 +836,24 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
   box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
+.field input.is-invalid,
+.field textarea.is-invalid,
+.field select.is-invalid {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.14);
+}
+
+.field input.is-invalid:focus,
+.field textarea.is-invalid:focus,
+.field select.is-invalid:focus {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.22);
+}
+
 .field input::placeholder,
 .field textarea::placeholder {
   color: var(--text-tertiary);
+  font-style: italic;
 }
 
 .field select {
@@ -661,9 +872,10 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
 
 .field .hint {
   display: block;
-  font-size: 11px;
+  font-size: 11.5px;
   color: var(--text-tertiary);
-  margin-top: 4px;
+  margin-top: 6px;
+  line-height: 1.45;
 }
 
 .check-field {
@@ -751,8 +963,12 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
 
 .field-hint {
   font-size: 12px;
-  color: var(--text-tertiary);
-  margin: 0 0 10px;
+  color: var(--text-secondary);
+  background: var(--accent-soft);
+  border-left: 2px solid var(--accent-mid);
+  border-radius: 0 8px 8px 0;
+  padding: 8px 10px;
+  margin: 0 0 12px;
   line-height: 1.5;
 }
 
@@ -821,12 +1037,25 @@ input:disabled:focus, textarea:disabled:focus, select:disabled:focus {
 }
 
 .panel-section h3 {
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-tertiary);
-  margin: 20px 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-primary);
+  margin: 18px 0 8px;
+}
+
+.panel-section h3::before {
+  content: "";
+  flex-shrink: 0;
+  width: 3px;
+  height: 13px;
+  border-radius: 2px;
+  background: var(--accent);
+  opacity: 0.55;
 }
 
 .dynamic-item {

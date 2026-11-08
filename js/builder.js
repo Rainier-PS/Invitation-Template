@@ -213,22 +213,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  function scrollToSection(targetId) {
+    sidebarStickyBottom = false;
+    setActiveSidebarBtn(targetId);
+    var target = document.getElementById(targetId);
+    if (!target) return;
+    if (isMobile()) {
+      closeNav();
+      var nav = document.querySelector('nav');
+      var headerOffset = nav ? nav.offsetHeight : 56;
+      scrollPageTo(target.getBoundingClientRect().top + getPageScrollTop() - headerOffset - 12);
+    } else if (panel) {
+      var top = target.getBoundingClientRect().top - panel.getBoundingClientRect().top - panel.clientTop + panel.scrollTop - 16;
+      scrollPanelTo(top);
+    }
+  }
+
   sidebarBtns.forEach(function(btn) {
     btn.addEventListener('click', function() {
-      var targetId = btn.getAttribute('data-target');
-      sidebarStickyBottom = false;
-      setActiveSidebarBtn(targetId);
-      var target = document.getElementById(targetId);
-      if (!target) return;
-      if (isMobile()) {
-        closeNav();
-        var nav = document.querySelector('nav');
-        var headerOffset = nav ? nav.offsetHeight : 56;
-        scrollPageTo(target.getBoundingClientRect().top + getPageScrollTop() - headerOffset - 12);
-      } else if (panel) {
-        var top = target.getBoundingClientRect().top - panel.getBoundingClientRect().top - panel.clientTop + panel.scrollTop - 16;
-        scrollPanelTo(top);
-      }
+      scrollToSection(btn.getAttribute('data-target'));
     });
   });
 
@@ -770,6 +773,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var applyJsonEdit = null;
   var toggleFns = {};
+
+  function setSectionState(container, enabled) {
+    if (!container) return;
+    container.classList.toggle('is-off', !enabled);
+    var state = container.querySelector('.section-state');
+    if (state) state.textContent = enabled ? 'On' : 'Off';
+  }
+
   function createSectionToggle(masterId, panelId) {
     var check = document.getElementById(masterId);
     if (!check) return;
@@ -782,6 +793,7 @@ document.addEventListener('DOMContentLoaded', function() {
           el.disabled = !enabled;
         });
       }
+      setSectionState(container, enabled);
       updateJson();
     }
     check.addEventListener('change', toggle);
@@ -808,11 +820,76 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     }
+    setSectionState(musicFields, !!enabled);
     if (musicEnabledCheck) updateJson();
   }
   if (musicEnabledCheck) {
     musicEnabledCheck.addEventListener('change', function() {
       toggleMusicInputs();
+    });
+  }
+
+  var doneBtn = document.getElementById('editor-done-btn');
+  var eventForm = document.getElementById('event-form');
+
+  function clearInvalidFields() {
+    document.querySelectorAll('#event-form .is-invalid').forEach(function(el) {
+      el.classList.remove('is-invalid');
+      el.removeAttribute('aria-invalid');
+    });
+  }
+
+  function requiredFieldName(el) {
+    var label = el.id ? document.querySelector('#event-form label[for="' + el.id + '"]') : null;
+    if (!label) return 'A required field';
+    var clone = label.cloneNode(true);
+    clone.querySelectorAll('.field-tag').forEach(function(tag) { tag.remove(); });
+    var text = clone.textContent.replace(/\s+/g, ' ').trim();
+    return text || 'A required field';
+  }
+
+  function emptyRequiredFields() {
+    var missing = [];
+    document.querySelectorAll('#event-form .panel-section').forEach(function(section) {
+      if (section.classList.contains('is-off')) return;
+      section.querySelectorAll('[aria-required="true"]').forEach(function(el) {
+        if (el.disabled) return;
+        if (!String(el.value || '').trim()) missing.push(el);
+      });
+    });
+    return missing;
+  }
+
+  if (doneBtn) {
+    doneBtn.addEventListener('click', function() {
+      clearInvalidFields();
+      var missing = emptyRequiredFields();
+      if (!missing.length) {
+        showToast('Downloading your invitation bundle.');
+        window.downloadBundle();
+        return;
+      }
+      missing.forEach(function(el) {
+        el.classList.add('is-invalid');
+        el.setAttribute('aria-invalid', 'true');
+      });
+      var first = missing[0];
+      var section = first.closest('.panel-section');
+      if (section) scrollToSection(section.id);
+      try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); }
+      showToast(missing.length === 1
+        ? requiredFieldName(first) + ' is required. Fill it in, then press Done again.'
+        : missing.length + ' required fields are empty. Starting with ' + requiredFieldName(first) + '.');
+    });
+  }
+
+  if (eventForm) {
+    eventForm.addEventListener('input', function(e) {
+      var el = e.target;
+      if (!el || !el.classList || !el.classList.contains('is-invalid')) return;
+      if (!String(el.value || '').trim()) return;
+      el.classList.remove('is-invalid');
+      el.removeAttribute('aria-invalid');
     });
   }
 
